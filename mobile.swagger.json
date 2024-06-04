@@ -486,6 +486,10 @@
           "type": "string",
           "title": "手机号：验证码登录必填"
         },
+        "smsCode": {
+          "type": "string",
+          "title": "验证码：验证码登录必填(4位数字)"
+        },
         "wxAuthCode": {
           "type": "string",
           "title": "微信code：微信手机号授权必填"
