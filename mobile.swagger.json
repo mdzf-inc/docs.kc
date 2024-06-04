@@ -232,7 +232,7 @@
             "name": "pageNum",
             "description": "分页页码 从1开始",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "integer",
             "format": "int32"
           },
@@ -240,7 +240,7 @@
             "name": "pageSize",
             "description": "分页大小",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "integer",
             "format": "int32"
           },
@@ -390,18 +390,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "imageUrls",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
         "tags": [
           "UserService"
         ]
@@ -513,7 +501,10 @@
         "supplierId": {
           "type": "string",
           "format": "int64",
-          "title": "供应商id(必填)"
+          "title": "供应商id(必填)",
+          "required": [
+            "supplierId"
+          ]
         },
         "name": {
           "type": "string",
@@ -524,7 +515,10 @@
           "items": {
             "type": "string"
           },
-          "title": "图片链接URL(必填) 1-5张"
+          "title": "图片链接URL(必填) 1-5张",
+          "required": [
+            "imageUrls"
+          ]
         },
         "stockQuantity": {
           "type": "integer",
@@ -536,7 +530,11 @@
           "format": "int64",
           "title": "货位ID只有数量大于0时才需要货位"
         }
-      }
+      },
+      "required": [
+        "supplierId",
+        "imageUrls"
+      ]
     },
     "v1CreateStockRequest": {
       "type": "object",
@@ -687,9 +685,15 @@
       "properties": {
         "phone": {
           "type": "string",
-          "title": "手机号"
+          "title": "手机号",
+          "required": [
+            "phone"
+          ]
         }
-      }
+      },
+      "required": [
+        "phone"
+      ]
     },
     "v1Stock": {
       "type": "object",
