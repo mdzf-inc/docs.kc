@@ -530,6 +530,11 @@
           "type": "integer",
           "format": "int32",
           "title": "数量 \u003e= 0"
+        },
+        "storageRackId": {
+          "type": "string",
+          "format": "int64",
+          "title": "货位ID只有数量大于0时才需要货位"
         }
       }
     },
