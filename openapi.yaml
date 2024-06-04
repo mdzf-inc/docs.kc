@@ -1,0 +1,366 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: ""
+    version: 0.0.1
+paths:
+    /authenticate:
+        post:
+            tags:
+                - AuthenticateService
+                - 登录
+            summary: 登录认证
+            description: 获取令牌
+            operationId: AuthenticateService_CreateAuthenticate
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateAuthenticateRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Authentication'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /samples:
+        post:
+            tags:
+                - SampleService
+                - 创建样品
+            summary: 样品
+            description: 可以使用相册照片/拍照上传
+            operationId: SampleService_CreateSample
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateSampleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Sample'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /stocks:
+        get:
+            tags:
+                - StockService
+                - 入/出库
+            summary: 库存服务
+            description: 出入库记录查询
+            operationId: StockService_ListStock
+            parameters:
+                - name: pageNum
+                  in: query
+                  description: 分页页码 从1开始
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 分页大小
+                  schema:
+                    type: integer
+                    format: int32
+                - name: sampleId
+                  in: query
+                  description: 样品ID
+                  schema:
+                    type: integer
+                    format: int64
+                - name: sampleNo
+                  in: query
+                  description: 样品编码
+                  schema:
+                    type: string
+                - name: storageRackId
+                  in: query
+                  description: 货位ID
+                  schema:
+                    type: integer
+                    format: int32
+                - name: stockType
+                  in: query
+                  schema:
+                    type: integer
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListStockReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - StockService
+                - 入/出库
+            summary: 库存服务
+            description: 选择样品后可以入库
+            operationId: StockService_CreateStock
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateStockRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Stock'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /storage-racks:
+        get:
+            tags:
+                - StorageRackService
+                - 货位
+            summary: 货位
+            description: 货物列表
+            operationId: StorageRackService_ListStorageRack
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListStorageRackReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /users/me:
+        get:
+            tags:
+                - UserService
+                - 用户信息
+            summary: 用户信息
+            description: 获取自己的用户信息
+            operationId: UserService_GetMe
+            parameters:
+                - name: imageUrls
+                  in: query
+                  schema:
+                    type: array
+                    items:
+                        type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+components:
+    schemas:
+        Authentication:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                    description: 接口令牌 放置在请求头Authorization字段
+        CreateAuthenticateRequest:
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+            description: 登录请求
+        CreateSampleRequest:
+            type: object
+            properties: {}
+            description: 登录请求
+        CreateStockRequest:
+            required:
+                - stockType
+                - sampleId
+                - storageRackId
+                - quantity
+            type: object
+            properties:
+                stockType:
+                    type: integer
+                    description: 入/出库类型
+                    format: enum
+                sampleId:
+                    type: integer
+                    description: 样品ID
+                    format: int64
+                storageRackId:
+                    type: integer
+                    description: 货架ID
+                    format: int32
+                quantity:
+                    type: integer
+                    description: 入/出库数量
+                    format: int32
+                note:
+                    type: string
+                    description: 入/出库备注 50个字以内
+        GoogleProtobufAny:
+            type: object
+            properties:
+                '@type':
+                    type: string
+                    description: The type of the serialized message.
+            additionalProperties: true
+            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        ListStockReply:
+            type: object
+            properties:
+                stocks:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Stock'
+                    description: 出入库记录
+        ListStorageRackReply:
+            type: object
+            properties:
+                total:
+                    type: integer
+                    format: int32
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/StorageRack'
+        Sample:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+                creatorId:
+                    type: integer
+                    format: int64
+                creatorName:
+                    type: string
+        Status:
+            type: object
+            properties:
+                code:
+                    type: integer
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                message:
+                    type: string
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                details:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufAny'
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+        Stock:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                createTime:
+                    type: string
+                    description: 发生时间
+                creatorId:
+                    type: integer
+                    description: 操作人id
+                    format: int64
+                creatorName:
+                    type: string
+                    description: 操作人姓名
+                sampleId:
+                    type: integer
+                    description: 样品ID
+                    format: int64
+                sampleNo:
+                    type: string
+                    description: 样品编码
+                storageRackId:
+                    type: integer
+                    description: 货架ID
+                    format: int32
+                storageRackCode:
+                    type: string
+                    description: 货架Code
+                quantity:
+                    type: integer
+                    description: 入/出库数量
+                    format: int32
+                stockType:
+                    type: integer
+                    description: 入/出库类型
+                    format: enum
+        StorageRack:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 货位ID
+                code:
+                    type: string
+                    description: 货位编码
+                imageUrl:
+                    type: string
+                    description: 货位图片
+        User:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int64
+                name:
+                    type: string
+tags:
+    - name: AuthenticateService
+      description: 登录认证
+    - name: SampleService
+      description: 样品
+    - name: StockService
+      description: 库存服务
+    - name: StorageRackService
+      description: 货位
+    - name: UserService
+      description: 用户信息
