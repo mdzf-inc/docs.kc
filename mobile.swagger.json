@@ -267,6 +267,7 @@
     },
     "/open/printers": {
       "get": {
+        "summary": "获取打印机列表",
         "operationId": "PrintService_ListPrinters",
         "responses": {
           "200": {
@@ -287,6 +288,7 @@
         ]
       },
       "post": {
+        "summary": "上传打印机",
         "operationId": "PrintService_UploadPrinters",
         "responses": {
           "200": {
@@ -17256,6 +17258,7 @@
           },
           {
             "name": "supplierId",
+            "description": "供应商id",
             "in": "query",
             "required": false,
             "type": "string",
@@ -17263,6 +17266,7 @@
           },
           {
             "name": "nos",
+            "description": "编码（多编码空格分开）",
             "in": "query",
             "required": false,
             "type": "array",
@@ -17273,6 +17277,7 @@
           },
           {
             "name": "name",
+            "description": "名称",
             "in": "query",
             "required": false,
             "type": "string"
@@ -17292,6 +17297,7 @@
           },
           {
             "name": "ownerId",
+            "description": "如果是自己的样品，可以传入自己的id",
             "in": "query",
             "required": false,
             "type": "string",
@@ -17346,13 +17352,8 @@
             "type": "string"
           },
           {
-            "name": "arrivalDate",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "locationId",
+            "description": "货位ID",
             "in": "query",
             "required": false,
             "type": "string",
@@ -20490,6 +20491,7 @@
     },
     "/v1/user/suppliers/tree": {
       "get": {
+        "summary": "供应商列表树",
         "operationId": "User_ListSuppliersTree",
         "responses": {
           "200": {
@@ -20783,6 +20785,7 @@
     },
     "/v1/user/warehouses": {
       "get": {
+        "summary": "我的仓库",
         "operationId": "User_ListWarehouse",
         "responses": {
           "200": {
@@ -27007,7 +27010,10 @@
         "supplierId": {
           "type": "string",
           "format": "int64",
-          "title": "供应商id"
+          "title": "供应商id",
+          "required": [
+            "supplierId"
+          ]
         },
         "articleNo": {
           "type": "string",
@@ -27046,19 +27052,33 @@
         "stockNum": {
           "type": "integer",
           "format": "int32",
-          "title": "数量 \u003e= 0"
+          "title": "数量 \u003e= 0",
+          "required": [
+            "stockNum"
+          ]
         },
         "locationId": {
           "type": "string",
           "format": "int64",
-          "title": "货位code只有数量大于0时才需要货位"
+          "title": "货位code只有数量大于0时才需要货位",
+          "required": [
+            "locationId"
+          ]
         },
         "label": {
-          "type": "string"
+          "type": "string",
+          "title": "三个选项： 通货/原创/市场买样",
+          "required": [
+            "label"
+          ]
         }
       },
       "required": [
-        "imageUrls"
+        "imageUrls",
+        "supplierId",
+        "stockNum",
+        "locationId",
+        "label"
       ]
     },
     "apisamplev1DeprecateRequest": {
