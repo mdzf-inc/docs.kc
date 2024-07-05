@@ -6,6 +6,38 @@ info:
     title: ""
     version: 0.0.1
 paths:
+    /accounts-payables:
+        get:
+            tags:
+                - AccountsPayableService
+                - 应付账款
+            summary: 应付账款
+            description: 应付账款列表
+            operationId: AccountsPayableService_ListAccountsPayable
+            parameters:
+                - name: pageNum
+                  in: query
+                  description: 页数 从0开始
+                  schema:
+                    type: string
+                - name: pageSize
+                  in: query
+                  description: 每页数据量 <= 1000
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListAccountsPayableReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /addresses:
         get:
             tags:
@@ -790,6 +822,40 @@ paths:
                                 $ref: '#/components/schemas/Status'
 components:
     schemas:
+        AccountsPayable:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 应付账款ID
+                createTime:
+                    type: string
+                    description: 时间
+                status:
+                    type: integer
+                    description: 状态
+                    format: enum
+                name:
+                    type: string
+                    description: 名称
+                amountDue:
+                    type: string
+                    description: 金额
+                orderId:
+                    type: string
+                    description: 来源订单ID
+                orderNo:
+                    type: string
+                    description: 来源订单编号
+                settlementTime:
+                    type: string
+                    description: 结算时间
+                settlementId:
+                    type: string
+                    description: 结算单id
+                settlementNo:
+                    type: string
+                    description: 结算单编号
         AdditionalPropertiesItem:
             type: object
             properties:
@@ -1232,6 +1298,13 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/NamedLinkOrReference'
+        ListAccountsPayableReply:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/AccountsPayable'
         ListAddressReply:
             type: object
             properties:
@@ -1478,6 +1551,13 @@ components:
                     allOf:
                         - $ref: '#/components/schemas/InvoiceAccount'
                     description: 无票时，不返回
+                invoiceStatus:
+                    type: integer
+                    description: 开票状态
+                    format: enum
+                invoiceUrl:
+                    type: string
+                    description: 发票链接(仅在已开票状态下返回。浏览器打开)
                 totalBox:
                     type: integer
                     description: 总箱数
@@ -1881,6 +1961,9 @@ components:
                     type: string
                 name:
                     type: string
+                phone:
+                    type: string
+            description: "公司信息\t 地区  联系人\t联系方式  业务渠道\t合作方式（集采/一件代发）沟通进度  跟进人  结算方式（现结/预付款）"
         Xml:
             type: object
             properties:
@@ -1900,6 +1983,8 @@ components:
                         $ref: '#/components/schemas/NamedAny'
             description: A metadata object that allows for more fine-tuned XML model definitions.  When using arrays, XML element names are *not* inferred (for singular/plural forms) and the `name` property SHOULD be used to add that information. See examples for expected behavior.
 tags:
+    - name: AccountsPayableService
+      description: 应付账款
     - name: AddressService
       description: 收货地址
     - name: AuthenticateService
