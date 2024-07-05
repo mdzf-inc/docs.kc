@@ -378,6 +378,34 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /options/order/payment:
+        get:
+            tags:
+                - OrderService
+                - 订单
+            summary: 获取支付选项
+            description: 下单时依据开票要求获取支付选项。不同的开票要求有不同的支付要求
+            operationId: OrderService_GetPaymentOptions
+            parameters:
+                - name: invoiceRequirement
+                  in: query
+                  description: 开票要求
+                  schema:
+                    type: integer
+                    format: enum
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetPaymentOptionsReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /orders:
         get:
             tags:
@@ -1178,6 +1206,15 @@ components:
                     items:
                         $ref: '#/components/schemas/NamedAny'
             description: Allows referencing an external resource for extended documentation.
+        GetPaymentOptionsReply:
+            type: object
+            properties:
+                paymentOptions:
+                    type: array
+                    items:
+                        type: integer
+                        format: enum
+                    description: 支付方式：可选的支付方式
         GoogleProtobufAny:
             type: object
             properties:
