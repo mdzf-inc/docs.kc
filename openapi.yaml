@@ -504,6 +504,40 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /orders/{id}/actions/submit-payment-proof:
+        post:
+            tags:
+                - OrderService
+                - 订单
+            summary: 提交付款凭证
+            description: 提交付款凭证
+            operationId: OrderService_SubmitPaymentProof
+            parameters:
+                - name: id
+                  in: path
+                  description: 订单ID
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/SubmitPaymentProofRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Response'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /products:
         get:
             tags:
@@ -1349,16 +1383,24 @@ components:
                 createTime:
                     type: string
                     description: 下单时间
-                summary:
-                    type: string
-                    description: 订单摘要（）
-                no:
-                    type: string
-                    description: 订单号
+                paymentStatus:
+                    type: integer
+                    description: 订单支付状态
+                    format: enum
+                shippingStatus:
+                    type: integer
+                    description: 订单发货状态
+                    format: enum
                 status:
                     type: integer
                     description: 订单状态
                     format: enum
+                summary:
+                    type: string
+                    description: 订单摘要
+                no:
+                    type: string
+                    description: 订单号
                 subtotal:
                     type: string
                     description: 汇总金额（小计）
@@ -1393,6 +1435,9 @@ components:
                 paymentTime:
                     type: string
                     description: 支付时间
+                paymentProofUrl:
+                    type: string
+                    description: 付款凭证
                 receiverName:
                     type: string
                     description: 收货人
@@ -1715,6 +1760,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/NamedString'
+        SubmitPaymentProofRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 订单ID
+                paymentProofUrl:
+                    type: string
+                    description: 付款凭证（凭证文件url）
         UpdateAddressRequest:
             type: object
             properties:
