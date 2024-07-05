@@ -6,38 +6,6 @@ info:
     title: ""
     version: 0.0.1
 paths:
-    /accounts-payables:
-        get:
-            tags:
-                - AccountsPayableService
-                - 应付账款
-            summary: 应付账款
-            description: 应付账款列表
-            operationId: AccountsPayableService_ListAccountsPayable
-            parameters:
-                - name: pageNum
-                  in: query
-                  description: 页数 从0开始
-                  schema:
-                    type: string
-                - name: pageSize
-                  in: query
-                  description: 每页数据量 <= 1000
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListAccountsPayableReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
     /addresses:
         get:
             tags:
@@ -536,18 +504,78 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /orders/{id}/actions/submit-payment-proof:
+    /payments:
+        get:
+            tags:
+                - OrderService
+                - 订单
+            summary: 付款记录列表
+            description: 付款记录列表
+            operationId: OrderService_ListPayment
+            parameters:
+                - name: pageNum
+                  in: query
+                  description: 页数 从0开始
+                  schema:
+                    type: string
+                - name: pageSize
+                  in: query
+                  description: 每页数据量 <= 1000
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListPaymentReply'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /payments/{id}:
+        get:
+            tags:
+                - OrderService
+                - 订单
+            summary: 付款记录详情
+            description: 付款记录详情
+            operationId: OrderService_GetPayment
+            parameters:
+                - name: id
+                  in: path
+                  description: 付款ID
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Payment'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /payments/{id}/actions/submit-voucher:
         post:
             tags:
                 - OrderService
                 - 订单
             summary: 提交付款凭证
             description: 提交付款凭证
-            operationId: OrderService_SubmitPaymentProof
+            operationId: OrderService_SubmitPaymentVoucher
             parameters:
                 - name: id
                   in: path
-                  description: 订单ID
+                  description: 付款ID
                   required: true
                   schema:
                     type: string
@@ -555,7 +583,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/SubmitPaymentProofRequest'
+                            $ref: '#/components/schemas/SubmitPaymentVoucherRequest'
                 required: true
             responses:
                 "200":
@@ -822,40 +850,6 @@ paths:
                                 $ref: '#/components/schemas/Status'
 components:
     schemas:
-        AccountsPayable:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 应付账款ID
-                createTime:
-                    type: string
-                    description: 时间
-                status:
-                    type: integer
-                    description: 状态
-                    format: enum
-                name:
-                    type: string
-                    description: 名称
-                amountDue:
-                    type: string
-                    description: 金额
-                orderId:
-                    type: string
-                    description: 来源订单ID
-                orderNo:
-                    type: string
-                    description: 来源订单编号
-                settlementTime:
-                    type: string
-                    description: 结算时间
-                settlementId:
-                    type: string
-                    description: 结算单id
-                settlementNo:
-                    type: string
-                    description: 结算单编号
         AdditionalPropertiesItem:
             type: object
             properties:
@@ -1298,13 +1292,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/NamedLinkOrReference'
-        ListAccountsPayableReply:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/AccountsPayable'
         ListAddressReply:
             type: object
             properties:
@@ -1335,6 +1322,13 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Order'
+        ListPaymentReply:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Payment'
         ListProductReply:
             type: object
             properties:
@@ -1531,9 +1525,12 @@ components:
                 paymentTime:
                     type: string
                     description: 支付时间
-                paymentProofUrl:
+                paymentId:
                     type: string
-                    description: 付款凭证
+                    description: 支付记录id
+                paymentNo:
+                    type: string
+                    description: 支付记录编号
                 receiverName:
                     type: string
                     description: 收货人
@@ -1568,6 +1565,45 @@ components:
                 sellerNote:
                     type: string
                     description: 卖家备注
+        Payment:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: 付款ID
+                createTime:
+                    type: string
+                    description: 时间
+                status:
+                    type: integer
+                    description: 付款状态
+                    format: enum
+                option:
+                    type: integer
+                    description: 付款方式
+                    format: enum
+                no:
+                    type: string
+                    description: 付款编号
+                name:
+                    type: string
+                    description: 名称
+                amount:
+                    type: string
+                    description: 付款金额
+                orderCount:
+                    type: integer
+                    description: 订单数量
+                    format: int32
+                note:
+                    type: string
+                    description: 付款备注
+                recipient:
+                    type: string
+                    description: 收款人
+                voucherUrl:
+                    type: string
+                    description: 付款凭证链接
         Product:
             type: object
             properties:
@@ -1863,18 +1899,18 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/NamedString'
-        SubmitPaymentProofRequest:
+        SubmitPaymentVoucherRequest:
             required:
                 - id
-                - paymentProofUrl
+                - voucherUrl
             type: object
             properties:
                 id:
                     type: string
-                    description: 订单ID
-                paymentProofUrl:
+                    description: 付款ID
+                voucherUrl:
                     type: string
-                    description: 付款凭证（凭证文件url）
+                    description: 付款凭证链接
         UpdateAddressRequest:
             required:
                 - name
@@ -1983,8 +2019,6 @@ components:
                         $ref: '#/components/schemas/NamedAny'
             description: A metadata object that allows for more fine-tuned XML model definitions.  When using arrays, XML element names are *not* inferred (for singular/plural forms) and the `name` property SHOULD be used to add that information. See examples for expected behavior.
 tags:
-    - name: AccountsPayableService
-      description: 应付账款
     - name: AddressService
       description: 收货地址
     - name: AuthenticateService
