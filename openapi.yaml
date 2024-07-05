@@ -870,6 +870,8 @@ components:
                         type: string
                     description: 产品ID数组 1-1000个
         CancelOrderRequest:
+            required:
+                - id
             type: object
             properties:
                 id:
@@ -937,6 +939,13 @@ components:
                         type: string
                     description: 产品ID数组 1-1000个
         CreateInvoiceAccountRequest:
+            required:
+                - title
+                - taxNumber
+                - registerAddress
+                - registerPhone
+                - bank
+                - bankAccount
             type: object
             properties:
                 title:
@@ -958,6 +967,13 @@ components:
                     type: string
                     description: 银行账号
         CreateOrderRequest:
+            required:
+                - receiverName
+                - receiverPhone
+                - receiverAddress
+                - invoiceRequirement
+                - paymentTerms
+                - shoppingCartIds
             type: object
             properties:
                 receiverName:
@@ -1761,6 +1777,9 @@ components:
                     items:
                         $ref: '#/components/schemas/NamedString'
         SubmitPaymentProofRequest:
+            required:
+                - id
+                - paymentProofUrl
             type: object
             properties:
                 id:
@@ -1797,6 +1816,14 @@ components:
                     type: boolean
                     description: 是否默认地址
         UpdateInvoiceAccountRequest:
+            required:
+                - id
+                - title
+                - taxNumber
+                - registerAddress
+                - registerPhone
+                - bank
+                - bankAccount
             type: object
             properties:
                 id:
