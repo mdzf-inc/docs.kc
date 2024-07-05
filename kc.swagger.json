@@ -51,7 +51,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -72,7 +72,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -105,7 +105,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -136,7 +136,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -167,7 +167,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -189,33 +189,59 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "title": "收货人"
+                  "title": "收货人",
+                  "required": [
+                    "name"
+                  ]
                 },
                 "phone": {
                   "type": "string",
-                  "title": "手机号"
+                  "title": "手机号",
+                  "required": [
+                    "phone"
+                  ]
                 },
                 "province": {
                   "type": "string",
-                  "title": "省份"
+                  "title": "省份",
+                  "required": [
+                    "province"
+                  ]
                 },
                 "city": {
                   "type": "string",
-                  "title": "城市"
+                  "title": "城市",
+                  "required": [
+                    "city"
+                  ]
                 },
                 "district": {
                   "type": "string",
-                  "title": "区县"
+                  "title": "区县",
+                  "required": [
+                    "district"
+                  ]
                 },
                 "detail": {
                   "type": "string",
-                  "title": "详细地址"
+                  "title": "详细地址",
+                  "required": [
+                    "detail"
+                  ]
                 },
                 "isDefault": {
                   "type": "boolean",
                   "title": "是否默认地址"
                 }
-              }
+              },
+              "required": [
+                "name",
+                "phone",
+                "province",
+                "city",
+                "district",
+                "detail"
+              ]
             }
           }
         ],
@@ -238,7 +264,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -271,7 +297,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -294,7 +320,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -327,7 +353,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -360,7 +386,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -381,7 +407,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -414,7 +440,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -445,7 +471,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -476,7 +502,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -498,34 +524,99 @@
               "properties": {
                 "title": {
                   "type": "string",
-                  "title": "发票抬头"
+                  "title": "发票抬头",
+                  "required": [
+                    "title"
+                  ]
                 },
                 "taxNumber": {
                   "type": "string",
-                  "title": "税号"
+                  "title": "税号",
+                  "required": [
+                    "taxNumber"
+                  ]
                 },
                 "registerAddress": {
                   "type": "string",
-                  "title": "注册地址"
+                  "title": "注册地址",
+                  "required": [
+                    "registerAddress"
+                  ]
                 },
                 "registerPhone": {
                   "type": "string",
-                  "title": "注册电话"
+                  "title": "注册电话",
+                  "required": [
+                    "registerPhone"
+                  ]
                 },
                 "bank": {
                   "type": "string",
-                  "title": "开户银行"
+                  "title": "开户银行",
+                  "required": [
+                    "bank"
+                  ]
                 },
                 "bankAccount": {
                   "type": "string",
-                  "title": "银行账号"
+                  "title": "银行账号",
+                  "required": [
+                    "bankAccount"
+                  ]
                 }
-              }
+              },
+              "required": [
+                "title",
+                "taxNumber",
+                "registerAddress",
+                "registerPhone",
+                "bank",
+                "bankAccount"
+              ]
             }
           }
         ],
         "tags": [
           "InvoiceAccountService"
+        ]
+      }
+    },
+    "/options/order/payment": {
+      "get": {
+        "summary": "获取支付选项，用于创建订单时选择支付信息",
+        "operationId": "OrderService_GetPaymentOptions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetPaymentOptionsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "invoiceRequirement",
+            "description": "开票要求\n\n - INVOICE_REQUIREMENT_UNKNOWN: 未知\n - INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "INVOICE_REQUIREMENT_UNKNOWN",
+              "INVOICE_REQUIREMENT_NONE",
+              "INVOICE_REQUIREMENT_NORMAL",
+              "INVOICE_REQUIREMENT_SPECIAL"
+            ],
+            "default": "INVOICE_REQUIREMENT_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "OrderService"
         ]
       }
     },
@@ -543,7 +634,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -566,14 +657,16 @@
           },
           {
             "name": "status",
-            "description": "订单状态\n\n - STATUS_UNKNOWN: 未知\n - PENDING: 客服审核中\n - FINANCE_PENDING: 财务审核中",
+            "description": "订单状态\n\n - STATUS_UNKNOWN: 未知\n - STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
               "STATUS_UNKNOWN",
-              "PENDING",
-              "FINANCE_PENDING"
+              "STATUS_PENDING",
+              "STATUS_CONFIRMED",
+              "STATUS_CANCELLED",
+              "STATUS_COMPLETED"
             ],
             "default": "STATUS_UNKNOWN"
           }
@@ -595,7 +688,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -628,7 +721,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -638,7 +731,8 @@
             "description": "订单ID",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -660,7 +754,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -670,7 +764,8 @@
             "description": "订单ID",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           },
           {
             "name": "body",
@@ -679,6 +774,133 @@
             "schema": {
               "type": "object",
               "title": "只有待审核状态的订单可以取消"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/payments": {
+      "get": {
+        "summary": "付款记录列表",
+        "operationId": "OrderService_ListPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPaymentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/payments/{id}": {
+      "get": {
+        "summary": "付款记录详情",
+        "operationId": "OrderService_GetPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Payment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "付款ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/payments/{id}/actions/submit-voucher": {
+      "post": {
+        "summary": "提交付款凭证",
+        "operationId": "OrderService_SubmitPaymentVoucher",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiorderv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "付款ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "voucherUrl": {
+                  "type": "string",
+                  "title": "付款凭证链接",
+                  "required": [
+                    "voucherUrl"
+                  ]
+                }
+              },
+              "required": [
+                "voucherUrl"
+              ]
             }
           }
         ],
@@ -701,7 +923,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -772,7 +994,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -805,7 +1027,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -844,7 +1066,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -879,7 +1101,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -912,7 +1134,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -966,7 +1188,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -999,7 +1221,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -1378,7 +1600,7 @@
       "additionalProperties": {},
       "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n    // or ...\n    if (any.isSameTypeAs(Foo.getDefaultInstance())) {\n      foo = any.unpack(Foo.getDefaultInstance());\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
     },
-    "rpcStatus": {
+    "googlerpcStatus": {
       "type": "object",
       "properties": {
         "code": {
@@ -1395,6 +1617,19 @@
           }
         }
       }
+    },
+    "orderv1Status": {
+      "type": "string",
+      "enum": [
+        "STATUS_UNKNOWN",
+        "STATUS_PENDING",
+        "STATUS_CONFIRMED",
+        "STATUS_CANCELLED",
+        "STATUS_COMPLETED"
+      ],
+      "default": "STATUS_UNKNOWN",
+      "description": "- STATUS_UNKNOWN: 未知\n - STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
+      "title": "订单状态"
     },
     "v1Address": {
       "type": "object",
@@ -1504,33 +1739,59 @@
       "properties": {
         "name": {
           "type": "string",
-          "title": "收货人"
+          "title": "收货人",
+          "required": [
+            "name"
+          ]
         },
         "phone": {
           "type": "string",
-          "title": "手机号"
+          "title": "手机号",
+          "required": [
+            "phone"
+          ]
         },
         "province": {
           "type": "string",
-          "title": "省份"
+          "title": "省份",
+          "required": [
+            "province"
+          ]
         },
         "city": {
           "type": "string",
-          "title": "城市"
+          "title": "城市",
+          "required": [
+            "city"
+          ]
         },
         "district": {
           "type": "string",
-          "title": "区县"
+          "title": "区县",
+          "required": [
+            "district"
+          ]
         },
         "detail": {
           "type": "string",
-          "title": "详细地址"
+          "title": "详细地址",
+          "required": [
+            "detail"
+          ]
         },
         "isDefault": {
           "type": "boolean",
           "title": "是否默认地址"
         }
-      }
+      },
+      "required": [
+        "name",
+        "phone",
+        "province",
+        "city",
+        "district",
+        "detail"
+      ]
     },
     "v1CreateAuthenticateRequest": {
       "type": "object",
@@ -1588,47 +1849,82 @@
       "properties": {
         "title": {
           "type": "string",
-          "title": "发票抬头"
+          "title": "发票抬头",
+          "required": [
+            "title"
+          ]
         },
         "taxNumber": {
           "type": "string",
-          "title": "税号"
+          "title": "税号",
+          "required": [
+            "taxNumber"
+          ]
         },
         "registerAddress": {
           "type": "string",
-          "title": "注册地址"
+          "title": "注册地址",
+          "required": [
+            "registerAddress"
+          ]
         },
         "registerPhone": {
           "type": "string",
-          "title": "注册电话"
+          "title": "注册电话",
+          "required": [
+            "registerPhone"
+          ]
         },
         "bank": {
           "type": "string",
-          "title": "开户银行"
+          "title": "开户银行",
+          "required": [
+            "bank"
+          ]
         },
         "bankAccount": {
           "type": "string",
-          "title": "银行账号"
+          "title": "银行账号",
+          "required": [
+            "bankAccount"
+          ]
         }
-      }
+      },
+      "required": [
+        "title",
+        "taxNumber",
+        "registerAddress",
+        "registerPhone",
+        "bank",
+        "bankAccount"
+      ]
     },
     "v1CreateOrderRequest": {
       "type": "object",
       "properties": {
         "receiverName": {
           "type": "string",
-          "title": "收货人"
+          "title": "收货人",
+          "required": [
+            "receiverName"
+          ]
         },
         "receiverPhone": {
           "type": "string",
-          "title": "收货人手机号"
+          "title": "收货人手机号",
+          "required": [
+            "receiverPhone"
+          ]
         },
         "receiverAddress": {
           "type": "string",
-          "title": "收货地址"
+          "title": "收货地址",
+          "required": [
+            "receiverAddress"
+          ]
         },
         "invoiceRequirement": {
-          "$ref": "#/definitions/v1OrderInvoiceRequirement",
+          "$ref": "#/definitions/v1InvoiceRequirement",
           "title": "开票要求"
         },
         "invoiceAccount": {
@@ -1636,11 +1932,11 @@
           "title": "无票时，不传"
         },
         "paymentTerms": {
-          "$ref": "#/definitions/v1OrderPaymentTerms",
+          "$ref": "#/definitions/v1PaymentTerms",
           "title": "支付条款：现付、挂账"
         },
         "paymentOption": {
-          "$ref": "#/definitions/v1OrderPaymentOption",
+          "$ref": "#/definitions/v1PaymentOption",
           "title": "支付方式: 挂账时，无需传"
         },
         "shoppingCartIds": {
@@ -1649,9 +1945,18 @@
             "type": "string",
             "format": "int64"
           },
-          "title": "购物车ID数组 【1-200】"
+          "title": "购物车ID数组 【1-200】",
+          "required": [
+            "shoppingCartIds"
+          ]
         }
-      }
+      },
+      "required": [
+        "receiverName",
+        "receiverPhone",
+        "receiverAddress",
+        "shoppingCartIds"
+      ]
     },
     "v1CreateShoppingCartRequest": {
       "type": "object",
@@ -1671,6 +1976,29 @@
       "required": [
         "productIds"
       ]
+    },
+    "v1GetPaymentOptionsReply": {
+      "type": "object",
+      "properties": {
+        "paymentOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1PaymentOption"
+          },
+          "title": "支付方式：可选的支付方式"
+        }
+      }
+    },
+    "v1InvoiceRequirement": {
+      "type": "string",
+      "enum": [
+        "INVOICE_REQUIREMENT_UNKNOWN",
+        "INVOICE_REQUIREMENT_NONE",
+        "INVOICE_REQUIREMENT_NORMAL",
+        "INVOICE_REQUIREMENT_SPECIAL"
+      ],
+      "default": "INVOICE_REQUIREMENT_UNKNOWN",
+      "title": "- INVOICE_REQUIREMENT_UNKNOWN: 未知\n - INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
     },
     "v1ListAddressReply": {
       "type": "object",
@@ -1718,6 +2046,17 @@
         }
       }
     },
+    "v1ListPaymentReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Payment"
+          }
+        }
+      }
+    },
     "v1ListProductReply": {
       "type": "object",
       "properties": {
@@ -1751,17 +2090,25 @@
           "type": "string",
           "title": "下单时间"
         },
+        "paymentStatus": {
+          "$ref": "#/definitions/v1PaymentStatus",
+          "title": "订单支付状态"
+        },
+        "shippingStatus": {
+          "$ref": "#/definitions/v1ShippingStatus",
+          "title": "订单发货状态"
+        },
+        "status": {
+          "$ref": "#/definitions/orderv1Status",
+          "title": "订单状态"
+        },
         "summary": {
           "type": "string",
-          "title": "订单摘要（）"
+          "title": "订单摘要"
         },
         "no": {
           "type": "string",
           "title": "订单号"
-        },
-        "status": {
-          "$ref": "#/definitions/v1OrderStatus",
-          "title": "订单状态"
         },
         "subtotal": {
           "type": "string",
@@ -1796,7 +2143,7 @@
           "title": "实付金额"
         },
         "paymentTerms": {
-          "$ref": "#/definitions/v1OrderPaymentTerms",
+          "$ref": "#/definitions/v1PaymentTerms",
           "title": "支付条款：现付、挂账"
         },
         "paymentOption": {
@@ -1806,6 +2153,15 @@
         "paymentTime": {
           "type": "string",
           "title": "支付时间"
+        },
+        "paymentId": {
+          "type": "string",
+          "format": "int64",
+          "title": "支付记录id"
+        },
+        "paymentNo": {
+          "type": "string",
+          "title": "支付记录编号"
         },
         "receiverName": {
           "type": "string",
@@ -1820,12 +2176,20 @@
           "title": "收货地址"
         },
         "invoiceRequirement": {
-          "$ref": "#/definitions/v1OrderInvoiceRequirement",
+          "$ref": "#/definitions/v1InvoiceRequirement",
           "title": "开票要求"
         },
         "invoiceAccount": {
           "$ref": "#/definitions/apiorderv1InvoiceAccount",
           "title": "无票时，不返回"
+        },
+        "invoiceStatus": {
+          "$ref": "#/definitions/v1OrderInvoiceStatus",
+          "title": "开票状态"
+        },
+        "invoiceUrl": {
+          "type": "string",
+          "title": "发票链接(仅在已开票状态下返回。浏览器打开)"
         },
         "totalBox": {
           "type": "integer",
@@ -1842,48 +2206,100 @@
         }
       }
     },
-    "v1OrderInvoiceRequirement": {
+    "v1OrderInvoiceStatus": {
       "type": "string",
       "enum": [
-        "INVOICE_REQUIREMENT_UNKNOWN",
-        "NONE",
-        "NORMAL",
-        "SPECIAL"
+        "INVOICE_STATUS_UNKNOWN",
+        "INVOICE_STATUS_NONE",
+        "INVOICE_STATUS_UNINVOICED",
+        "INVOICE_STATUS_INVOICED"
       ],
-      "default": "INVOICE_REQUIREMENT_UNKNOWN",
-      "title": "- INVOICE_REQUIREMENT_UNKNOWN: 未知\n - NONE: 不开票\n - NORMAL: 普票\n - SPECIAL: 专票"
+      "default": "INVOICE_STATUS_UNKNOWN",
+      "description": "- INVOICE_STATUS_UNKNOWN: 未知\n - INVOICE_STATUS_NONE: 无需开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
+      "title": "开票状态"
     },
-    "v1OrderPaymentOption": {
+    "v1Payment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "付款ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "时间"
+        },
+        "status": {
+          "$ref": "#/definitions/v1PaymentStatus",
+          "title": "付款状态"
+        },
+        "option": {
+          "$ref": "#/definitions/v1PaymentOption",
+          "title": "付款方式"
+        },
+        "no": {
+          "type": "string",
+          "title": "付款编号"
+        },
+        "name": {
+          "type": "string",
+          "title": "名称"
+        },
+        "amount": {
+          "type": "string",
+          "title": "付款金额"
+        },
+        "orderCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "订单数量"
+        },
+        "note": {
+          "type": "string",
+          "title": "付款备注"
+        },
+        "recipient": {
+          "type": "string",
+          "title": "收款人"
+        },
+        "voucherUrl": {
+          "type": "string",
+          "title": "付款凭证链接"
+        }
+      }
+    },
+    "v1PaymentOption": {
       "type": "string",
       "enum": [
         "PAYMENT_OPTION_UNKNOWN",
-        "OFFLINE_WECHAT",
-        "OFFLINE_ALIPAY",
-        "OFFLINE_ENTERPRISE"
+        "PAYMENT_OPTION_OFFLINE_WECHAT",
+        "PAYMENT_OPTION_OFFLINE_ALIPAY",
+        "PAYMENT_OPTION_OFFLINE_ENTERPRISE"
       ],
       "default": "PAYMENT_OPTION_UNKNOWN",
-      "title": "- PAYMENT_OPTION_UNKNOWN: 未知\n - OFFLINE_WECHAT: 线下微信转账\n - OFFLINE_ALIPAY: 线下支付宝转账\n - OFFLINE_ENTERPRISE: 线下对公支付"
+      "title": "- PAYMENT_OPTION_UNKNOWN: 未知\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付"
     },
-    "v1OrderPaymentTerms": {
+    "v1PaymentStatus": {
       "type": "string",
       "enum": [
-        "UNKNOWN",
-        "Cash",
-        "CREDIT"
+        "PAYMENT_STATUS_UNPAID",
+        "PAYMENT_STATUS_PAYING",
+        "PAYMENT_STATUS_PAID",
+        "PAYMENT_STATUS_CREDITING"
       ],
-      "default": "UNKNOWN",
-      "title": "- UNKNOWN: 未知:挂账情况下是未知\n - Cash: 现付\n - CREDIT: 挂账"
+      "default": "PAYMENT_STATUS_UNPAID",
+      "title": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_PAYING: 确认中\n - PAYMENT_STATUS_PAID: 已付款\n - PAYMENT_STATUS_CREDITING: 挂账中"
     },
-    "v1OrderStatus": {
+    "v1PaymentTerms": {
       "type": "string",
       "enum": [
-        "STATUS_UNKNOWN",
-        "PENDING",
-        "FINANCE_PENDING"
+        "PAYMENT_TERMS_UNKNOWN",
+        "PAYMENT_TERMS_CASH",
+        "PAYMENT_TERMS_CREDIT"
       ],
-      "default": "STATUS_UNKNOWN",
-      "description": "- STATUS_UNKNOWN: 未知\n - PENDING: 客服审核中\n - FINANCE_PENDING: 财务审核中",
-      "title": "订单状态"
+      "default": "PAYMENT_TERMS_UNKNOWN",
+      "title": "- PAYMENT_TERMS_UNKNOWN: 未知:挂账情况下是未知\n - PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账"
     },
     "v1SendSMSCodeRequest": {
       "type": "object",
@@ -1899,6 +2315,17 @@
       "required": [
         "phone"
       ]
+    },
+    "v1ShippingStatus": {
+      "type": "string",
+      "enum": [
+        "SHIPPING_STATUS_UNKNOWN",
+        "SHIPPING_STATUS_UNDELIVERED",
+        "SHIPPING_STATUS_PARTIALLY_DELIVERED",
+        "SHIPPING_STATUS_DELIVERED"
+      ],
+      "default": "SHIPPING_STATUS_UNKNOWN",
+      "title": "- SHIPPING_STATUS_UNKNOWN: 未知\n - SHIPPING_STATUS_UNDELIVERED: 未发货\n - SHIPPING_STATUS_PARTIALLY_DELIVERED: 部分发货\n - SHIPPING_STATUS_DELIVERED: 已发货"
     },
     "v1ShoppingCart": {
       "type": "object",
@@ -1936,8 +2363,12 @@
         },
         "name": {
           "type": "string"
+        },
+        "phone": {
+          "type": "string"
         }
-      }
+      },
+      "title": "公司信息\t 地区  联系人\t联系方式  业务渠道\t合作方式（集采/一件代发）沟通进度  跟进人  结算方式（现结/预付款）"
     }
   }
 }
