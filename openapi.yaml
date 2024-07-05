@@ -11,7 +11,7 @@ paths:
             tags:
                 - AddressService
                 - 收货地址
-            summary: 地址
+            summary: 地址列表
             description: 地址列表
             operationId: AddressService_ListAddress
             responses:
@@ -31,7 +31,7 @@ paths:
             tags:
                 - AddressService
                 - 收货地址
-            summary: 地址
+            summary: 创建地址
             description: 创建地址
             operationId: AddressService_CreateAddress
             requestBody:
@@ -58,7 +58,7 @@ paths:
             tags:
                 - AddressService
                 - 收货地址
-            summary: 地址
+            summary: 地址详情
             description: 地址详情
             operationId: AddressService_GetAddress
             parameters:
@@ -85,7 +85,7 @@ paths:
             tags:
                 - AddressService
                 - 收货地址
-            summary: 地址
+            summary: 修改地址
             description: 修改地址
             operationId: AddressService_UpdateAddress
             parameters:
@@ -118,7 +118,7 @@ paths:
             tags:
                 - AddressService
                 - 收货地址
-            summary: 地址
+            summary: 删除地址
             description: 删除地址
             operationId: AddressService_DeleteAddress
             parameters:
