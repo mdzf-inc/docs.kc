@@ -888,6 +888,13 @@ components:
                     type: string
                     description: 类目名称
         CreateAddressRequest:
+            required:
+                - name
+                - phone
+                - province
+                - city
+                - district
+                - detail
             type: object
             properties:
                 name:
@@ -1789,6 +1796,13 @@ components:
                     type: string
                     description: 付款凭证（凭证文件url）
         UpdateAddressRequest:
+            required:
+                - name
+                - phone
+                - province
+                - city
+                - district
+                - detail
             type: object
             properties:
                 id:
