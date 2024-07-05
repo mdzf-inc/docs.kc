@@ -1,0 +1,1943 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "order/v1/order.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OrderService"
+    },
+    {
+      "name": "AuthenticateService"
+    },
+    {
+      "name": "InvoiceAccountService"
+    },
+    {
+      "name": "FavoriteService"
+    },
+    {
+      "name": "UserService"
+    },
+    {
+      "name": "ProductService"
+    },
+    {
+      "name": "AddressService"
+    },
+    {
+      "name": "ShoppingCartService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/addresses": {
+      "get": {
+        "summary": "地址列表",
+        "operationId": "AddressService_ListAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAddressReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AddressService"
+        ]
+      },
+      "post": {
+        "summary": "创建地址",
+        "operationId": "AddressService_CreateAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Address"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateAddressRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AddressService"
+        ]
+      }
+    },
+    "/addresses/{id}": {
+      "get": {
+        "summary": "地址详情",
+        "operationId": "AddressService_GetAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Address"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "地址id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AddressService"
+        ]
+      },
+      "delete": {
+        "summary": "删除地址",
+        "operationId": "AddressService_DeleteAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiaddressv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "地址id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AddressService"
+        ]
+      },
+      "put": {
+        "summary": "修改地址",
+        "operationId": "AddressService_UpdateAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Address"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "地址id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "收货人"
+                },
+                "phone": {
+                  "type": "string",
+                  "title": "手机号"
+                },
+                "province": {
+                  "type": "string",
+                  "title": "省份"
+                },
+                "city": {
+                  "type": "string",
+                  "title": "城市"
+                },
+                "district": {
+                  "type": "string",
+                  "title": "区县"
+                },
+                "detail": {
+                  "type": "string",
+                  "title": "详细地址"
+                },
+                "isDefault": {
+                  "type": "boolean",
+                  "title": "是否默认地址"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "AddressService"
+        ]
+      }
+    },
+    "/authenticate": {
+      "post": {
+        "summary": "登录",
+        "operationId": "AuthenticateService_CreateAuthenticate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Authentication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateAuthenticateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthenticateService"
+        ]
+      }
+    },
+    "/categories": {
+      "get": {
+        "summary": "类目列表",
+        "operationId": "ProductService_ListCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ProductService"
+        ]
+      }
+    },
+    "/favorites/product": {
+      "post": {
+        "summary": "收藏产品",
+        "operationId": "FavoriteService_CreateFavoriteProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apifavoritev1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateFavoriteProductRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FavoriteService"
+        ]
+      }
+    },
+    "/favorites/product/actions/cancel": {
+      "post": {
+        "summary": "取消收藏产品",
+        "operationId": "FavoriteService_CancelFavoriteProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apifavoritev1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CancelFavoriteProductRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FavoriteService"
+        ]
+      }
+    },
+    "/invoice-accounts": {
+      "get": {
+        "summary": "发票账户列表",
+        "operationId": "InvoiceAccountService_ListInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListInvoiceAccountReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      },
+      "post": {
+        "summary": "创建发票账户",
+        "operationId": "InvoiceAccountService_CreateInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiinvoiceaccountv1InvoiceAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateInvoiceAccountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      }
+    },
+    "/invoice-accounts/{id}": {
+      "get": {
+        "summary": "发票账户详情",
+        "operationId": "InvoiceAccountService_GetInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiinvoiceaccountv1InvoiceAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "发票账户id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      },
+      "delete": {
+        "summary": "删除发票账户",
+        "operationId": "InvoiceAccountService_DeleteInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiinvoiceaccountv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "发票账户id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      },
+      "put": {
+        "summary": "修改发票账户",
+        "operationId": "InvoiceAccountService_UpdateInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiinvoiceaccountv1InvoiceAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "发票账户id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "发票抬头"
+                },
+                "taxNumber": {
+                  "type": "string",
+                  "title": "税号"
+                },
+                "registerAddress": {
+                  "type": "string",
+                  "title": "注册地址"
+                },
+                "registerPhone": {
+                  "type": "string",
+                  "title": "注册电话"
+                },
+                "bank": {
+                  "type": "string",
+                  "title": "开户银行"
+                },
+                "bankAccount": {
+                  "type": "string",
+                  "title": "银行账号"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "订单列表",
+        "operationId": "OrderService_ListOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListOrderReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "status",
+            "description": "订单状态\n\n - STATUS_UNKNOWN: 未知\n - PENDING: 客服审核中\n - FINANCE_PENDING: 财务审核中",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "STATUS_UNKNOWN",
+              "PENDING",
+              "FINANCE_PENDING"
+            ],
+            "default": "STATUS_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      },
+      "post": {
+        "summary": "创建订单",
+        "operationId": "OrderService_CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Order"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "summary": "订单详情",
+        "operationId": "OrderService_GetOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Order"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "订单ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/orders/{id}/actions/cancel": {
+      "post": {
+        "summary": "取消订单",
+        "operationId": "OrderService_CancelOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiorderv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "订单ID",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "只有待审核状态的订单可以取消"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "产品列表",
+        "operationId": "ProductService_ListProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListProductReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "categoryId",
+            "description": "类目id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "promotionId",
+            "description": "推荐id。小程序二维码进入时，url会带上此参数",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "onlyFavorite",
+            "description": "只看收藏商品",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "q",
+            "description": "品名/编码",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ProductService"
+        ]
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "产品详情",
+        "operationId": "ProductService_GetProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiproductv1Product"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "产品id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ProductService"
+        ]
+      }
+    },
+    "/shopping-carts": {
+      "get": {
+        "summary": "购物车列表",
+        "operationId": "ShoppingCartService_ListShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListShoppingCartReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "分页页码 从1开始",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "description": "分页大小",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      },
+      "delete": {
+        "summary": "删除购物车商品",
+        "operationId": "ShoppingCartService_DeleteShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apishoppingcartv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "description": "购物车ID数组 1-1000个",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      },
+      "post": {
+        "summary": "加入购物车",
+        "operationId": "ShoppingCartService_CreateShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apishoppingcartv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateShoppingCartRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      }
+    },
+    "/shopping-carts/{id}": {
+      "put": {
+        "summary": "修改购物车商品数量",
+        "operationId": "ShoppingCartService_UpdateShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apishoppingcartv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "购物车ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "数量：[0-99999]，如果为0则系统自动删除该商品",
+                  "required": [
+                    "quantity"
+                  ]
+                }
+              },
+              "required": [
+                "quantity"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      }
+    },
+    "/sms-code": {
+      "post": {
+        "summary": "发送验证码",
+        "operationId": "AuthenticateService_SendSMSCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiauthenticatev1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SendSMSCodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthenticateService"
+        ]
+      }
+    },
+    "/users/me": {
+      "get": {
+        "summary": "获取自己的用户信息",
+        "operationId": "UserService_GetMe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "UserService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiaddressv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apiauthenticatev1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apifavoritev1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apiinvoiceaccountv1InvoiceAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "发票账户id"
+        },
+        "title": {
+          "type": "string",
+          "title": "发票抬头"
+        },
+        "taxNumber": {
+          "type": "string",
+          "title": "税号"
+        },
+        "registerAddress": {
+          "type": "string",
+          "title": "注册地址"
+        },
+        "registerPhone": {
+          "type": "string",
+          "title": "注册电话"
+        },
+        "bank": {
+          "type": "string",
+          "title": "开户银行"
+        },
+        "bankAccount": {
+          "type": "string",
+          "title": "银行账号"
+        }
+      }
+    },
+    "apiinvoiceaccountv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apiorderv1InvoiceAccount": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "发票抬头"
+        },
+        "taxNumber": {
+          "type": "string",
+          "title": "税号"
+        },
+        "registerAddress": {
+          "type": "string",
+          "title": "注册地址"
+        },
+        "registerPhone": {
+          "type": "string",
+          "title": "注册电话"
+        },
+        "bank": {
+          "type": "string",
+          "title": "开户银行"
+        },
+        "bankAccount": {
+          "type": "string",
+          "title": "银行账号"
+        }
+      }
+    },
+    "apiorderv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apiproductv1Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "产品id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "更新时间"
+        },
+        "mainImageUrl": {
+          "type": "string",
+          "title": "主图"
+        },
+        "detailImageUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "详情图"
+        },
+        "name": {
+          "type": "string",
+          "title": "产品名称"
+        },
+        "no": {
+          "type": "string",
+          "title": "产品编号"
+        },
+        "spec": {
+          "type": "string",
+          "title": "规格"
+        },
+        "material": {
+          "type": "string",
+          "title": "材质"
+        },
+        "weight": {
+          "type": "string",
+          "title": "重量"
+        },
+        "barcode": {
+          "type": "string",
+          "title": "69码"
+        },
+        "categoryId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "类目id"
+        },
+        "categoryName": {
+          "type": "string",
+          "title": "类目名称"
+        },
+        "supplierPackingRate": {
+          "type": "integer",
+          "format": "int32",
+          "title": "供应商装箱率"
+        },
+        "internalPackingRate": {
+          "type": "integer",
+          "format": "int32",
+          "title": "内部装箱率"
+        },
+        "wholesalePrice": {
+          "type": "string",
+          "title": "批发价"
+        },
+        "dropshippingPrice": {
+          "type": "string",
+          "title": "代发价"
+        },
+        "unifiedPrice": {
+          "type": "string",
+          "title": "统一控价"
+        },
+        "wxMomentText": {
+          "type": "string",
+          "title": "发圈文案"
+        },
+        "tmallShopUrl": {
+          "type": "string",
+          "title": "天猫店铺链接 如果没有值，表示没有天猫链接，隐藏跳转按钮"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "产品标签"
+        },
+        "isFavorite": {
+          "type": "boolean",
+          "title": "是否收藏"
+        }
+      }
+    },
+    "apishoppingcartv1Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "产品id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "更新时间"
+        },
+        "mainImageUrl": {
+          "type": "string",
+          "title": "主图"
+        },
+        "name": {
+          "type": "string",
+          "title": "产品名称"
+        },
+        "no": {
+          "type": "string",
+          "title": "产品编号"
+        },
+        "spec": {
+          "type": "string",
+          "title": "规格"
+        },
+        "material": {
+          "type": "string",
+          "title": "材质"
+        },
+        "weight": {
+          "type": "string",
+          "title": "重量"
+        },
+        "barcode": {
+          "type": "string",
+          "title": "69码"
+        },
+        "supplierPackingRate": {
+          "type": "integer",
+          "format": "int32",
+          "title": "供应商装箱率"
+        },
+        "internalPackingRate": {
+          "type": "integer",
+          "format": "int32",
+          "title": "内部装箱率"
+        },
+        "wholesalePrice": {
+          "type": "string",
+          "title": "批发价"
+        },
+        "dropshippingPrice": {
+          "type": "string",
+          "title": "代发价"
+        },
+        "unifiedPrice": {
+          "type": "string",
+          "title": "统一控价"
+        },
+        "wxMomentText": {
+          "type": "string",
+          "title": "发圈文案"
+        },
+        "tmallShopUrl": {
+          "type": "string",
+          "title": "天猫店铺链接 如果没有值，表示没有天猫链接，隐藏跳转按钮"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "产品标签"
+        }
+      }
+    },
+    "apishoppingcartv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "googleprotobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com. As of May 2023, there are no widely used type server\nimplementations and no plans to implement one.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+        }
+      },
+      "additionalProperties": {},
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n    // or ...\n    if (any.isSameTypeAs(Foo.getDefaultInstance())) {\n      foo = any.unpack(Foo.getDefaultInstance());\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/googleprotobufAny"
+          }
+        }
+      }
+    },
+    "v1Address": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "地址id"
+        },
+        "name": {
+          "type": "string",
+          "title": "收货人"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号"
+        },
+        "province": {
+          "type": "string",
+          "title": "省份"
+        },
+        "city": {
+          "type": "string",
+          "title": "城市"
+        },
+        "district": {
+          "type": "string",
+          "title": "区县"
+        },
+        "detail": {
+          "type": "string",
+          "title": "详细地址"
+        },
+        "isDefault": {
+          "type": "boolean",
+          "title": "是否默认地址"
+        }
+      }
+    },
+    "v1Authentication": {
+      "type": "object",
+      "properties": {
+        "tokenType": {
+          "type": "string",
+          "title": "Cookie 类型，固定为Bearer"
+        },
+        "accessToken": {
+          "type": "string",
+          "title": "Cookie 令牌：Header['Authorization'] = token_type + ' '+ access_token"
+        },
+        "expiresIn": {
+          "type": "string",
+          "format": "int64",
+          "title": "Cookie 有效期"
+        },
+        "refreshToken": {
+          "type": "string",
+          "title": "Cookie 刷新令牌"
+        },
+        "refreshTokenExpiresIn": {
+          "type": "string",
+          "format": "int64",
+          "title": "refresh_token 有效期"
+        },
+        "createTimestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "创建时间 毫秒时间戳"
+        }
+      }
+    },
+    "v1CancelFavoriteProductRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "产品ID数组 1-1000个",
+          "required": [
+            "ids"
+          ]
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    },
+    "v1Category": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "类目id"
+        },
+        "name": {
+          "type": "string",
+          "title": "类目名称"
+        }
+      }
+    },
+    "v1CreateAddressRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "收货人"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号"
+        },
+        "province": {
+          "type": "string",
+          "title": "省份"
+        },
+        "city": {
+          "type": "string",
+          "title": "城市"
+        },
+        "district": {
+          "type": "string",
+          "title": "区县"
+        },
+        "detail": {
+          "type": "string",
+          "title": "详细地址"
+        },
+        "isDefault": {
+          "type": "boolean",
+          "title": "是否默认地址"
+        }
+      }
+    },
+    "v1CreateAuthenticateRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1CreateAuthenticateRequestType",
+          "title": "登录类型"
+        },
+        "phoneKey": {
+          "type": "string",
+          "title": "验证接口返回的key：验证码登录必填"
+        },
+        "smsCode": {
+          "type": "string",
+          "title": "验证码：验证码登录必填(4位数字)"
+        },
+        "wxAuthCode": {
+          "type": "string",
+          "title": "微信code：微信手机号授权必填"
+        }
+      },
+      "title": "登录请求"
+    },
+    "v1CreateAuthenticateRequestType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "PHONE",
+        "WX_PHONE"
+      ],
+      "default": "UNKNOWN",
+      "title": "- UNKNOWN: 未知\n - PHONE: 手机号登录\n - WX_PHONE: 微信手机号授权"
+    },
+    "v1CreateFavoriteProductRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "产品ID数组 1-1000个",
+          "required": [
+            "ids"
+          ]
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    },
+    "v1CreateInvoiceAccountRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "发票抬头"
+        },
+        "taxNumber": {
+          "type": "string",
+          "title": "税号"
+        },
+        "registerAddress": {
+          "type": "string",
+          "title": "注册地址"
+        },
+        "registerPhone": {
+          "type": "string",
+          "title": "注册电话"
+        },
+        "bank": {
+          "type": "string",
+          "title": "开户银行"
+        },
+        "bankAccount": {
+          "type": "string",
+          "title": "银行账号"
+        }
+      }
+    },
+    "v1CreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "receiverName": {
+          "type": "string",
+          "title": "收货人"
+        },
+        "receiverPhone": {
+          "type": "string",
+          "title": "收货人手机号"
+        },
+        "receiverAddress": {
+          "type": "string",
+          "title": "收货地址"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/v1OrderInvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceAccount": {
+          "$ref": "#/definitions/apiorderv1InvoiceAccount",
+          "title": "无票时，不传"
+        },
+        "paymentTerms": {
+          "$ref": "#/definitions/v1OrderPaymentTerms",
+          "title": "支付条款：现付、挂账"
+        },
+        "paymentOption": {
+          "$ref": "#/definitions/v1OrderPaymentOption",
+          "title": "支付方式: 挂账时，无需传"
+        },
+        "shoppingCartIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "购物车ID数组 【1-200】"
+        }
+      }
+    },
+    "v1CreateShoppingCartRequest": {
+      "type": "object",
+      "properties": {
+        "productIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "产品ID数组 1-1000个",
+          "required": [
+            "productIds"
+          ]
+        }
+      },
+      "required": [
+        "productIds"
+      ]
+    },
+    "v1ListAddressReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Address"
+          },
+          "title": "地址列表"
+        }
+      }
+    },
+    "v1ListCategoryReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Category"
+          }
+        }
+      }
+    },
+    "v1ListInvoiceAccountReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiinvoiceaccountv1InvoiceAccount"
+          },
+          "title": "发票账户列表"
+        }
+      }
+    },
+    "v1ListOrderReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Order"
+          }
+        }
+      }
+    },
+    "v1ListProductReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiproductv1Product"
+          }
+        }
+      }
+    },
+    "v1ListShoppingCartReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ShoppingCart"
+          }
+        }
+      }
+    },
+    "v1Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "订单ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "下单时间"
+        },
+        "summary": {
+          "type": "string",
+          "title": "订单摘要（）"
+        },
+        "no": {
+          "type": "string",
+          "title": "订单号"
+        },
+        "status": {
+          "$ref": "#/definitions/v1OrderStatus",
+          "title": "订单状态"
+        },
+        "subtotal": {
+          "type": "string",
+          "title": "汇总金额（小计）"
+        },
+        "tax": {
+          "type": "string",
+          "title": "税费"
+        },
+        "shipping": {
+          "type": "string",
+          "title": "运费"
+        },
+        "discount": {
+          "type": "string",
+          "title": "优惠金额"
+        },
+        "grandTotal": {
+          "type": "string",
+          "title": "最终总额"
+        },
+        "balanceDeduction": {
+          "type": "string",
+          "title": "余额抵扣"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "应付金额"
+        },
+        "amountPaid": {
+          "type": "string",
+          "title": "实付金额"
+        },
+        "paymentTerms": {
+          "$ref": "#/definitions/v1OrderPaymentTerms",
+          "title": "支付条款：现付、挂账"
+        },
+        "paymentOption": {
+          "type": "string",
+          "title": "支付方式"
+        },
+        "paymentTime": {
+          "type": "string",
+          "title": "支付时间"
+        },
+        "receiverName": {
+          "type": "string",
+          "title": "收货人"
+        },
+        "receiverPhone": {
+          "type": "string",
+          "title": "收货人手机号"
+        },
+        "receiverAddress": {
+          "type": "string",
+          "title": "收货地址"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/v1OrderInvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceAccount": {
+          "$ref": "#/definitions/apiorderv1InvoiceAccount",
+          "title": "无票时，不返回"
+        },
+        "totalBox": {
+          "type": "integer",
+          "format": "int32",
+          "title": "总箱数"
+        },
+        "buyerNote": {
+          "type": "string",
+          "title": "买家备注"
+        },
+        "sellerNote": {
+          "type": "string",
+          "title": "卖家备注"
+        }
+      }
+    },
+    "v1OrderInvoiceRequirement": {
+      "type": "string",
+      "enum": [
+        "INVOICE_REQUIREMENT_UNKNOWN",
+        "NONE",
+        "NORMAL",
+        "SPECIAL"
+      ],
+      "default": "INVOICE_REQUIREMENT_UNKNOWN",
+      "title": "- INVOICE_REQUIREMENT_UNKNOWN: 未知\n - NONE: 不开票\n - NORMAL: 普票\n - SPECIAL: 专票"
+    },
+    "v1OrderPaymentOption": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_OPTION_UNKNOWN",
+        "OFFLINE_WECHAT",
+        "OFFLINE_ALIPAY",
+        "OFFLINE_ENTERPRISE"
+      ],
+      "default": "PAYMENT_OPTION_UNKNOWN",
+      "title": "- PAYMENT_OPTION_UNKNOWN: 未知\n - OFFLINE_WECHAT: 线下微信转账\n - OFFLINE_ALIPAY: 线下支付宝转账\n - OFFLINE_ENTERPRISE: 线下对公支付"
+    },
+    "v1OrderPaymentTerms": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "Cash",
+        "CREDIT"
+      ],
+      "default": "UNKNOWN",
+      "title": "- UNKNOWN: 未知:挂账情况下是未知\n - Cash: 现付\n - CREDIT: 挂账"
+    },
+    "v1OrderStatus": {
+      "type": "string",
+      "enum": [
+        "STATUS_UNKNOWN",
+        "PENDING",
+        "FINANCE_PENDING"
+      ],
+      "default": "STATUS_UNKNOWN",
+      "description": "- STATUS_UNKNOWN: 未知\n - PENDING: 客服审核中\n - FINANCE_PENDING: 财务审核中",
+      "title": "订单状态"
+    },
+    "v1SendSMSCodeRequest": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string",
+          "title": "手机号^1[1-9]\\\\d{9}$",
+          "required": [
+            "phone"
+          ]
+        }
+      },
+      "required": [
+        "phone"
+      ]
+    },
+    "v1ShoppingCart": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "购物车id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "加入时间"
+        },
+        "product": {
+          "$ref": "#/definitions/apishoppingcartv1Product",
+          "title": "产品"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "title": "数量"
+        },
+        "total": {
+          "type": "string",
+          "title": "合计金额"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
