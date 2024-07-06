@@ -51,7 +51,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetAccountReply"
+              "$ref": "#/definitions/v1Account"
             }
           },
           "default": {
@@ -1734,6 +1734,28 @@
       "description": "- STATUS_UNKNOWN: 未知\n - STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
       "title": "订单状态"
     },
+    "v1Account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "账户id"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "最新更新时间"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "当前应付款"
+        }
+      }
+    },
     "v1Address": {
       "type": "object",
       "properties": {
@@ -1801,6 +1823,41 @@
           "type": "string",
           "format": "int64",
           "title": "创建时间 毫秒时间戳"
+        }
+      }
+    },
+    "v1Bill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "账单id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "账单时间"
+        },
+        "no": {
+          "type": "string",
+          "title": "账单号"
+        },
+        "amount": {
+          "type": "string",
+          "title": "账单金额"
+        },
+        "direction": {
+          "type": "integer",
+          "format": "int32",
+          "title": "收支方向 1-收入 -1支出"
+        },
+        "summary": {
+          "type": "string",
+          "title": "账单摘要"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
         }
       }
     },
@@ -2169,28 +2226,6 @@
         "productIds"
       ]
     },
-    "v1GetAccountReply": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "账户id"
-        },
-        "updateTime": {
-          "type": "string",
-          "title": "最新更新时间"
-        },
-        "balance": {
-          "type": "string",
-          "title": "余额"
-        },
-        "amountDue": {
-          "type": "string",
-          "title": "当前应付款"
-        }
-      }
-    },
     "v1GetPaymentOptionsReply": {
       "type": "object",
       "properties": {
@@ -2217,35 +2252,12 @@
     "v1ListAccountBillReply": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "账单id"
-        },
-        "createTime": {
-          "type": "string",
-          "title": "账单时间"
-        },
-        "no": {
-          "type": "string",
-          "title": "账单号"
-        },
-        "amount": {
-          "type": "string",
-          "title": "账单金额"
-        },
-        "direction": {
-          "type": "integer",
-          "format": "int32",
-          "title": "收支方向 1-收入 -1支出"
-        },
-        "summary": {
-          "type": "string",
-          "title": "账单摘要"
-        },
-        "balance": {
-          "type": "string",
-          "title": "余额"
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Bill"
+          },
+          "title": "账单列表"
         }
       }
     },
