@@ -845,6 +845,39 @@
         ]
       }
     },
+    "/orders/{id}/notifications": {
+      "get": {
+        "summary": "订单通知列表",
+        "operationId": "OrderService_ListOrderNotification",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListOrderNotificationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "订单ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
     "/payments": {
       "get": {
         "summary": "付款记录列表",
@@ -2246,6 +2279,17 @@
         }
       }
     },
+    "v1ListOrderNotificationReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrderNotification"
+          }
+        }
+      }
+    },
     "v1ListOrderReply": {
       "type": "object",
       "properties": {
@@ -2422,6 +2466,24 @@
       "default": "INVOICE_STATUS_NONE",
       "description": "- INVOICE_STATUS_NONE: 未开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
       "title": "开票状态"
+    },
+    "v1OrderNotification": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "通知ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "通知时间"
+        },
+        "content": {
+          "type": "string",
+          "title": "通知内容"
+        }
+      }
     },
     "v1Payment": {
       "type": "object",
