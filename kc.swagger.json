@@ -1041,7 +1041,7 @@
             "format": "int64"
           },
           {
-            "name": "categoryId",
+            "name": "classificationId",
             "description": "类目id",
             "in": "query",
             "required": false,
@@ -1532,12 +1532,12 @@
           "type": "string",
           "title": "69码"
         },
-        "categoryId": {
+        "classificationId": {
           "type": "integer",
           "format": "int32",
           "title": "类目id"
         },
-        "categoryName": {
+        "classificationName": {
           "type": "string",
           "title": "类目名称"
         },
