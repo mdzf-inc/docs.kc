@@ -2185,6 +2185,10 @@
           "$ref": "#/definitions/v1PaymentOption",
           "title": "支付方式: 挂账时，无需传"
         },
+        "buyerRemark": {
+          "type": "string",
+          "title": "备注 【0- 100】"
+        },
         "shoppingCartIds": {
           "type": "array",
           "items": {
@@ -2448,16 +2452,11 @@
           "type": "string",
           "title": "发票链接(仅在已开票状态下返回。浏览器打开)"
         },
-        "totalBox": {
-          "type": "integer",
-          "format": "int32",
-          "title": "总箱数"
-        },
-        "buyerNote": {
+        "buyerRemark": {
           "type": "string",
           "title": "买家备注"
         },
-        "sellerNote": {
+        "sellerRemark": {
           "type": "string",
           "title": "卖家备注"
         }
