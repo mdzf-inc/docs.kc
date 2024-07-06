@@ -1054,7 +1054,7 @@
             "format": "int64"
           },
           {
-            "name": "promotionId",
+            "name": "recommendId",
             "description": "推荐id。小程序二维码进入时，url会带上此参数",
             "in": "query",
             "required": false,
