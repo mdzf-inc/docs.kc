@@ -705,17 +705,16 @@
         "parameters": [
           {
             "name": "invoiceRequirement",
-            "description": "开票要求\n\n - INVOICE_REQUIREMENT_UNKNOWN: 未知\n - INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票",
+            "description": "开票要求\n\n - INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "INVOICE_REQUIREMENT_UNKNOWN",
               "INVOICE_REQUIREMENT_NONE",
               "INVOICE_REQUIREMENT_NORMAL",
               "INVOICE_REQUIREMENT_SPECIAL"
             ],
-            "default": "INVOICE_REQUIREMENT_UNKNOWN"
+            "default": "INVOICE_REQUIREMENT_NONE"
           }
         ],
         "tags": [
@@ -760,18 +759,17 @@
           },
           {
             "name": "status",
-            "description": "订单状态\n\n - STATUS_UNKNOWN: 未知\n - STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
+            "description": "订单状态\n\n - STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "STATUS_UNKNOWN",
               "STATUS_PENDING",
               "STATUS_CONFIRMED",
               "STATUS_CANCELLED",
               "STATUS_COMPLETED"
             ],
-            "default": "STATUS_UNKNOWN"
+            "default": "STATUS_PENDING"
           }
         ],
         "tags": [
@@ -1724,14 +1722,13 @@
     "orderv1Status": {
       "type": "string",
       "enum": [
-        "STATUS_UNKNOWN",
         "STATUS_PENDING",
         "STATUS_CONFIRMED",
         "STATUS_CANCELLED",
         "STATUS_COMPLETED"
       ],
-      "default": "STATUS_UNKNOWN",
-      "description": "- STATUS_UNKNOWN: 未知\n - STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
+      "default": "STATUS_PENDING",
+      "description": "- STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
       "title": "订单状态"
     },
     "v1Account": {
@@ -2241,13 +2238,12 @@
     "v1InvoiceRequirement": {
       "type": "string",
       "enum": [
-        "INVOICE_REQUIREMENT_UNKNOWN",
         "INVOICE_REQUIREMENT_NONE",
         "INVOICE_REQUIREMENT_NORMAL",
         "INVOICE_REQUIREMENT_SPECIAL"
       ],
-      "default": "INVOICE_REQUIREMENT_UNKNOWN",
-      "title": "- INVOICE_REQUIREMENT_UNKNOWN: 未知\n - INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
+      "default": "INVOICE_REQUIREMENT_NONE",
+      "title": "- INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
     },
     "v1ListAccountBillReply": {
       "type": "object",
@@ -2470,13 +2466,12 @@
     "v1OrderInvoiceStatus": {
       "type": "string",
       "enum": [
-        "INVOICE_STATUS_UNKNOWN",
         "INVOICE_STATUS_NONE",
         "INVOICE_STATUS_UNINVOICED",
         "INVOICE_STATUS_INVOICED"
       ],
-      "default": "INVOICE_STATUS_UNKNOWN",
-      "description": "- INVOICE_STATUS_UNKNOWN: 未知\n - INVOICE_STATUS_NONE: 无需开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
+      "default": "INVOICE_STATUS_NONE",
+      "description": "- INVOICE_STATUS_NONE: 未开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
       "title": "开票状态"
     },
     "v1Payment": {
@@ -2533,13 +2528,13 @@
     "v1PaymentOption": {
       "type": "string",
       "enum": [
-        "PAYMENT_OPTION_UNKNOWN",
+        "PAYMENT_OPTION_NONE",
         "PAYMENT_OPTION_OFFLINE_WECHAT",
         "PAYMENT_OPTION_OFFLINE_ALIPAY",
         "PAYMENT_OPTION_OFFLINE_ENTERPRISE"
       ],
-      "default": "PAYMENT_OPTION_UNKNOWN",
-      "title": "- PAYMENT_OPTION_UNKNOWN: 未知\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付"
+      "default": "PAYMENT_OPTION_NONE",
+      "title": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付"
     },
     "v1PaymentStatus": {
       "type": "string",
@@ -2555,12 +2550,11 @@
     "v1PaymentTerms": {
       "type": "string",
       "enum": [
-        "PAYMENT_TERMS_UNKNOWN",
         "PAYMENT_TERMS_CASH",
         "PAYMENT_TERMS_CREDIT"
       ],
-      "default": "PAYMENT_TERMS_UNKNOWN",
-      "title": "- PAYMENT_TERMS_UNKNOWN: 未知:挂账情况下是未知\n - PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账"
+      "default": "PAYMENT_TERMS_CASH",
+      "title": "- PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账"
     },
     "v1SendSMSCodeRequest": {
       "type": "object",
@@ -2580,13 +2574,12 @@
     "v1ShippingStatus": {
       "type": "string",
       "enum": [
-        "SHIPPING_STATUS_UNKNOWN",
         "SHIPPING_STATUS_UNDELIVERED",
         "SHIPPING_STATUS_PARTIALLY_DELIVERED",
         "SHIPPING_STATUS_DELIVERED"
       ],
-      "default": "SHIPPING_STATUS_UNKNOWN",
-      "title": "- SHIPPING_STATUS_UNKNOWN: 未知\n - SHIPPING_STATUS_UNDELIVERED: 未发货\n - SHIPPING_STATUS_PARTIALLY_DELIVERED: 部分发货\n - SHIPPING_STATUS_DELIVERED: 已发货"
+      "default": "SHIPPING_STATUS_UNDELIVERED",
+      "title": "- SHIPPING_STATUS_UNDELIVERED: 未发货\n - SHIPPING_STATUS_PARTIALLY_DELIVERED: 部分发货\n - SHIPPING_STATUS_DELIVERED: 已发货"
     },
     "v1ShoppingCart": {
       "type": "object",
