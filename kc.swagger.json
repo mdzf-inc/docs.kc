@@ -353,15 +353,15 @@
         ]
       }
     },
-    "/categories": {
+    "/classifications": {
       "get": {
         "summary": "类目列表",
-        "operationId": "ProductService_ListCategory",
+        "operationId": "ProductService_ListClassification",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListCategoryReply"
+              "$ref": "#/definitions/v1ListClassificationReply"
             }
           },
           "default": {
@@ -646,11 +646,11 @@
                     "registerAddress"
                   ]
                 },
-                "registerPhone": {
+                "phone": {
                   "type": "string",
                   "title": "注册电话",
                   "required": [
-                    "registerPhone"
+                    "phone"
                   ]
                 },
                 "bank": {
@@ -672,7 +672,7 @@
                 "title",
                 "taxNumber",
                 "registerAddress",
-                "registerPhone",
+                "phone",
                 "bank",
                 "bankAccount"
               ]
@@ -1409,9 +1409,9 @@
           "type": "string",
           "title": "注册地址"
         },
-        "registerPhone": {
+        "phone": {
           "type": "string",
-          "title": "注册电话"
+          "title": "电话"
         },
         "bank": {
           "type": "string",
@@ -1880,7 +1880,7 @@
         "ids"
       ]
     },
-    "v1Category": {
+    "v1Classification": {
       "type": "object",
       "properties": {
         "id": {
@@ -2117,11 +2117,11 @@
             "registerAddress"
           ]
         },
-        "registerPhone": {
+        "phone": {
           "type": "string",
           "title": "注册电话",
           "required": [
-            "registerPhone"
+            "phone"
           ]
         },
         "bank": {
@@ -2143,7 +2143,7 @@
         "title",
         "taxNumber",
         "registerAddress",
-        "registerPhone",
+        "phone",
         "bank",
         "bankAccount"
       ]
@@ -2273,13 +2273,13 @@
         }
       }
     },
-    "v1ListCategoryReply": {
+    "v1ListClassificationReply": {
       "type": "object",
       "properties": {
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1Category"
+            "$ref": "#/definitions/v1Classification"
           }
         }
       }
