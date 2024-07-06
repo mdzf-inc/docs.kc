@@ -9,6 +9,9 @@
       "name": "OrderService"
     },
     {
+      "name": "CooperationService"
+    },
+    {
       "name": "AuthenticateService"
     },
     {
@@ -28,6 +31,9 @@
     },
     {
       "name": "ShoppingCartService"
+    },
+    {
+      "name": "AccountService"
     }
   ],
   "consumes": [
@@ -37,6 +43,70 @@
     "application/json"
   ],
   "paths": {
+    "/accounts/me": {
+      "get": {
+        "summary": "获取账户余额",
+        "operationId": "AccountService_GetAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetAccountReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/accounts/me/bills": {
+      "get": {
+        "summary": "获取账户账单",
+        "operationId": "AccountService_ListAccountBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAccountBillReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
     "/addresses": {
       "get": {
         "summary": "地址列表",
@@ -303,6 +373,39 @@
         },
         "tags": [
           "ProductService"
+        ]
+      }
+    },
+    "/cooperations": {
+      "post": {
+        "summary": "提交合作意向",
+        "operationId": "CooperationService_CreateCooperation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Cooperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateCooperationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CooperationService"
         ]
       }
     },
@@ -1734,6 +1837,32 @@
         }
       }
     },
+    "v1Cooperation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "合作意向id"
+        },
+        "no": {
+          "type": "string",
+          "title": "合作意向编号"
+        },
+        "name": {
+          "type": "string",
+          "title": "联系人"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号"
+        },
+        "progress": {
+          "type": "string",
+          "title": "进度说明：请您耐心等待，我们会尽快联系您"
+        }
+      }
+    },
     "v1CreateAddressRequest": {
       "type": "object",
       "properties": {
@@ -1824,6 +1953,69 @@
       ],
       "default": "UNKNOWN",
       "title": "- UNKNOWN: 未知\n - PHONE: 手机号登录\n - WX_PHONE: 微信手机号授权"
+    },
+    "v1CreateCooperationRequest": {
+      "type": "object",
+      "properties": {
+        "wxCode": {
+          "type": "string",
+          "title": "微信登录的临时code",
+          "required": [
+            "wxCode"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "title": "联系人",
+          "required": [
+            "name"
+          ]
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号",
+          "required": [
+            "phone"
+          ]
+        },
+        "region": {
+          "type": "string",
+          "title": "地区",
+          "required": [
+            "region"
+          ]
+        },
+        "businessChannel": {
+          "type": "string",
+          "title": "业务渠道(礼品采购/线下家具馆/线下商超/私域商城/银行商城/其他)",
+          "required": [
+            "businessChannel"
+          ]
+        },
+        "cooperationMode": {
+          "type": "string",
+          "title": "合作方式(集采/一件代发)",
+          "required": [
+            "cooperationMode"
+          ]
+        },
+        "settlementMethod": {
+          "type": "string",
+          "title": "结算方式 (现结/预付/账期)",
+          "required": [
+            "settlementMethod"
+          ]
+        }
+      },
+      "required": [
+        "wxCode",
+        "name",
+        "phone",
+        "region",
+        "businessChannel",
+        "cooperationMode",
+        "settlementMethod"
+      ]
     },
     "v1CreateFavoriteProductRequest": {
       "type": "object",
@@ -1977,6 +2169,28 @@
         "productIds"
       ]
     },
+    "v1GetAccountReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "账户id"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "最新更新时间"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "当前应付款"
+        }
+      }
+    },
     "v1GetPaymentOptionsReply": {
       "type": "object",
       "properties": {
@@ -1999,6 +2213,41 @@
       ],
       "default": "INVOICE_REQUIREMENT_UNKNOWN",
       "title": "- INVOICE_REQUIREMENT_UNKNOWN: 未知\n - INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
+    },
+    "v1ListAccountBillReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "账单id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "账单时间"
+        },
+        "no": {
+          "type": "string",
+          "title": "账单号"
+        },
+        "amount": {
+          "type": "string",
+          "title": "账单金额"
+        },
+        "direction": {
+          "type": "integer",
+          "format": "int32",
+          "title": "收支方向 1-收入 -1支出"
+        },
+        "summary": {
+          "type": "string",
+          "title": "账单摘要"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
+        }
+      }
     },
     "v1ListAddressReply": {
       "type": "object",
