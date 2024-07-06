@@ -684,44 +684,6 @@
         ]
       }
     },
-    "/options/order/payment": {
-      "get": {
-        "summary": "获取支付选项，用于创建订单时选择支付信息",
-        "operationId": "OrderService_GetPaymentOptions",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1GetPaymentOptionsReply"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "invoiceRequirement",
-            "description": "开票要求\n\n - INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "INVOICE_REQUIREMENT_NONE",
-              "INVOICE_REQUIREMENT_NORMAL",
-              "INVOICE_REQUIREMENT_SPECIAL"
-            ],
-            "default": "INVOICE_REQUIREMENT_NONE"
-          }
-        ],
-        "tags": [
-          "OrderService"
-        ]
-      }
-    },
     "/orders": {
       "get": {
         "summary": "订单列表",
@@ -2179,11 +2141,11 @@
         },
         "paymentTerms": {
           "$ref": "#/definitions/v1PaymentTerms",
-          "title": "支付条款：现付、挂账"
+          "title": "支付条款：现付、挂账（用户信息接口中有是否允许挂账）"
         },
         "paymentOption": {
           "$ref": "#/definitions/v1PaymentOption",
-          "title": "支付方式: 挂账时，无需传"
+          "title": "支付方式"
         },
         "buyerRemark": {
           "type": "string",
@@ -2226,18 +2188,6 @@
       "required": [
         "productIds"
       ]
-    },
-    "v1GetPaymentOptionsReply": {
-      "type": "object",
-      "properties": {
-        "paymentOptions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1PaymentOption"
-          },
-          "title": "支付方式：可选的支付方式"
-        }
-      }
     },
     "v1InvoiceRequirement": {
       "type": "string",
