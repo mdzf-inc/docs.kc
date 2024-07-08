@@ -43,30 +43,7 @@
     "application/json"
   ],
   "paths": {
-    "/accounts/me": {
-      "get": {
-        "summary": "获取账户余额",
-        "operationId": "AccountService_GetAccount",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1Account"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "AccountService"
-        ]
-      }
-    },
-    "/accounts/me/bills": {
+    "/aacounts/me/bills": {
       "get": {
         "summary": "获取账户账单",
         "operationId": "AccountService_ListAccountBill",
@@ -102,6 +79,29 @@
             "format": "int64"
           }
         ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/accounts/me": {
+      "get": {
+        "summary": "获取账户信息",
+        "operationId": "AccountService_GetAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
         "tags": [
           "AccountService"
         ]
@@ -1305,7 +1305,7 @@
     },
     "/users/me": {
       "get": {
-        "summary": "获取自己的用户信息",
+        "summary": "获取用户信息",
         "operationId": "UserService_GetMe",
         "responses": {
           "200": {
@@ -1559,9 +1559,9 @@
           "type": "string",
           "title": "代发价"
         },
-        "unifiedPrice": {
+        "minimumAdvertisedPrice": {
           "type": "string",
-          "title": "统一控价"
+          "title": "最低控价"
         },
         "wxMomentText": {
           "type": "string",
@@ -1744,7 +1744,50 @@
         },
         "amountDue": {
           "type": "string",
-          "title": "当前应付款"
+          "title": "当前付款"
+        },
+        "creditLimit": {
+          "type": "string",
+          "title": "信用额度"
+        },
+        "remainingCreditLimit": {
+          "type": "string",
+          "title": "剩余信用额度"
+        }
+      }
+    },
+    "v1AccountBill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "账单id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "账单时间"
+        },
+        "no": {
+          "type": "string",
+          "title": "账单号"
+        },
+        "amount": {
+          "type": "string",
+          "title": "账单金额"
+        },
+        "direction": {
+          "type": "integer",
+          "format": "int32",
+          "title": "收支方向 1-收入 -1支出"
+        },
+        "summary": {
+          "type": "string",
+          "title": "账单摘要"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
         }
       }
     },
@@ -1815,41 +1858,6 @@
           "type": "string",
           "format": "int64",
           "title": "创建时间 毫秒时间戳"
-        }
-      }
-    },
-    "v1Bill": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "账单id"
-        },
-        "createTime": {
-          "type": "string",
-          "title": "账单时间"
-        },
-        "no": {
-          "type": "string",
-          "title": "账单号"
-        },
-        "amount": {
-          "type": "string",
-          "title": "账单金额"
-        },
-        "direction": {
-          "type": "integer",
-          "format": "int32",
-          "title": "收支方向 1-收入 -1支出"
-        },
-        "summary": {
-          "type": "string",
-          "title": "账单摘要"
-        },
-        "balance": {
-          "type": "string",
-          "title": "余额"
         }
       }
     },
@@ -2238,7 +2246,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1Bill"
+            "$ref": "#/definitions/v1AccountBill"
           },
           "title": "账单列表"
         }
@@ -2613,7 +2621,7 @@
           "format": "int32",
           "title": "数量"
         },
-        "total": {
+        "amountTotal": {
           "type": "string",
           "title": "合计金额"
         }
@@ -2624,16 +2632,72 @@
       "properties": {
         "id": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "用户id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "更新时间"
+        },
+        "followerId": {
+          "type": "string",
+          "format": "int64",
+          "title": "跟进人ID"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "title": "姓名"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "title": "头像"
         },
         "phone": {
-          "type": "string"
+          "type": "string",
+          "title": "手机号"
+        },
+        "enterpriseName": {
+          "type": "string",
+          "title": "企业名称"
+        },
+        "enterpriseTaxNumber": {
+          "type": "string",
+          "title": "企业税号"
+        },
+        "channels": {
+          "type": "string",
+          "title": "业务渠道"
+        },
+        "cooperationModes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": "合作方式： 1:集中采购 2:一件代发"
+        },
+        "paymentTerms": {
+          "type": "integer",
+          "format": "int32",
+          "title": "支付条款 0：未设置 1:现结 2:账期"
+        },
+        "creditLimit": {
+          "type": "string",
+          "title": "授信额度"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "应付账款"
         }
-      },
-      "title": "公司信息\t 地区  联系人\t联系方式  业务渠道\t合作方式（集采/一件代发）沟通进度  跟进人  结算方式（现结/预付款）"
+      }
     }
   }
 }
