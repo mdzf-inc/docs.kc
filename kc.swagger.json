@@ -2347,6 +2347,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "int64",
           "title": "订单ID"
         },
         "createTime": {
@@ -2410,7 +2411,7 @@
           "title": "支付条款：现付、挂账"
         },
         "paymentOption": {
-          "type": "string",
+          "$ref": "#/definitions/v1PaymentOption",
           "title": "支付方式"
         },
         "paymentTime": {
@@ -2462,6 +2463,11 @@
           "type": "string",
           "title": "卖家备注"
         },
+        "itemsCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "商品种类数"
+        },
         "items": {
           "type": "array",
           "items": {
@@ -2485,6 +2491,15 @@
     "v1OrderItem": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "订单ID"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "下单时间"
+        },
         "productId": {
           "type": "string",
           "title": "商品id"
