@@ -666,6 +666,9 @@
                   "required": [
                     "bankAccount"
                   ]
+                },
+                "isDefault": {
+                  "type": "boolean"
                 }
               },
               "required": [
@@ -708,16 +711,16 @@
             "description": "页数 从0开始",
             "in": "query",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "pageSize",
             "description": "每页数据量 \u003c= 1000",
             "in": "query",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "status",
@@ -902,16 +905,16 @@
             "description": "页数 从0开始",
             "in": "query",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "pageSize",
             "description": "每页数据量 \u003c= 1000",
             "in": "query",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -1029,16 +1032,16 @@
             "description": "页数 从0开始",
             "in": "query",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "pageSize",
             "description": "每页数据量 \u003c= 1000",
             "in": "query",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "classificationId",
@@ -1413,6 +1416,9 @@
         "bankAccount": {
           "type": "string",
           "title": "银行账号"
+        },
+        "isDefault": {
+          "type": "boolean"
         }
       }
     },
@@ -1845,15 +1851,6 @@
           "format": "int64",
           "title": "Cookie 有效期"
         },
-        "refreshToken": {
-          "type": "string",
-          "title": "Cookie 刷新令牌"
-        },
-        "refreshTokenExpiresIn": {
-          "type": "string",
-          "format": "int64",
-          "title": "refresh_token 有效期"
-        },
         "createTimestamp": {
           "type": "string",
           "format": "int64",
@@ -1986,9 +1983,9 @@
           "$ref": "#/definitions/v1CreateAuthenticateRequestType",
           "title": "登录类型"
         },
-        "phoneKey": {
+        "phone": {
           "type": "string",
-          "title": "验证接口返回的key：验证码登录必填"
+          "title": "手机号：验证码登录必填"
         },
         "smsCode": {
           "type": "string",
@@ -2137,6 +2134,9 @@
           "required": [
             "bankAccount"
           ]
+        },
+        "isDefault": {
+          "type": "boolean"
         }
       },
       "required": [
@@ -2461,6 +2461,13 @@
         "sellerRemark": {
           "type": "string",
           "title": "卖家备注"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrderItem"
+          },
+          "title": "订单商品"
         }
       }
     },
@@ -2474,6 +2481,49 @@
       "default": "INVOICE_STATUS_NONE",
       "description": "- INVOICE_STATUS_NONE: 未开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
       "title": "开票状态"
+    },
+    "v1OrderItem": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "title": "商品id"
+        },
+        "mainImageUrl": {
+          "type": "string",
+          "title": "主图"
+        },
+        "name": {
+          "type": "string",
+          "title": "商品名称"
+        },
+        "no": {
+          "type": "string",
+          "title": "商品编码"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "title": "商品数量"
+        },
+        "price": {
+          "type": "string",
+          "title": "商品单价"
+        },
+        "itemTotal": {
+          "type": "string",
+          "title": "行总额"
+        },
+        "box": {
+          "type": "integer",
+          "format": "int32",
+          "title": "箱数"
+        },
+        "shippingTime": {
+          "type": "string",
+          "title": "发货时间"
+        }
+      }
     },
     "v1OrderNotification": {
       "type": "object",
@@ -2642,11 +2692,6 @@
         "updateTime": {
           "type": "string",
           "title": "更新时间"
-        },
-        "followerId": {
-          "type": "string",
-          "format": "int64",
-          "title": "跟进人ID"
         },
         "name": {
           "type": "string",
