@@ -1,2074 +1,2698 @@
-# Generated with protoc-gen-openapi
-# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
-
-openapi: 3.0.3
-info:
-    title: ""
-    version: 0.0.1
-paths:
-    /addresses:
-        get:
-            tags:
-                - AddressService
-                - 收货地址
-            summary: 地址列表
-            description: 地址列表
-            operationId: AddressService_ListAddress
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListAddressReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        post:
-            tags:
-                - AddressService
-                - 收货地址
-            summary: 创建地址
-            description: 创建地址
-            operationId: AddressService_CreateAddress
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateAddressRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Address'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /addresses/{id}:
-        get:
-            tags:
-                - AddressService
-                - 收货地址
-            summary: 地址详情
-            description: 地址详情
-            operationId: AddressService_GetAddress
-            parameters:
-                - name: id
-                  in: path
-                  description: 地址id
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Address'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        put:
-            tags:
-                - AddressService
-                - 收货地址
-            summary: 修改地址
-            description: 修改地址
-            operationId: AddressService_UpdateAddress
-            parameters:
-                - name: id
-                  in: path
-                  description: 地址id
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/UpdateAddressRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Address'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        delete:
-            tags:
-                - AddressService
-                - 收货地址
-            summary: 删除地址
-            description: 删除地址
-            operationId: AddressService_DeleteAddress
-            parameters:
-                - name: id
-                  in: path
-                  description: 地址id
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /authenticate:
-        post:
-            tags:
-                - AuthenticateService
-                - 登录
-            summary: 登录认证
-            description: 获取令牌
-            operationId: AuthenticateService_CreateAuthenticate
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateAuthenticateRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Authentication'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /categories:
-        get:
-            tags:
-                - ProductService
-                - 产品
-            summary: 类目
-            description: 类目列表
-            operationId: ProductService_ListCategory
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListCategoryReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /favorites/product:
-        post:
-            tags:
-                - FavoriteService
-                - 收藏
-            summary: 收藏产品
-            description: 收藏产品
-            operationId: FavoriteService_CreateFavoriteProduct
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateFavoriteProductRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /favorites/product/actions/cancel:
-        post:
-            tags:
-                - FavoriteService
-                - 收藏
-            summary: 取消收藏产品
-            description: 取消收藏产品
-            operationId: FavoriteService_CancelFavoriteProduct
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CancelFavoriteProductRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /invoice-accounts:
-        get:
-            tags:
-                - InvoiceAccountService
-                - 发票账户
-            summary: 发票账户
-            description: 发票账户列表
-            operationId: InvoiceAccountService_ListInvoiceAccount
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListInvoiceAccountReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        post:
-            tags:
-                - InvoiceAccountService
-                - 发票账户
-            summary: 创建发票账户
-            description: 创建发票账户
-            operationId: InvoiceAccountService_CreateInvoiceAccount
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateInvoiceAccountRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/InvoiceAccount'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /invoice-accounts/{id}:
-        get:
-            tags:
-                - InvoiceAccountService
-                - 发票账户
-            summary: 发票账户
-            description: 发票账户详情
-            operationId: InvoiceAccountService_GetInvoiceAccount
-            parameters:
-                - name: id
-                  in: path
-                  description: 发票账户id
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/InvoiceAccount'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        put:
-            tags:
-                - InvoiceAccountService
-                - 发票账户
-            summary: 修改发票账户
-            description: 修改发票账户
-            operationId: InvoiceAccountService_UpdateInvoiceAccount
-            parameters:
-                - name: id
-                  in: path
-                  description: 发票账户id
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/UpdateInvoiceAccountRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/InvoiceAccount'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        delete:
-            tags:
-                - InvoiceAccountService
-                - 发票账户
-            summary: 删除发票账户
-            description: 删除发票账户
-            operationId: InvoiceAccountService_DeleteInvoiceAccount
-            parameters:
-                - name: id
-                  in: path
-                  description: 发票账户id
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /options/order/payment:
-        get:
-            tags:
-                - OrderService
-                - 订单
-            summary: 获取支付选项
-            description: 下单时依据开票要求获取支付选项。不同的开票要求有不同的支付要求
-            operationId: OrderService_GetPaymentOptions
-            parameters:
-                - name: invoiceRequirement
-                  in: query
-                  description: 开票要求
-                  schema:
-                    type: integer
-                    format: enum
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetPaymentOptionsReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /orders:
-        get:
-            tags:
-                - OrderService
-                - 订单
-            summary: 订单列表
-            description: 订单列表
-            operationId: OrderService_ListOrder
-            parameters:
-                - name: pageNum
-                  in: query
-                  description: 页数 从0开始
-                  schema:
-                    type: string
-                - name: pageSize
-                  in: query
-                  description: 每页数据量 <= 1000
-                  schema:
-                    type: string
-                - name: status
-                  in: query
-                  description: 订单状态
-                  schema:
-                    type: integer
-                    format: enum
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListOrderReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        post:
-            tags:
-                - OrderService
-                - 订单
-            summary: 创建订单
-            description: 创建订单
-            operationId: OrderService_CreateOrder
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateOrderRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Order'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /orders/{id}:
-        get:
-            tags:
-                - OrderService
-                - 订单
-            summary: 订单详情
-            description: 订单详情
-            operationId: OrderService_GetOrder
-            parameters:
-                - name: id
-                  in: path
-                  description: 订单ID
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Order'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /orders/{id}/actions/cancel:
-        post:
-            tags:
-                - OrderService
-                - 订单
-            summary: 取消订单
-            description: 取消订单
-            operationId: OrderService_CancelOrder
-            parameters:
-                - name: id
-                  in: path
-                  description: 订单ID
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CancelOrderRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /payments:
-        get:
-            tags:
-                - OrderService
-                - 订单
-            summary: 付款记录列表
-            description: 付款记录列表
-            operationId: OrderService_ListPayment
-            parameters:
-                - name: pageNum
-                  in: query
-                  description: 页数 从0开始
-                  schema:
-                    type: string
-                - name: pageSize
-                  in: query
-                  description: 每页数据量 <= 1000
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListPaymentReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /payments/{id}:
-        get:
-            tags:
-                - OrderService
-                - 订单
-            summary: 付款记录详情
-            description: 付款记录详情
-            operationId: OrderService_GetPayment
-            parameters:
-                - name: id
-                  in: path
-                  description: 付款ID
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Payment'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /payments/{id}/actions/submit-voucher:
-        post:
-            tags:
-                - OrderService
-                - 订单
-            summary: 提交付款凭证
-            description: 提交付款凭证
-            operationId: OrderService_SubmitPaymentVoucher
-            parameters:
-                - name: id
-                  in: path
-                  description: 付款ID
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/SubmitPaymentVoucherRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /products:
-        get:
-            tags:
-                - ProductService
-                - 产品
-            summary: 产品
-            description: 产品列表
-            operationId: ProductService_ListProduct
-            parameters:
-                - name: pageNum
-                  in: query
-                  description: 页数 从0开始
-                  schema:
-                    type: string
-                - name: pageSize
-                  in: query
-                  description: 每页数据量 <= 1000
-                  schema:
-                    type: string
-                - name: categoryId
-                  in: query
-                  description: 类目id
-                  schema:
-                    type: string
-                - name: promotionId
-                  in: query
-                  description: 推荐id。小程序二维码进入时，url会带上此参数
-                  schema:
-                    type: string
-                - name: onlyFavorite
-                  in: query
-                  description: 只看收藏商品
-                  schema:
-                    type: boolean
-                - name: q
-                  in: query
-                  description: 品名/编码
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListProductReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /products/{id}:
-        get:
-            tags:
-                - ProductService
-                - 产品
-            summary: 产品
-            description: 产品详情
-            operationId: ProductService_GetProduct
-            parameters:
-                - name: id
-                  in: path
-                  description: 产品id
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Product'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /shopping-carts:
-        get:
-            tags:
-                - ShoppingCartService
-                - 购物车
-            summary: 购物车列表
-            description: 购物车列表
-            operationId: ShoppingCartService_ListShoppingCart
-            parameters:
-                - name: pageNum
-                  in: query
-                  description: 分页页码 从1开始
-                  schema:
-                    type: integer
-                    format: int32
-                - name: pageSize
-                  in: query
-                  description: 分页大小
-                  schema:
-                    type: integer
-                    format: int32
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListShoppingCartReply'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        post:
-            tags:
-                - ShoppingCartService
-                - 购物车
-            summary: 创建购物车
-            description: 创建购物车
-            operationId: ShoppingCartService_CreateShoppingCart
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateShoppingCartRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        delete:
-            tags:
-                - ShoppingCartService
-                - 购物车
-            summary: 删除购物车商品
-            description: 形如/shopping-carts?ids[]=1&ids[]=2&ids[]=3&ids[]=4
-            operationId: ShoppingCartService_DeleteShoppingCart
-            parameters:
-                - name: ids
-                  in: query
-                  description: 购物车ID数组 1-1000个
-                  schema:
-                    type: array
-                    items:
-                        type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /shopping-carts/{id}:
-        put:
-            tags:
-                - ShoppingCartService
-                - 购物车
-            summary: 修改购物车商品数量
-            description: 修改购物车商品数量
-            operationId: ShoppingCartService_UpdateShoppingCart
-            parameters:
-                - name: id
-                  in: path
-                  description: 购物车ID
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/UpdateShoppingCartRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /sms-code:
-        post:
-            tags:
-                - AuthenticateService
-                - 登录
-            summary: 发送验证码
-            description: 发送验证码
-            operationId: AuthenticateService_SendSMSCode
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/SendSMSCodeRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Response'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /users/me:
-        get:
-            tags:
-                - UserService
-                - 用户信息
-            summary: 用户信息
-            description: 获取自己的用户信息
-            operationId: UserService_GetMe
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/User'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-components:
-    schemas:
-        AdditionalPropertiesItem:
-            type: object
-            properties:
-                schemaOrReference:
-                    $ref: '#/components/schemas/SchemaOrReference'
-                boolean:
-                    type: boolean
-        Address:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 地址id
-                name:
-                    type: string
-                    description: 收货人
-                phone:
-                    type: string
-                    description: 手机号
-                province:
-                    type: string
-                    description: 省份
-                city:
-                    type: string
-                    description: 城市
-                district:
-                    type: string
-                    description: 区县
-                detail:
-                    type: string
-                    description: 详细地址
-                isDefault:
-                    type: boolean
-                    description: 是否默认地址
-        Any:
-            type: object
-            properties:
-                value:
-                    $ref: '#/components/schemas/GoogleProtobufAny'
-                yaml:
-                    type: string
-        AnyOrExpression:
-            type: object
-            properties:
-                any:
-                    $ref: '#/components/schemas/Any'
-                expression:
-                    $ref: '#/components/schemas/Expression'
-        Authentication:
-            type: object
-            properties:
-                tokenType:
-                    type: string
-                    description: Cookie 类型，固定为Bearer
-                accessToken:
-                    type: string
-                    description: Cookie 令牌：Header['Authorization'] = token_type + ' '+ access_token
-                expiresIn:
-                    type: string
-                    description: Cookie 有效期
-                refreshToken:
-                    type: string
-                    description: Cookie 刷新令牌
-                refreshTokenExpiresIn:
-                    type: string
-                    description: refresh_token 有效期
-                createTimestamp:
-                    type: string
-                    description: 创建时间 毫秒时间戳
-        CancelFavoriteProductRequest:
-            required:
-                - ids
-            type: object
-            properties:
-                ids:
-                    type: array
-                    items:
-                        type: string
-                    description: 产品ID数组 1-1000个
-        CancelOrderRequest:
-            required:
-                - id
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 订单ID
-            description: 只有待审核状态的订单可以取消
-        Category:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 类目id
-                name:
-                    type: string
-                    description: 类目名称
-        CreateAddressRequest:
-            required:
-                - name
-                - phone
-                - province
-                - city
-                - district
-                - detail
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: 收货人
-                phone:
-                    type: string
-                    description: 手机号
-                province:
-                    type: string
-                    description: 省份
-                city:
-                    type: string
-                    description: 城市
-                district:
-                    type: string
-                    description: 区县
-                detail:
-                    type: string
-                    description: 详细地址
-                isDefault:
-                    type: boolean
-                    description: 是否默认地址
-        CreateAuthenticateRequest:
-            type: object
-            properties:
-                type:
-                    type: integer
-                    description: 登录类型
-                    format: enum
-                phoneKey:
-                    type: string
-                    description: 验证接口返回的key：验证码登录必填
-                smsCode:
-                    type: string
-                    description: 验证码：验证码登录必填(4位数字)
-                wxAuthCode:
-                    type: string
-                    description: 微信code：微信手机号授权必填
-            description: 登录请求
-        CreateFavoriteProductRequest:
-            required:
-                - ids
-            type: object
-            properties:
-                ids:
-                    type: array
-                    items:
-                        type: string
-                    description: 产品ID数组 1-1000个
-        CreateInvoiceAccountRequest:
-            required:
-                - title
-                - taxNumber
-                - registerAddress
-                - registerPhone
-                - bank
-                - bankAccount
-            type: object
-            properties:
-                title:
-                    type: string
-                    description: 发票抬头
-                taxNumber:
-                    type: string
-                    description: 税号
-                registerAddress:
-                    type: string
-                    description: 注册地址
-                registerPhone:
-                    type: string
-                    description: 注册电话
-                bank:
-                    type: string
-                    description: 开户银行
-                bankAccount:
-                    type: string
-                    description: 银行账号
-        CreateOrderRequest:
-            required:
-                - receiverName
-                - receiverPhone
-                - receiverAddress
-                - invoiceRequirement
-                - paymentTerms
-                - shoppingCartIds
-            type: object
-            properties:
-                receiverName:
-                    type: string
-                    description: 收货人
-                receiverPhone:
-                    type: string
-                    description: 收货人手机号
-                receiverAddress:
-                    type: string
-                    description: 收货地址
-                invoiceRequirement:
-                    type: integer
-                    description: 开票要求
-                    format: enum
-                invoiceAccount:
-                    allOf:
-                        - $ref: '#/components/schemas/InvoiceAccount'
-                    description: 无票时，不传
-                paymentTerms:
-                    type: integer
-                    description: 支付条款：现付、挂账
-                    format: enum
-                paymentOption:
-                    type: integer
-                    description: '支付方式: 挂账时，无需传'
-                    format: enum
-                shoppingCartIds:
-                    type: array
-                    items:
-                        type: string
-                    description: 购物车ID数组 【1-200】
-        CreateShoppingCartRequest:
-            required:
-                - productIds
-            type: object
-            properties:
-                productIds:
-                    type: array
-                    items:
-                        type: string
-                    description: 产品ID数组 1-1000个
-        DefaultType:
-            type: object
-            properties:
-                number:
-                    type: number
-                    format: double
-                boolean:
-                    type: boolean
-                string:
-                    type: string
-        Discriminator:
-            type: object
-            properties:
-                propertyName:
-                    type: string
-                mapping:
-                    $ref: '#/components/schemas/Strings'
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: When request bodies or response payloads may be one of a number of different schemas, a `discriminator` object can be used to aid in serialization, deserialization, and validation.  The discriminator is a specific object in a schema which is used to inform the consumer of the specification of an alternative schema based on the value associated with it.  When using the discriminator, _inline_ schemas will not be considered.
-        Encoding:
-            type: object
-            properties:
-                contentType:
-                    type: string
-                headers:
-                    $ref: '#/components/schemas/HeadersOrReferences'
-                style:
-                    type: string
-                explode:
-                    type: boolean
-                allowReserved:
-                    type: boolean
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: A single encoding definition applied to a single schema property.
-        Encodings:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedEncoding'
-        Example:
-            type: object
-            properties:
-                summary:
-                    type: string
-                description:
-                    type: string
-                value:
-                    $ref: '#/components/schemas/Any'
-                externalValue:
-                    type: string
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-        ExampleOrReference:
-            type: object
-            properties:
-                example:
-                    $ref: '#/components/schemas/Example'
-                reference:
-                    $ref: '#/components/schemas/Reference'
-        ExamplesOrReferences:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedExampleOrReference'
-        Expression:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-        ExternalDocs:
-            type: object
-            properties:
-                description:
-                    type: string
-                url:
-                    type: string
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: Allows referencing an external resource for extended documentation.
-        GetPaymentOptionsReply:
-            type: object
-            properties:
-                paymentOptions:
-                    type: array
-                    items:
-                        type: integer
-                        format: enum
-                    description: 支付方式：可选的支付方式
-        GoogleProtobufAny:
-            type: object
-            properties:
-                '@type':
-                    type: string
-                    description: The type of the serialized message.
-            additionalProperties: true
-            description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
-        Header:
-            type: object
-            properties:
-                description:
-                    type: string
-                required:
-                    type: boolean
-                deprecated:
-                    type: boolean
-                allowEmptyValue:
-                    type: boolean
-                style:
-                    type: string
-                explode:
-                    type: boolean
-                allowReserved:
-                    type: boolean
-                schema:
-                    $ref: '#/components/schemas/SchemaOrReference'
-                example:
-                    $ref: '#/components/schemas/Any'
-                examples:
-                    $ref: '#/components/schemas/ExamplesOrReferences'
-                content:
-                    $ref: '#/components/schemas/MediaTypes'
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: 'The Header Object follows the structure of the Parameter Object with the following changes:  1. `name` MUST NOT be specified, it is given in the corresponding `headers` map. 1. `in` MUST NOT be specified, it is implicitly in `header`. 1. All traits that are affected by the location MUST be applicable to a location of `header` (for example, `style`).'
-        HeaderOrReference:
-            type: object
-            properties:
-                header:
-                    $ref: '#/components/schemas/Header'
-                reference:
-                    $ref: '#/components/schemas/Reference'
-        HeadersOrReferences:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedHeaderOrReference'
-        InvoiceAccount:
-            type: object
-            properties:
-                title:
-                    type: string
-                    description: 发票抬头
-                taxNumber:
-                    type: string
-                    description: 税号
-                registerAddress:
-                    type: string
-                    description: 注册地址
-                registerPhone:
-                    type: string
-                    description: 注册电话
-                bank:
-                    type: string
-                    description: 开户银行
-                bankAccount:
-                    type: string
-                    description: 银行账号
-        ItemsItem:
-            type: object
-            properties:
-                schemaOrReference:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/SchemaOrReference'
-        Link:
-            type: object
-            properties:
-                operationRef:
-                    type: string
-                operationId:
-                    type: string
-                parameters:
-                    $ref: '#/components/schemas/AnyOrExpression'
-                requestBody:
-                    $ref: '#/components/schemas/AnyOrExpression'
-                description:
-                    type: string
-                server:
-                    $ref: '#/components/schemas/Server'
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: The `Link object` represents a possible design-time link for a response. The presence of a link does not guarantee the caller's ability to successfully invoke it, rather it provides a known relationship and traversal mechanism between responses and other operations.  Unlike _dynamic_ links (i.e. links provided **in** the response payload), the OAS linking mechanism does not require link information in the runtime response.  For computing links, and providing instructions to execute them, a runtime expression is used for accessing values in an operation and using them as parameters while invoking the linked operation.
-        LinkOrReference:
-            type: object
-            properties:
-                link:
-                    $ref: '#/components/schemas/Link'
-                reference:
-                    $ref: '#/components/schemas/Reference'
-        LinksOrReferences:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedLinkOrReference'
-        ListAddressReply:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Address'
-                    description: 地址列表
-        ListCategoryReply:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Category'
-        ListInvoiceAccountReply:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/InvoiceAccount'
-                    description: 发票账户列表
-        ListOrderReply:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Order'
-        ListPaymentReply:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Payment'
-        ListProductReply:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Product'
-        ListShoppingCartReply:
-            type: object
-            properties:
-                items:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/ShoppingCart'
-        MediaType:
-            type: object
-            properties:
-                schema:
-                    $ref: '#/components/schemas/SchemaOrReference'
-                example:
-                    $ref: '#/components/schemas/Any'
-                examples:
-                    $ref: '#/components/schemas/ExamplesOrReferences'
-                encoding:
-                    $ref: '#/components/schemas/Encodings'
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: Each Media Type Object provides schema and examples for the media type identified by its key.
-        MediaTypes:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedMediaType'
-        NamedAny:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    allOf:
-                        - $ref: '#/components/schemas/Any'
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of Any as ordered (name,value) pairs.
-        NamedEncoding:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    allOf:
-                        - $ref: '#/components/schemas/Encoding'
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of Encoding as ordered (name,value) pairs.
-        NamedExampleOrReference:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    allOf:
-                        - $ref: '#/components/schemas/ExampleOrReference'
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of ExampleOrReference as ordered (name,value) pairs.
-        NamedHeaderOrReference:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    allOf:
-                        - $ref: '#/components/schemas/HeaderOrReference'
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of HeaderOrReference as ordered (name,value) pairs.
-        NamedLinkOrReference:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    allOf:
-                        - $ref: '#/components/schemas/LinkOrReference'
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of LinkOrReference as ordered (name,value) pairs.
-        NamedMediaType:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    allOf:
-                        - $ref: '#/components/schemas/MediaType'
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of MediaType as ordered (name,value) pairs.
-        NamedSchemaOrReference:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    allOf:
-                        - $ref: '#/components/schemas/SchemaOrReference'
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of SchemaOrReference as ordered (name,value) pairs.
-        NamedServerVariable:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    allOf:
-                        - $ref: '#/components/schemas/ServerVariable'
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of ServerVariable as ordered (name,value) pairs.
-        NamedString:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: Map key
-                value:
-                    type: string
-                    description: Mapped value
-            description: Automatically-generated message used to represent maps of string as ordered (name,value) pairs.
-        Order:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 订单ID
-                createTime:
-                    type: string
-                    description: 下单时间
-                paymentStatus:
-                    type: integer
-                    description: 订单支付状态
-                    format: enum
-                shippingStatus:
-                    type: integer
-                    description: 订单发货状态
-                    format: enum
-                status:
-                    type: integer
-                    description: 订单状态
-                    format: enum
-                summary:
-                    type: string
-                    description: 订单摘要
-                no:
-                    type: string
-                    description: 订单号
-                subtotal:
-                    type: string
-                    description: 汇总金额（小计）
-                tax:
-                    type: string
-                    description: 税费
-                shipping:
-                    type: string
-                    description: 运费
-                discount:
-                    type: string
-                    description: 优惠金额
-                grandTotal:
-                    type: string
-                    description: 最终总额
-                balanceDeduction:
-                    type: string
-                    description: 余额抵扣
-                amountDue:
-                    type: string
-                    description: 应付金额
-                amountPaid:
-                    type: string
-                    description: 实付金额
-                paymentTerms:
-                    type: integer
-                    description: 支付条款：现付、挂账
-                    format: enum
-                paymentOption:
-                    type: string
-                    description: 支付方式
-                paymentTime:
-                    type: string
-                    description: 支付时间
-                paymentId:
-                    type: string
-                    description: 支付记录id
-                paymentNo:
-                    type: string
-                    description: 支付记录编号
-                receiverName:
-                    type: string
-                    description: 收货人
-                receiverPhone:
-                    type: string
-                    description: 收货人手机号
-                receiverAddress:
-                    type: string
-                    description: 收货地址
-                invoiceRequirement:
-                    type: integer
-                    description: 开票要求
-                    format: enum
-                invoiceAccount:
-                    allOf:
-                        - $ref: '#/components/schemas/InvoiceAccount'
-                    description: 无票时，不返回
-                invoiceStatus:
-                    type: integer
-                    description: 开票状态
-                    format: enum
-                invoiceUrl:
-                    type: string
-                    description: 发票链接(仅在已开票状态下返回。浏览器打开)
-                totalBox:
-                    type: integer
-                    description: 总箱数
-                    format: int32
-                buyerNote:
-                    type: string
-                    description: 买家备注
-                sellerNote:
-                    type: string
-                    description: 卖家备注
-        Payment:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 付款ID
-                createTime:
-                    type: string
-                    description: 时间
-                status:
-                    type: integer
-                    description: 付款状态
-                    format: enum
-                option:
-                    type: integer
-                    description: 付款方式
-                    format: enum
-                no:
-                    type: string
-                    description: 付款编号
-                name:
-                    type: string
-                    description: 名称
-                amount:
-                    type: string
-                    description: 付款金额
-                orderCount:
-                    type: integer
-                    description: 订单数量
-                    format: int32
-                note:
-                    type: string
-                    description: 付款备注
-                recipient:
-                    type: string
-                    description: 收款人
-                voucherUrl:
-                    type: string
-                    description: 付款凭证链接
-        Product:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 产品id
-                createTime:
-                    type: string
-                    description: 创建时间
-                updateTime:
-                    type: string
-                    description: 更新时间
-                mainImageUrl:
-                    type: string
-                    description: 主图
-                detailImageUrls:
-                    type: array
-                    items:
-                        type: string
-                    description: 详情图
-                name:
-                    type: string
-                    description: 产品名称
-                no:
-                    type: string
-                    description: 产品编号
-                spec:
-                    type: string
-                    description: 规格
-                material:
-                    type: string
-                    description: 材质
-                weight:
-                    type: string
-                    description: 重量
-                barcode:
-                    type: string
-                    description: 69码
-                categoryId:
-                    type: integer
-                    description: 类目id
-                    format: int32
-                categoryName:
-                    type: string
-                    description: 类目名称
-                supplierPackingRate:
-                    type: integer
-                    description: 供应商装箱率
-                    format: int32
-                internalPackingRate:
-                    type: integer
-                    description: 内部装箱率
-                    format: int32
-                wholesalePrice:
-                    type: string
-                    description: 批发价
-                dropshippingPrice:
-                    type: string
-                    description: 代发价
-                unifiedPrice:
-                    type: string
-                    description: 统一控价
-                wxMomentText:
-                    type: string
-                    description: 发圈文案
-                tmallShopUrl:
-                    type: string
-                    description: 天猫店铺链接 如果没有值，表示没有天猫链接，隐藏跳转按钮
-                labels:
-                    type: array
-                    items:
-                        type: string
-                    description: 产品标签
-                isFavorite:
-                    type: boolean
-                    description: 是否收藏
-        Properties:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedSchemaOrReference'
-        Reference:
-            type: object
-            properties:
-                Ref:
-                    type: string
-                summary:
-                    type: string
-                description:
-                    type: string
-            description: A simple object to allow referencing other components in the specification, internally and externally.  The Reference Object is defined by JSON Reference and follows the same structure, behavior and rules.   For this specification, reference resolution is accomplished as defined by the JSON Reference specification and not by the JSON Schema specification.
-        Response:
-            type: object
-            properties:
-                description:
-                    type: string
-                headers:
-                    $ref: '#/components/schemas/HeadersOrReferences'
-                content:
-                    $ref: '#/components/schemas/MediaTypes'
-                links:
-                    $ref: '#/components/schemas/LinksOrReferences'
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: Describes a single response from an API Operation, including design-time, static  `links` to operations based on the response.
-        Schema:
-            type: object
-            properties:
-                nullable:
-                    type: boolean
-                discriminator:
-                    $ref: '#/components/schemas/Discriminator'
-                readOnly:
-                    type: boolean
-                writeOnly:
-                    type: boolean
-                xml:
-                    $ref: '#/components/schemas/Xml'
-                externalDocs:
-                    $ref: '#/components/schemas/ExternalDocs'
-                example:
-                    $ref: '#/components/schemas/Any'
-                deprecated:
-                    type: boolean
-                title:
-                    type: string
-                multipleOf:
-                    type: number
-                    format: double
-                maximum:
-                    type: number
-                    format: double
-                exclusiveMaximum:
-                    type: boolean
-                minimum:
-                    type: number
-                    format: double
-                exclusiveMinimum:
-                    type: boolean
-                maxLength:
-                    type: string
-                minLength:
-                    type: string
-                pattern:
-                    type: string
-                maxItems:
-                    type: string
-                minItems:
-                    type: string
-                uniqueItems:
-                    type: boolean
-                maxProperties:
-                    type: string
-                minProperties:
-                    type: string
-                required:
-                    type: array
-                    items:
-                        type: string
-                enum:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Any'
-                type:
-                    type: string
-                allOf:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/SchemaOrReference'
-                oneOf:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/SchemaOrReference'
-                anyOf:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/SchemaOrReference'
-                not:
-                    $ref: '#/components/schemas/Schema'
-                items:
-                    $ref: '#/components/schemas/ItemsItem'
-                properties:
-                    $ref: '#/components/schemas/Properties'
-                additionalProperties:
-                    $ref: '#/components/schemas/AdditionalPropertiesItem'
-                default:
-                    $ref: '#/components/schemas/DefaultType'
-                description:
-                    type: string
-                format:
-                    type: string
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: The Schema Object allows the definition of input and output data types. These types can be objects, but also primitives and arrays. This object is an extended subset of the JSON Schema Specification Wright Draft 00.  For more information about the properties, see JSON Schema Core and JSON Schema Validation. Unless stated otherwise, the property definitions follow the JSON Schema.
-        SchemaOrReference:
-            type: object
-            properties:
-                schema:
-                    $ref: '#/components/schemas/Schema'
-                reference:
-                    $ref: '#/components/schemas/Reference'
-        SendSMSCodeRequest:
-            required:
-                - phone
-            type: object
-            properties:
-                phone:
-                    type: string
-                    description: 手机号^1[1-9]\\d{9}$
-        Server:
-            type: object
-            properties:
-                url:
-                    type: string
-                description:
-                    type: string
-                variables:
-                    $ref: '#/components/schemas/ServerVariables'
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: An object representing a Server.
-        ServerVariable:
-            type: object
-            properties:
-                enum:
-                    type: array
-                    items:
-                        type: string
-                default:
-                    type: string
-                description:
-                    type: string
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: An object representing a Server Variable for server URL template substitution.
-        ServerVariables:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedServerVariable'
-        ShoppingCart:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 购物车id
-                createTime:
-                    type: string
-                    description: 加入时间
-                product:
-                    allOf:
-                        - $ref: '#/components/schemas/Product'
-                    description: 产品
-                quantity:
-                    type: integer
-                    description: 数量
-                    format: int32
-                total:
-                    type: string
-                    description: 合计金额
-        Status:
-            type: object
-            properties:
-                code:
-                    type: integer
-                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-                    format: int32
-                message:
-                    type: string
-                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
-                details:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/GoogleProtobufAny'
-                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
-            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
-        Strings:
-            type: object
-            properties:
-                additionalProperties:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedString'
-        SubmitPaymentVoucherRequest:
-            required:
-                - id
-                - voucherUrl
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 付款ID
-                voucherUrl:
-                    type: string
-                    description: 付款凭证链接
-        UpdateAddressRequest:
-            required:
-                - name
-                - phone
-                - province
-                - city
-                - district
-                - detail
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 地址id
-                name:
-                    type: string
-                    description: 收货人
-                phone:
-                    type: string
-                    description: 手机号
-                province:
-                    type: string
-                    description: 省份
-                city:
-                    type: string
-                    description: 城市
-                district:
-                    type: string
-                    description: 区县
-                detail:
-                    type: string
-                    description: 详细地址
-                isDefault:
-                    type: boolean
-                    description: 是否默认地址
-        UpdateInvoiceAccountRequest:
-            required:
-                - id
-                - title
-                - taxNumber
-                - registerAddress
-                - registerPhone
-                - bank
-                - bankAccount
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 发票账户id
-                title:
-                    type: string
-                    description: 发票抬头
-                taxNumber:
-                    type: string
-                    description: 税号
-                registerAddress:
-                    type: string
-                    description: 注册地址
-                registerPhone:
-                    type: string
-                    description: 注册电话
-                bank:
-                    type: string
-                    description: 开户银行
-                bankAccount:
-                    type: string
-                    description: 银行账号
-        UpdateShoppingCartRequest:
-            required:
-                - id
-                - quantity
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: 购物车ID
-                quantity:
-                    type: integer
-                    description: 数量：[0-99999]，如果为0则系统自动删除该商品
-                    format: int32
-        User:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                phone:
-                    type: string
-            description: "公司信息\t 地区  联系人\t联系方式  业务渠道\t合作方式（集采/一件代发）沟通进度  跟进人  结算方式（现结/预付款）"
-        Xml:
-            type: object
-            properties:
-                name:
-                    type: string
-                namespace:
-                    type: string
-                prefix:
-                    type: string
-                attribute:
-                    type: boolean
-                wrapped:
-                    type: boolean
-                specificationExtension:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/NamedAny'
-            description: A metadata object that allows for more fine-tuned XML model definitions.  When using arrays, XML element names are *not* inferred (for singular/plural forms) and the `name` property SHOULD be used to add that information. See examples for expected behavior.
-tags:
-    - name: AddressService
-      description: 收货地址
-    - name: AuthenticateService
-      description: 登录认证
-    - name: FavoriteService
-      description: 收藏
-    - name: InvoiceAccountService
-      description: 发票账户
-    - name: OrderService
-      description: 订单
-    - name: ProductService
-      description: 产品
-    - name: ShoppingCartService
-      description: 购物车
-    - name: UserService
-      description: 用户信息
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "order/v1/order.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OrderService"
+    },
+    {
+      "name": "CooperationService"
+    },
+    {
+      "name": "AuthenticateService"
+    },
+    {
+      "name": "InvoiceAccountService"
+    },
+    {
+      "name": "FavoriteService"
+    },
+    {
+      "name": "UserService"
+    },
+    {
+      "name": "ProductService"
+    },
+    {
+      "name": "AddressService"
+    },
+    {
+      "name": "ShoppingCartService"
+    },
+    {
+      "name": "AccountService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/aacounts/me/bills": {
+      "get": {
+        "summary": "获取账户账单",
+        "operationId": "AccountService_ListAccountBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAccountBillReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/accounts/me": {
+      "get": {
+        "summary": "获取账户信息",
+        "operationId": "AccountService_GetAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/addresses": {
+      "get": {
+        "summary": "地址列表",
+        "operationId": "AddressService_ListAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListAddressReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AddressService"
+        ]
+      },
+      "post": {
+        "summary": "创建地址",
+        "operationId": "AddressService_CreateAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Address"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateAddressRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AddressService"
+        ]
+      }
+    },
+    "/addresses/{id}": {
+      "get": {
+        "summary": "地址详情",
+        "operationId": "AddressService_GetAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Address"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "地址id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AddressService"
+        ]
+      },
+      "delete": {
+        "summary": "删除地址",
+        "operationId": "AddressService_DeleteAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiaddressv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "地址id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "AddressService"
+        ]
+      },
+      "put": {
+        "summary": "修改地址",
+        "operationId": "AddressService_UpdateAddress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Address"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "地址id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "收货人",
+                  "required": [
+                    "name"
+                  ]
+                },
+                "phone": {
+                  "type": "string",
+                  "title": "手机号",
+                  "required": [
+                    "phone"
+                  ]
+                },
+                "province": {
+                  "type": "string",
+                  "title": "省份",
+                  "required": [
+                    "province"
+                  ]
+                },
+                "city": {
+                  "type": "string",
+                  "title": "城市",
+                  "required": [
+                    "city"
+                  ]
+                },
+                "district": {
+                  "type": "string",
+                  "title": "区县",
+                  "required": [
+                    "district"
+                  ]
+                },
+                "detail": {
+                  "type": "string",
+                  "title": "详细地址",
+                  "required": [
+                    "detail"
+                  ]
+                },
+                "isDefault": {
+                  "type": "boolean",
+                  "title": "是否默认地址"
+                }
+              },
+              "required": [
+                "name",
+                "phone",
+                "province",
+                "city",
+                "district",
+                "detail"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "AddressService"
+        ]
+      }
+    },
+    "/authenticate": {
+      "post": {
+        "summary": "登录",
+        "operationId": "AuthenticateService_CreateAuthenticate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Authentication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateAuthenticateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthenticateService"
+        ]
+      }
+    },
+    "/classifications": {
+      "get": {
+        "summary": "类目列表",
+        "operationId": "ProductService_ListClassification",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListClassificationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "ProductService"
+        ]
+      }
+    },
+    "/cooperations": {
+      "post": {
+        "summary": "提交合作意向",
+        "operationId": "CooperationService_CreateCooperation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Cooperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateCooperationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CooperationService"
+        ]
+      }
+    },
+    "/favorites/product": {
+      "post": {
+        "summary": "收藏产品",
+        "operationId": "FavoriteService_CreateFavoriteProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apifavoritev1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateFavoriteProductRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FavoriteService"
+        ]
+      }
+    },
+    "/favorites/product/actions/cancel": {
+      "post": {
+        "summary": "取消收藏产品",
+        "operationId": "FavoriteService_CancelFavoriteProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apifavoritev1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CancelFavoriteProductRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FavoriteService"
+        ]
+      }
+    },
+    "/invoice-accounts": {
+      "get": {
+        "summary": "发票账户列表",
+        "operationId": "InvoiceAccountService_ListInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListInvoiceAccountReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      },
+      "post": {
+        "summary": "创建发票账户",
+        "operationId": "InvoiceAccountService_CreateInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiinvoiceaccountv1InvoiceAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateInvoiceAccountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      }
+    },
+    "/invoice-accounts/{id}": {
+      "get": {
+        "summary": "发票账户详情",
+        "operationId": "InvoiceAccountService_GetInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiinvoiceaccountv1InvoiceAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "发票账户id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      },
+      "delete": {
+        "summary": "删除发票账户",
+        "operationId": "InvoiceAccountService_DeleteInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiinvoiceaccountv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "发票账户id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      },
+      "put": {
+        "summary": "修改发票账户",
+        "operationId": "InvoiceAccountService_UpdateInvoiceAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiinvoiceaccountv1InvoiceAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "发票账户id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "title": "发票抬头",
+                  "required": [
+                    "title"
+                  ]
+                },
+                "taxNumber": {
+                  "type": "string",
+                  "title": "税号",
+                  "required": [
+                    "taxNumber"
+                  ]
+                },
+                "registerAddress": {
+                  "type": "string",
+                  "title": "注册地址",
+                  "required": [
+                    "registerAddress"
+                  ]
+                },
+                "phone": {
+                  "type": "string",
+                  "title": "注册电话",
+                  "required": [
+                    "phone"
+                  ]
+                },
+                "bank": {
+                  "type": "string",
+                  "title": "开户银行",
+                  "required": [
+                    "bank"
+                  ]
+                },
+                "bankAccount": {
+                  "type": "string",
+                  "title": "银行账号",
+                  "required": [
+                    "bankAccount"
+                  ]
+                },
+                "isDefault": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "title",
+                "taxNumber",
+                "registerAddress",
+                "phone",
+                "bank",
+                "bankAccount"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "InvoiceAccountService"
+        ]
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "订单列表",
+        "operationId": "OrderService_ListOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListOrderReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "status",
+            "description": "订单状态\n\n - STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "STATUS_PENDING",
+              "STATUS_CONFIRMED",
+              "STATUS_CANCELLED",
+              "STATUS_COMPLETED"
+            ],
+            "default": "STATUS_PENDING"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      },
+      "post": {
+        "summary": "创建订单",
+        "operationId": "OrderService_CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Order"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "summary": "订单详情",
+        "operationId": "OrderService_GetOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Order"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "订单ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/orders/{id}/actions/cancel": {
+      "post": {
+        "summary": "取消订单",
+        "operationId": "OrderService_CancelOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiorderv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "订单ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "title": "只有待审核状态的订单可以取消"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/orders/{id}/notifications": {
+      "get": {
+        "summary": "订单通知列表",
+        "operationId": "OrderService_ListOrderNotification",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListOrderNotificationReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "订单ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/payments": {
+      "get": {
+        "summary": "付款记录列表",
+        "operationId": "OrderService_ListPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPaymentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/payments/{id}": {
+      "get": {
+        "summary": "付款记录详情",
+        "operationId": "OrderService_GetPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Payment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "付款ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/payments/{id}/actions/submit-voucher": {
+      "post": {
+        "summary": "提交付款凭证",
+        "operationId": "OrderService_SubmitPaymentVoucher",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiorderv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "付款ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "voucherUrl": {
+                  "type": "string",
+                  "title": "付款凭证链接",
+                  "required": [
+                    "voucherUrl"
+                  ]
+                }
+              },
+              "required": [
+                "voucherUrl"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "产品列表",
+        "operationId": "ProductService_ListProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListProductReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "classificationId",
+            "description": "类目id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "recommendId",
+            "description": "推荐id。小程序二维码进入时，url会带上此参数",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "onlyFavorite",
+            "description": "只看收藏商品",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "q",
+            "description": "品名/编码",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ProductService"
+        ]
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "产品详情",
+        "operationId": "ProductService_GetProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiproductv1Product"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "产品id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "ProductService"
+        ]
+      }
+    },
+    "/shopping-carts": {
+      "get": {
+        "summary": "购物车列表",
+        "operationId": "ShoppingCartService_ListShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListShoppingCartReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "分页页码 从1开始",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "description": "分页大小",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      },
+      "delete": {
+        "summary": "删除购物车商品",
+        "operationId": "ShoppingCartService_DeleteShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apishoppingcartv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ids",
+            "description": "购物车ID数组 1-1000个",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      },
+      "post": {
+        "summary": "加入购物车",
+        "operationId": "ShoppingCartService_CreateShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apishoppingcartv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateShoppingCartRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      }
+    },
+    "/shopping-carts/{id}": {
+      "put": {
+        "summary": "修改购物车商品数量",
+        "operationId": "ShoppingCartService_UpdateShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apishoppingcartv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "购物车ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "quantity": {
+                  "type": "integer",
+                  "format": "int32",
+                  "title": "数量：[0-99999]，如果为0则系统自动删除该商品",
+                  "required": [
+                    "quantity"
+                  ]
+                }
+              },
+              "required": [
+                "quantity"
+              ]
+            }
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      }
+    },
+    "/sms-code": {
+      "post": {
+        "summary": "发送验证码",
+        "operationId": "AuthenticateService_SendSMSCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiauthenticatev1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SendSMSCodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AuthenticateService"
+        ]
+      }
+    },
+    "/users/me": {
+      "get": {
+        "summary": "获取用户信息",
+        "operationId": "UserService_GetMe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "UserService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiaddressv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apiauthenticatev1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apifavoritev1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apiinvoiceaccountv1InvoiceAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "发票账户id"
+        },
+        "title": {
+          "type": "string",
+          "title": "发票抬头"
+        },
+        "taxNumber": {
+          "type": "string",
+          "title": "税号"
+        },
+        "registerAddress": {
+          "type": "string",
+          "title": "注册地址"
+        },
+        "phone": {
+          "type": "string",
+          "title": "电话"
+        },
+        "bank": {
+          "type": "string",
+          "title": "开户银行"
+        },
+        "bankAccount": {
+          "type": "string",
+          "title": "银行账号"
+        },
+        "isDefault": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiinvoiceaccountv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apiorderv1InvoiceAccount": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "发票抬头"
+        },
+        "taxNumber": {
+          "type": "string",
+          "title": "税号"
+        },
+        "registerAddress": {
+          "type": "string",
+          "title": "注册地址"
+        },
+        "registerPhone": {
+          "type": "string",
+          "title": "注册电话"
+        },
+        "bank": {
+          "type": "string",
+          "title": "开户银行"
+        },
+        "bankAccount": {
+          "type": "string",
+          "title": "银行账号"
+        }
+      }
+    },
+    "apiorderv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "apiproductv1Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "产品id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "更新时间"
+        },
+        "mainImageUrl": {
+          "type": "string",
+          "title": "主图"
+        },
+        "detailImageUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "详情图"
+        },
+        "name": {
+          "type": "string",
+          "title": "产品名称"
+        },
+        "no": {
+          "type": "string",
+          "title": "产品编号"
+        },
+        "spec": {
+          "type": "string",
+          "title": "规格"
+        },
+        "material": {
+          "type": "string",
+          "title": "材质"
+        },
+        "weight": {
+          "type": "string",
+          "title": "重量"
+        },
+        "barcode": {
+          "type": "string",
+          "title": "69码"
+        },
+        "classificationId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "类目id"
+        },
+        "classificationName": {
+          "type": "string",
+          "title": "类目名称"
+        },
+        "supplierPackingRate": {
+          "type": "integer",
+          "format": "int32",
+          "title": "供应商装箱率"
+        },
+        "internalPackingRate": {
+          "type": "integer",
+          "format": "int32",
+          "title": "内部装箱率"
+        },
+        "wholesalePrice": {
+          "type": "string",
+          "title": "批发价"
+        },
+        "dropshippingPrice": {
+          "type": "string",
+          "title": "代发价"
+        },
+        "minimumAdvertisedPrice": {
+          "type": "string",
+          "title": "最低控价"
+        },
+        "wxMomentText": {
+          "type": "string",
+          "title": "发圈文案"
+        },
+        "tmallShopUrl": {
+          "type": "string",
+          "title": "天猫店铺链接 如果没有值，表示没有天猫链接，隐藏跳转按钮"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "产品标签"
+        },
+        "isFavorite": {
+          "type": "boolean",
+          "title": "是否收藏"
+        }
+      }
+    },
+    "apishoppingcartv1Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "产品id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "更新时间"
+        },
+        "mainImageUrl": {
+          "type": "string",
+          "title": "主图"
+        },
+        "name": {
+          "type": "string",
+          "title": "产品名称"
+        },
+        "no": {
+          "type": "string",
+          "title": "产品编号"
+        },
+        "spec": {
+          "type": "string",
+          "title": "规格"
+        },
+        "material": {
+          "type": "string",
+          "title": "材质"
+        },
+        "weight": {
+          "type": "string",
+          "title": "重量"
+        },
+        "barcode": {
+          "type": "string",
+          "title": "69码"
+        },
+        "supplierPackingRate": {
+          "type": "integer",
+          "format": "int32",
+          "title": "供应商装箱率"
+        },
+        "internalPackingRate": {
+          "type": "integer",
+          "format": "int32",
+          "title": "内部装箱率"
+        },
+        "wholesalePrice": {
+          "type": "string",
+          "title": "批发价"
+        },
+        "dropshippingPrice": {
+          "type": "string",
+          "title": "代发价"
+        },
+        "unifiedPrice": {
+          "type": "string",
+          "title": "统一控价"
+        },
+        "wxMomentText": {
+          "type": "string",
+          "title": "发圈文案"
+        },
+        "tmallShopUrl": {
+          "type": "string",
+          "title": "天猫店铺链接 如果没有值，表示没有天猫链接，隐藏跳转按钮"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "产品标签"
+        }
+      }
+    },
+    "apishoppingcartv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "googleprotobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string",
+          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com. As of May 2023, there are no widely used type server\nimplementations and no plans to implement one.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+        }
+      },
+      "additionalProperties": {},
+      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n    // or ...\n    if (any.isSameTypeAs(Foo.getDefaultInstance())) {\n      foo = any.unpack(Foo.getDefaultInstance());\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/googleprotobufAny"
+          }
+        }
+      }
+    },
+    "orderv1Status": {
+      "type": "string",
+      "enum": [
+        "STATUS_PENDING",
+        "STATUS_CONFIRMED",
+        "STATUS_CANCELLED",
+        "STATUS_COMPLETED"
+      ],
+      "default": "STATUS_PENDING",
+      "description": "- STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
+      "title": "订单状态"
+    },
+    "v1Account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "账户id"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "最新更新时间"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "当前付款"
+        },
+        "creditLimit": {
+          "type": "string",
+          "title": "信用额度"
+        },
+        "remainingCreditLimit": {
+          "type": "string",
+          "title": "剩余信用额度"
+        }
+      }
+    },
+    "v1AccountBill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "账单id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "账单时间"
+        },
+        "no": {
+          "type": "string",
+          "title": "账单号"
+        },
+        "amount": {
+          "type": "string",
+          "title": "账单金额"
+        },
+        "direction": {
+          "type": "integer",
+          "format": "int32",
+          "title": "收支方向 1-收入 -1支出"
+        },
+        "summary": {
+          "type": "string",
+          "title": "账单摘要"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
+        }
+      }
+    },
+    "v1Address": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "地址id"
+        },
+        "name": {
+          "type": "string",
+          "title": "收货人"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号"
+        },
+        "province": {
+          "type": "string",
+          "title": "省份"
+        },
+        "city": {
+          "type": "string",
+          "title": "城市"
+        },
+        "district": {
+          "type": "string",
+          "title": "区县"
+        },
+        "detail": {
+          "type": "string",
+          "title": "详细地址"
+        },
+        "isDefault": {
+          "type": "boolean",
+          "title": "是否默认地址"
+        }
+      }
+    },
+    "v1Authentication": {
+      "type": "object",
+      "properties": {
+        "tokenType": {
+          "type": "string",
+          "title": "Cookie 类型，固定为Bearer"
+        },
+        "accessToken": {
+          "type": "string",
+          "title": "Cookie 令牌：Header['Authorization'] = token_type + ' '+ access_token"
+        },
+        "expiresIn": {
+          "type": "string",
+          "format": "int64",
+          "title": "Cookie 有效期"
+        },
+        "createTimestamp": {
+          "type": "string",
+          "format": "int64",
+          "title": "创建时间 毫秒时间戳"
+        }
+      }
+    },
+    "v1CancelFavoriteProductRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "产品ID数组 1-1000个",
+          "required": [
+            "ids"
+          ]
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    },
+    "v1Classification": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "类目id"
+        },
+        "name": {
+          "type": "string",
+          "title": "类目名称"
+        }
+      }
+    },
+    "v1Cooperation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "合作意向id"
+        },
+        "no": {
+          "type": "string",
+          "title": "合作意向编号"
+        },
+        "name": {
+          "type": "string",
+          "title": "联系人"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号"
+        },
+        "progress": {
+          "type": "string",
+          "title": "进度说明：请您耐心等待，我们会尽快联系您"
+        }
+      }
+    },
+    "v1CreateAddressRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "收货人",
+          "required": [
+            "name"
+          ]
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号",
+          "required": [
+            "phone"
+          ]
+        },
+        "province": {
+          "type": "string",
+          "title": "省份",
+          "required": [
+            "province"
+          ]
+        },
+        "city": {
+          "type": "string",
+          "title": "城市",
+          "required": [
+            "city"
+          ]
+        },
+        "district": {
+          "type": "string",
+          "title": "区县",
+          "required": [
+            "district"
+          ]
+        },
+        "detail": {
+          "type": "string",
+          "title": "详细地址",
+          "required": [
+            "detail"
+          ]
+        },
+        "isDefault": {
+          "type": "boolean",
+          "title": "是否默认地址"
+        }
+      },
+      "required": [
+        "name",
+        "phone",
+        "province",
+        "city",
+        "district",
+        "detail"
+      ]
+    },
+    "v1CreateAuthenticateRequest": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/v1CreateAuthenticateRequestType",
+          "title": "登录类型"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号：验证码登录必填"
+        },
+        "smsCode": {
+          "type": "string",
+          "title": "验证码：验证码登录必填(4位数字)"
+        },
+        "wxAuthCode": {
+          "type": "string",
+          "title": "微信code：微信手机号授权必填"
+        }
+      },
+      "title": "登录请求"
+    },
+    "v1CreateAuthenticateRequestType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "PHONE",
+        "WX_PHONE"
+      ],
+      "default": "UNKNOWN",
+      "title": "- UNKNOWN: 未知\n - PHONE: 手机号登录\n - WX_PHONE: 微信手机号授权"
+    },
+    "v1CreateCooperationRequest": {
+      "type": "object",
+      "properties": {
+        "wxCode": {
+          "type": "string",
+          "title": "微信登录的临时code",
+          "required": [
+            "wxCode"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "title": "联系人",
+          "required": [
+            "name"
+          ]
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号",
+          "required": [
+            "phone"
+          ]
+        },
+        "region": {
+          "type": "string",
+          "title": "地区",
+          "required": [
+            "region"
+          ]
+        },
+        "businessChannel": {
+          "type": "string",
+          "title": "业务渠道(礼品采购/线下家具馆/线下商超/私域商城/银行商城/其他)",
+          "required": [
+            "businessChannel"
+          ]
+        },
+        "cooperationMode": {
+          "type": "string",
+          "title": "合作方式(集采/一件代发)",
+          "required": [
+            "cooperationMode"
+          ]
+        },
+        "settlementMethod": {
+          "type": "string",
+          "title": "结算方式 (现结/预付/账期)",
+          "required": [
+            "settlementMethod"
+          ]
+        }
+      },
+      "required": [
+        "wxCode",
+        "name",
+        "phone",
+        "region",
+        "businessChannel",
+        "cooperationMode",
+        "settlementMethod"
+      ]
+    },
+    "v1CreateFavoriteProductRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "产品ID数组 1-1000个",
+          "required": [
+            "ids"
+          ]
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    },
+    "v1CreateInvoiceAccountRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "发票抬头",
+          "required": [
+            "title"
+          ]
+        },
+        "taxNumber": {
+          "type": "string",
+          "title": "税号",
+          "required": [
+            "taxNumber"
+          ]
+        },
+        "registerAddress": {
+          "type": "string",
+          "title": "注册地址",
+          "required": [
+            "registerAddress"
+          ]
+        },
+        "phone": {
+          "type": "string",
+          "title": "注册电话",
+          "required": [
+            "phone"
+          ]
+        },
+        "bank": {
+          "type": "string",
+          "title": "开户银行",
+          "required": [
+            "bank"
+          ]
+        },
+        "bankAccount": {
+          "type": "string",
+          "title": "银行账号",
+          "required": [
+            "bankAccount"
+          ]
+        },
+        "isDefault": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "title",
+        "taxNumber",
+        "registerAddress",
+        "phone",
+        "bank",
+        "bankAccount"
+      ]
+    },
+    "v1CreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "receiverName": {
+          "type": "string",
+          "title": "收货人",
+          "required": [
+            "receiverName"
+          ]
+        },
+        "receiverPhone": {
+          "type": "string",
+          "title": "收货人手机号",
+          "required": [
+            "receiverPhone"
+          ]
+        },
+        "receiverAddress": {
+          "type": "string",
+          "title": "收货地址",
+          "required": [
+            "receiverAddress"
+          ]
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/v1InvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceAccount": {
+          "$ref": "#/definitions/apiorderv1InvoiceAccount",
+          "title": "无票时，不传"
+        },
+        "paymentTerms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "支付条款：现付、挂账（用户信息接口中有是否允许挂账）"
+        },
+        "paymentOption": {
+          "$ref": "#/definitions/v1PaymentOption",
+          "title": "支付方式"
+        },
+        "buyerRemark": {
+          "type": "string",
+          "title": "备注 【0- 100】"
+        },
+        "shoppingCartIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "购物车ID数组 【1-200】",
+          "required": [
+            "shoppingCartIds"
+          ]
+        }
+      },
+      "required": [
+        "receiverName",
+        "receiverPhone",
+        "receiverAddress",
+        "shoppingCartIds"
+      ]
+    },
+    "v1CreateShoppingCartRequest": {
+      "type": "object",
+      "properties": {
+        "productIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "产品ID数组 1-1000个",
+          "required": [
+            "productIds"
+          ]
+        }
+      },
+      "required": [
+        "productIds"
+      ]
+    },
+    "v1InvoiceRequirement": {
+      "type": "string",
+      "enum": [
+        "INVOICE_REQUIREMENT_NONE",
+        "INVOICE_REQUIREMENT_NORMAL",
+        "INVOICE_REQUIREMENT_SPECIAL"
+      ],
+      "default": "INVOICE_REQUIREMENT_NONE",
+      "title": "- INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
+    },
+    "v1ListAccountBillReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1AccountBill"
+          },
+          "title": "账单列表"
+        }
+      }
+    },
+    "v1ListAddressReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Address"
+          },
+          "title": "地址列表"
+        }
+      }
+    },
+    "v1ListClassificationReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Classification"
+          }
+        }
+      }
+    },
+    "v1ListInvoiceAccountReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiinvoiceaccountv1InvoiceAccount"
+          },
+          "title": "发票账户列表"
+        }
+      }
+    },
+    "v1ListOrderNotificationReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrderNotification"
+          }
+        }
+      }
+    },
+    "v1ListOrderReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Order"
+          }
+        }
+      }
+    },
+    "v1ListPaymentReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Payment"
+          }
+        }
+      }
+    },
+    "v1ListProductReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiproductv1Product"
+          }
+        }
+      }
+    },
+    "v1ListShoppingCartReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ShoppingCart"
+          }
+        }
+      }
+    },
+    "v1Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "订单ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "下单时间"
+        },
+        "paymentStatus": {
+          "$ref": "#/definitions/v1PaymentStatus",
+          "title": "订单支付状态"
+        },
+        "shippingStatus": {
+          "$ref": "#/definitions/v1ShippingStatus",
+          "title": "订单发货状态"
+        },
+        "status": {
+          "$ref": "#/definitions/orderv1Status",
+          "title": "订单状态"
+        },
+        "summary": {
+          "type": "string",
+          "title": "订单摘要"
+        },
+        "no": {
+          "type": "string",
+          "title": "订单号"
+        },
+        "subtotal": {
+          "type": "string",
+          "title": "汇总金额（小计）"
+        },
+        "tax": {
+          "type": "string",
+          "title": "税费"
+        },
+        "shipping": {
+          "type": "string",
+          "title": "运费"
+        },
+        "discount": {
+          "type": "string",
+          "title": "优惠金额"
+        },
+        "grandTotal": {
+          "type": "string",
+          "title": "最终总额"
+        },
+        "balanceDeduction": {
+          "type": "string",
+          "title": "余额抵扣"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "应付金额"
+        },
+        "amountPaid": {
+          "type": "string",
+          "title": "实付金额"
+        },
+        "paymentTerms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "支付条款：现付、挂账"
+        },
+        "paymentOption": {
+          "type": "string",
+          "title": "支付方式"
+        },
+        "paymentTime": {
+          "type": "string",
+          "title": "支付时间"
+        },
+        "paymentId": {
+          "type": "string",
+          "format": "int64",
+          "title": "支付记录id"
+        },
+        "paymentNo": {
+          "type": "string",
+          "title": "支付记录编号"
+        },
+        "receiverName": {
+          "type": "string",
+          "title": "收货人"
+        },
+        "receiverPhone": {
+          "type": "string",
+          "title": "收货人手机号"
+        },
+        "receiverAddress": {
+          "type": "string",
+          "title": "收货地址"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/v1InvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceAccount": {
+          "$ref": "#/definitions/apiorderv1InvoiceAccount",
+          "title": "无票时，不返回"
+        },
+        "invoiceStatus": {
+          "$ref": "#/definitions/v1OrderInvoiceStatus",
+          "title": "开票状态"
+        },
+        "invoiceUrl": {
+          "type": "string",
+          "title": "发票链接(仅在已开票状态下返回。浏览器打开)"
+        },
+        "buyerRemark": {
+          "type": "string",
+          "title": "买家备注"
+        },
+        "sellerRemark": {
+          "type": "string",
+          "title": "卖家备注"
+        }
+      }
+    },
+    "v1OrderInvoiceStatus": {
+      "type": "string",
+      "enum": [
+        "INVOICE_STATUS_NONE",
+        "INVOICE_STATUS_UNINVOICED",
+        "INVOICE_STATUS_INVOICED"
+      ],
+      "default": "INVOICE_STATUS_NONE",
+      "description": "- INVOICE_STATUS_NONE: 未开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
+      "title": "开票状态"
+    },
+    "v1OrderNotification": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "通知ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "通知时间"
+        },
+        "content": {
+          "type": "string",
+          "title": "通知内容"
+        }
+      }
+    },
+    "v1Payment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "付款ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "时间"
+        },
+        "status": {
+          "$ref": "#/definitions/v1PaymentStatus",
+          "title": "付款状态"
+        },
+        "option": {
+          "$ref": "#/definitions/v1PaymentOption",
+          "title": "付款方式"
+        },
+        "no": {
+          "type": "string",
+          "title": "付款编号"
+        },
+        "name": {
+          "type": "string",
+          "title": "名称"
+        },
+        "amount": {
+          "type": "string",
+          "title": "付款金额"
+        },
+        "orderCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "订单数量"
+        },
+        "note": {
+          "type": "string",
+          "title": "付款备注"
+        },
+        "recipient": {
+          "type": "string",
+          "title": "收款人"
+        },
+        "voucherUrl": {
+          "type": "string",
+          "title": "付款凭证链接"
+        }
+      }
+    },
+    "v1PaymentOption": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_OPTION_NONE",
+        "PAYMENT_OPTION_OFFLINE_WECHAT",
+        "PAYMENT_OPTION_OFFLINE_ALIPAY",
+        "PAYMENT_OPTION_OFFLINE_ENTERPRISE"
+      ],
+      "default": "PAYMENT_OPTION_NONE",
+      "title": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付"
+    },
+    "v1PaymentStatus": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_STATUS_UNPAID",
+        "PAYMENT_STATUS_PAYING",
+        "PAYMENT_STATUS_PAID",
+        "PAYMENT_STATUS_CREDITING"
+      ],
+      "default": "PAYMENT_STATUS_UNPAID",
+      "title": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_PAYING: 确认中\n - PAYMENT_STATUS_PAID: 已付款\n - PAYMENT_STATUS_CREDITING: 挂账中"
+    },
+    "v1PaymentTerms": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_TERMS_CASH",
+        "PAYMENT_TERMS_CREDIT"
+      ],
+      "default": "PAYMENT_TERMS_CASH",
+      "title": "- PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账"
+    },
+    "v1SendSMSCodeRequest": {
+      "type": "object",
+      "properties": {
+        "phone": {
+          "type": "string",
+          "title": "手机号^1[1-9]\\\\d{9}$",
+          "required": [
+            "phone"
+          ]
+        }
+      },
+      "required": [
+        "phone"
+      ]
+    },
+    "v1ShippingStatus": {
+      "type": "string",
+      "enum": [
+        "SHIPPING_STATUS_UNDELIVERED",
+        "SHIPPING_STATUS_PARTIALLY_DELIVERED",
+        "SHIPPING_STATUS_DELIVERED"
+      ],
+      "default": "SHIPPING_STATUS_UNDELIVERED",
+      "title": "- SHIPPING_STATUS_UNDELIVERED: 未发货\n - SHIPPING_STATUS_PARTIALLY_DELIVERED: 部分发货\n - SHIPPING_STATUS_DELIVERED: 已发货"
+    },
+    "v1ShoppingCart": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "购物车id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "加入时间"
+        },
+        "product": {
+          "$ref": "#/definitions/apishoppingcartv1Product",
+          "title": "产品"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "title": "数量"
+        },
+        "amountTotal": {
+          "type": "string",
+          "title": "合计金额"
+        }
+      }
+    },
+    "v1User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "用户id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "更新时间"
+        },
+        "name": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "title": "头像"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号"
+        },
+        "enterpriseName": {
+          "type": "string",
+          "title": "企业名称"
+        },
+        "enterpriseTaxNumber": {
+          "type": "string",
+          "title": "企业税号"
+        },
+        "channels": {
+          "type": "string",
+          "title": "业务渠道"
+        },
+        "cooperationModes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": "合作方式： 1:集中采购 2:一件代发"
+        },
+        "paymentTerms": {
+          "type": "integer",
+          "format": "int32",
+          "title": "支付条款 0：未设置 1:现结 2:账期"
+        },
+        "creditLimit": {
+          "type": "string",
+          "title": "授信额度"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "应付账款"
+        }
+      }
+    }
+  }
+}
