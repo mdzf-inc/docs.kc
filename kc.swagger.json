@@ -2242,6 +2242,18 @@
           "$ref": "#/definitions/v1ShippingStatus",
           "title": "订单发货状态"
         },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/v1InvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceAccount": {
+          "$ref": "#/definitions/apiorderv1InvoiceAccount",
+          "title": "无票时，不返回"
+        },
+        "invoiceStatus": {
+          "$ref": "#/definitions/v1OrderInvoiceStatus",
+          "title": "开票状态"
+        },
         "status": {
           "$ref": "#/definitions/orderv1Status",
           "title": "订单状态"
@@ -2293,22 +2305,6 @@
         "receiverAddress": {
           "type": "string",
           "title": "收货地址"
-        },
-        "invoiceRequirement": {
-          "$ref": "#/definitions/v1InvoiceRequirement",
-          "title": "开票要求"
-        },
-        "invoiceAccount": {
-          "$ref": "#/definitions/apiorderv1InvoiceAccount",
-          "title": "无票时，不返回"
-        },
-        "invoiceStatus": {
-          "$ref": "#/definitions/v1OrderInvoiceStatus",
-          "title": "开票状态"
-        },
-        "invoiceUrl": {
-          "type": "string",
-          "title": "发票链接(仅在已开票状态下返回。浏览器打开)"
         },
         "buyerRemark": {
           "type": "string",
@@ -2476,6 +2472,22 @@
         "voucherUrl": {
           "type": "string",
           "title": "付款凭证链接"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/v1InvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceAccount": {
+          "$ref": "#/definitions/apiorderv1InvoiceAccount",
+          "title": "开票抬头信息；无票时，不返回"
+        },
+        "invoiceStatus": {
+          "$ref": "#/definitions/v1OrderInvoiceStatus",
+          "title": "开票状态"
+        },
+        "invoiceUrl": {
+          "type": "string",
+          "title": "发票连接（如有，使用浏览器打开即可）"
         }
       }
     },
@@ -2495,11 +2507,10 @@
       "enum": [
         "PAYMENT_STATUS_UNPAID",
         "PAYMENT_STATUS_PAYING",
-        "PAYMENT_STATUS_PAID",
-        "PAYMENT_STATUS_CREDITING"
+        "PAYMENT_STATUS_PAID"
       ],
       "default": "PAYMENT_STATUS_UNPAID",
-      "title": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_PAYING: 确认中\n - PAYMENT_STATUS_PAID: 已付款\n - PAYMENT_STATUS_CREDITING: 挂账中"
+      "title": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_PAYING: 确认中\n - PAYMENT_STATUS_PAID: 已付款"
     },
     "v1PaymentTerms": {
       "type": "string",
