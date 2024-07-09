@@ -848,113 +848,6 @@
         ]
       }
     },
-    "/orders/{id}/notifications": {
-      "get": {
-        "summary": "订单通知列表",
-        "operationId": "OrderService_ListOrderNotification",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1ListOrderNotificationReply"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "description": "订单ID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "OrderService"
-        ]
-      }
-    },
-    "/payments": {
-      "get": {
-        "summary": "付款记录列表",
-        "operationId": "OrderService_ListPayment",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1ListPaymentReply"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "pageNum",
-            "description": "页数 从0开始",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "description": "每页数据量 \u003c= 1000",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "tags": [
-          "OrderService"
-        ]
-      }
-    },
-    "/payments/{id}": {
-      "get": {
-        "summary": "付款记录详情",
-        "operationId": "OrderService_GetPayment",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1Payment"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "description": "付款ID",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "OrderService"
-        ]
-      }
-    },
     "/payments/{id}/actions/submit-voucher": {
       "post": {
         "summary": "提交付款凭证",
@@ -1531,7 +1424,8 @@
           "title": "材质"
         },
         "weight": {
-          "type": "string",
+          "type": "number",
+          "format": "double",
           "title": "重量"
         },
         "barcode": {
@@ -1539,8 +1433,8 @@
           "title": "69码"
         },
         "classificationId": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
+          "format": "int64",
           "title": "类目id"
         },
         "classificationName": {
@@ -2287,17 +2181,6 @@
         }
       }
     },
-    "v1ListOrderNotificationReply": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1OrderNotification"
-          }
-        }
-      }
-    },
     "v1ListOrderReply": {
       "type": "object",
       "properties": {
@@ -2305,17 +2188,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/v1Order"
-          }
-        }
-      }
-    },
-    "v1ListPaymentReply": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1Payment"
           }
         }
       }
@@ -2357,6 +2229,14 @@
         "paymentStatus": {
           "$ref": "#/definitions/v1PaymentStatus",
           "title": "订单支付状态"
+        },
+        "paymentTerms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "支付条款：现付、挂账"
+        },
+        "paymentOption": {
+          "$ref": "#/definitions/v1PaymentOption",
+          "title": "支付方式"
         },
         "shippingStatus": {
           "$ref": "#/definitions/v1ShippingStatus",
@@ -2401,31 +2281,6 @@
         "amountDue": {
           "type": "string",
           "title": "应付金额"
-        },
-        "amountPaid": {
-          "type": "string",
-          "title": "实付金额"
-        },
-        "paymentTerms": {
-          "$ref": "#/definitions/v1PaymentTerms",
-          "title": "支付条款：现付、挂账"
-        },
-        "paymentOption": {
-          "$ref": "#/definitions/v1PaymentOption",
-          "title": "支付方式"
-        },
-        "paymentTime": {
-          "type": "string",
-          "title": "支付时间"
-        },
-        "paymentId": {
-          "type": "string",
-          "format": "int64",
-          "title": "支付记录id"
-        },
-        "paymentNo": {
-          "type": "string",
-          "title": "支付记录编号"
         },
         "receiverName": {
           "type": "string",
@@ -2474,6 +2329,17 @@
             "$ref": "#/definitions/v1OrderItem"
           },
           "title": "订单商品"
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrderNotification"
+          },
+          "title": "订单通知（详情时返回）"
+        },
+        "payment": {
+          "$ref": "#/definitions/v1Payment",
+          "title": "付款记录（详情时返回，无付款则不返回）"
         }
       }
     },
@@ -2577,6 +2443,10 @@
         "option": {
           "$ref": "#/definitions/v1PaymentOption",
           "title": "付款方式"
+        },
+        "terms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "支付条款"
         },
         "no": {
           "type": "string",
