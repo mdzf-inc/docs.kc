@@ -15,6 +15,9 @@
       "name": "AuthenticateService"
     },
     {
+      "name": "StatementService"
+    },
+    {
       "name": "InvoiceAccountService"
     },
     {
@@ -735,6 +738,14 @@
               "STATUS_COMPLETED"
             ],
             "default": "STATUS_PENDING"
+          },
+          {
+            "name": "statementId",
+            "description": "对账单ID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1027,24 +1038,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "pageNum",
-            "description": "分页页码 从1开始",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "pageSize",
-            "description": "分页大小",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
         "tags": [
           "ShoppingCartService"
         ]
@@ -1203,6 +1196,135 @@
         ]
       }
     },
+    "/statements": {
+      "get": {
+        "summary": "对账单列表",
+        "operationId": "StatementService_ListStatement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListStatementReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "status",
+            "description": "对账单状态\n\n - STATEMENT_STATUS_PENDING_UNKNOWN: 异常\n - STATEMENT_STATUS_PENDING_BUYER_CONFIRM: 待买家确认\n - STATEMENT_STATUS_PENDING_FINANCE_CONFIRM: 财务待确认\n - STATEMENT_STATUS_CONFIRMED: 已确认",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "STATEMENT_STATUS_PENDING_UNKNOWN",
+              "STATEMENT_STATUS_PENDING_BUYER_CONFIRM",
+              "STATEMENT_STATUS_PENDING_FINANCE_CONFIRM",
+              "STATEMENT_STATUS_CONFIRMED"
+            ],
+            "default": "STATEMENT_STATUS_PENDING_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "StatementService"
+        ]
+      }
+    },
+    "/statements/{id}": {
+      "get": {
+        "summary": "对账单详情",
+        "operationId": "StatementService_GetStatement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Statement"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "对账单ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "StatementService"
+        ]
+      }
+    },
+    "/statements/{id}/actions/confirm": {
+      "post": {
+        "summary": "确认对账单",
+        "operationId": "StatementService_ConfirmStatement",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Statement"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "对账单ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "StatementService"
+        ]
+      }
+    },
     "/users/me": {
       "get": {
         "summary": "获取用户信息",
@@ -1228,6 +1350,31 @@
     }
   },
   "definitions": {
+    "CreateShoppingCartRequestItem": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "format": "int64",
+          "title": "产品ID",
+          "required": [
+            "productId"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "title": "数量：[1-99999]",
+          "required": [
+            "quantity"
+          ]
+        }
+      },
+      "required": [
+        "productId",
+        "quantity"
+      ]
+    },
     "apiaddressv1Response": {
       "type": "object",
       "properties": {
@@ -1366,6 +1513,128 @@
         }
       }
     },
+    "apiorderv1InvoiceRequirement": {
+      "type": "string",
+      "enum": [
+        "INVOICE_REQUIREMENT_NONE",
+        "INVOICE_REQUIREMENT_NORMAL",
+        "INVOICE_REQUIREMENT_SPECIAL"
+      ],
+      "default": "INVOICE_REQUIREMENT_NONE",
+      "title": "- INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
+    },
+    "apiorderv1InvoiceStatus": {
+      "type": "string",
+      "enum": [
+        "INVOICE_STATUS_NONE",
+        "INVOICE_STATUS_UNINVOICED",
+        "INVOICE_STATUS_INVOICED"
+      ],
+      "default": "INVOICE_STATUS_NONE",
+      "description": "- INVOICE_STATUS_NONE: 不开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
+      "title": "开票状态"
+    },
+    "apiorderv1Payment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "付款ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "时间"
+        },
+        "status": {
+          "$ref": "#/definitions/apiorderv1PaymentStatus",
+          "title": "付款状态"
+        },
+        "option": {
+          "$ref": "#/definitions/apiorderv1PaymentOption",
+          "title": "付款方式"
+        },
+        "terms": {
+          "$ref": "#/definitions/apiorderv1PaymentTerms",
+          "title": "支付条款"
+        },
+        "no": {
+          "type": "string",
+          "title": "付款编号"
+        },
+        "name": {
+          "type": "string",
+          "title": "名称"
+        },
+        "amount": {
+          "type": "string",
+          "title": "付款金额"
+        },
+        "orderCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "订单数量"
+        },
+        "note": {
+          "type": "string",
+          "title": "付款备注"
+        },
+        "recipient": {
+          "type": "string",
+          "title": "收款人"
+        },
+        "voucherUrl": {
+          "type": "string",
+          "title": "付款凭证链接"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/apiorderv1InvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceAccount": {
+          "$ref": "#/definitions/apiorderv1InvoiceAccount",
+          "title": "开票抬头信息；无票时，不返回"
+        },
+        "invoiceStatus": {
+          "$ref": "#/definitions/apiorderv1InvoiceStatus",
+          "title": "开票状态"
+        },
+        "invoiceUrl": {
+          "type": "string",
+          "title": "发票连接（如有，使用浏览器打开即可）"
+        }
+      }
+    },
+    "apiorderv1PaymentOption": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_OPTION_NONE",
+        "PAYMENT_OPTION_OFFLINE_WECHAT",
+        "PAYMENT_OPTION_OFFLINE_ALIPAY",
+        "PAYMENT_OPTION_OFFLINE_ENTERPRISE"
+      ],
+      "default": "PAYMENT_OPTION_NONE",
+      "title": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付"
+    },
+    "apiorderv1PaymentStatus": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_STATUS_UNPAID",
+        "PAYMENT_STATUS_CONFIRMING",
+        "PAYMENT_STATUS_PAID"
+      ],
+      "default": "PAYMENT_STATUS_UNPAID",
+      "title": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_CONFIRMING: 确认中\n - PAYMENT_STATUS_PAID: 已付款"
+    },
+    "apiorderv1PaymentTerms": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_TERMS_CASH",
+        "PAYMENT_TERMS_CREDIT"
+      ],
+      "default": "PAYMENT_TERMS_CASH",
+      "title": "- PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账"
+    },
     "apiorderv1Response": {
       "type": "object",
       "properties": {
@@ -1496,14 +1765,6 @@
           "format": "int64",
           "title": "产品id"
         },
-        "createTime": {
-          "type": "string",
-          "title": "创建时间"
-        },
-        "updateTime": {
-          "type": "string",
-          "title": "更新时间"
-        },
         "mainImageUrl": {
           "type": "string",
           "title": "主图"
@@ -1525,7 +1786,8 @@
           "title": "材质"
         },
         "weight": {
-          "type": "string",
+          "type": "number",
+          "format": "double",
           "title": "重量"
         },
         "barcode": {
@@ -1554,14 +1816,6 @@
           "type": "string",
           "title": "统一控价"
         },
-        "wxMomentText": {
-          "type": "string",
-          "title": "发圈文案"
-        },
-        "tmallShopUrl": {
-          "type": "string",
-          "title": "天猫店铺链接 如果没有值，表示没有天猫链接，隐藏跳转按钮"
-        },
         "labels": {
           "type": "array",
           "items": {
@@ -1588,6 +1842,157 @@
           "type": "string"
         }
       }
+    },
+    "apistatementv1InvoiceAccount": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "发票抬头"
+        },
+        "taxNumber": {
+          "type": "string",
+          "title": "税号"
+        },
+        "registerAddress": {
+          "type": "string",
+          "title": "注册地址"
+        },
+        "phone": {
+          "type": "string",
+          "title": "注册电话"
+        },
+        "bank": {
+          "type": "string",
+          "title": "开户银行"
+        },
+        "bankAccount": {
+          "type": "string",
+          "title": "银行账号"
+        }
+      }
+    },
+    "apistatementv1InvoiceRequirement": {
+      "type": "string",
+      "enum": [
+        "INVOICE_REQUIREMENT_NONE",
+        "INVOICE_REQUIREMENT_NORMAL",
+        "INVOICE_REQUIREMENT_SPECIAL"
+      ],
+      "default": "INVOICE_REQUIREMENT_NONE",
+      "title": "- INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
+    },
+    "apistatementv1InvoiceStatus": {
+      "type": "string",
+      "enum": [
+        "INVOICE_STATUS_NONE",
+        "INVOICE_STATUS_UNINVOICED",
+        "INVOICE_STATUS_INVOICED"
+      ],
+      "default": "INVOICE_STATUS_NONE",
+      "description": "- INVOICE_STATUS_NONE: 不开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
+      "title": "开票状态"
+    },
+    "apistatementv1Payment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "付款ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "时间"
+        },
+        "status": {
+          "$ref": "#/definitions/apistatementv1PaymentStatus",
+          "title": "付款状态"
+        },
+        "option": {
+          "$ref": "#/definitions/apistatementv1PaymentOption",
+          "title": "付款方式"
+        },
+        "terms": {
+          "$ref": "#/definitions/apistatementv1PaymentTerms",
+          "title": "支付条款"
+        },
+        "no": {
+          "type": "string",
+          "title": "付款编号"
+        },
+        "name": {
+          "type": "string",
+          "title": "名称"
+        },
+        "amount": {
+          "type": "string",
+          "title": "付款金额"
+        },
+        "orderCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "订单数量"
+        },
+        "note": {
+          "type": "string",
+          "title": "付款备注"
+        },
+        "recipient": {
+          "type": "string",
+          "title": "收款人"
+        },
+        "voucherUrl": {
+          "type": "string",
+          "title": "付款凭证链接"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/apistatementv1InvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceAccount": {
+          "$ref": "#/definitions/apistatementv1InvoiceAccount",
+          "title": "开票抬头信息；无票时，不返回"
+        },
+        "invoiceStatus": {
+          "$ref": "#/definitions/apistatementv1InvoiceStatus",
+          "title": "开票状态"
+        },
+        "invoiceUrl": {
+          "type": "string",
+          "title": "发票连接（如有，使用浏览器打开即可）"
+        }
+      }
+    },
+    "apistatementv1PaymentOption": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_OPTION_NONE",
+        "PAYMENT_OPTION_OFFLINE_WECHAT",
+        "PAYMENT_OPTION_OFFLINE_ALIPAY",
+        "PAYMENT_OPTION_OFFLINE_ENTERPRISE"
+      ],
+      "default": "PAYMENT_OPTION_NONE",
+      "title": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付"
+    },
+    "apistatementv1PaymentStatus": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_STATUS_UNPAID",
+        "PAYMENT_STATUS_CONFIRMING",
+        "PAYMENT_STATUS_PAID"
+      ],
+      "default": "PAYMENT_STATUS_UNPAID",
+      "title": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_CONFIRMING: 确认中\n - PAYMENT_STATUS_PAID: 已付款"
+    },
+    "apistatementv1PaymentTerms": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_TERMS_CASH",
+        "PAYMENT_TERMS_CREDIT"
+      ],
+      "default": "PAYMENT_TERMS_CASH",
+      "title": "- PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账"
     },
     "googleprotobufAny": {
       "type": "object",
@@ -2071,15 +2476,15 @@
           ]
         },
         "invoiceRequirement": {
-          "$ref": "#/definitions/v1InvoiceRequirement",
+          "$ref": "#/definitions/apiorderv1InvoiceRequirement",
           "title": "开票要求"
         },
         "paymentTerms": {
-          "$ref": "#/definitions/v1PaymentTerms",
+          "$ref": "#/definitions/apiorderv1PaymentTerms",
           "title": "支付条款：现付、挂账（用户信息接口中有是否允许挂账）"
         },
         "paymentOption": {
-          "$ref": "#/definitions/v1PaymentOption",
+          "$ref": "#/definitions/apiorderv1PaymentOption",
           "title": "支付方式"
         },
         "buyerRemark": {
@@ -2108,31 +2513,20 @@
     "v1CreateShoppingCartRequest": {
       "type": "object",
       "properties": {
-        "productIds": {
+        "items": {
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "int64"
+            "$ref": "#/definitions/CreateShoppingCartRequestItem"
           },
           "title": "产品ID数组 1-1000个",
           "required": [
-            "productIds"
+            "items"
           ]
         }
       },
       "required": [
-        "productIds"
+        "items"
       ]
-    },
-    "v1InvoiceRequirement": {
-      "type": "string",
-      "enum": [
-        "INVOICE_REQUIREMENT_NONE",
-        "INVOICE_REQUIREMENT_NORMAL",
-        "INVOICE_REQUIREMENT_SPECIAL"
-      ],
-      "default": "INVOICE_REQUIREMENT_NONE",
-      "title": "- INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
     },
     "v1ListAccountBillReply": {
       "type": "object",
@@ -2214,6 +2608,17 @@
         }
       }
     },
+    "v1ListStatementReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Statement"
+          }
+        }
+      }
+    },
     "v1Order": {
       "type": "object",
       "properties": {
@@ -2227,23 +2632,23 @@
           "title": "下单时间"
         },
         "paymentStatus": {
-          "$ref": "#/definitions/v1PaymentStatus",
+          "$ref": "#/definitions/apiorderv1PaymentStatus",
           "title": "订单支付状态"
         },
         "paymentTerms": {
-          "$ref": "#/definitions/v1PaymentTerms",
+          "$ref": "#/definitions/apiorderv1PaymentTerms",
           "title": "支付条款：现付、挂账"
         },
         "paymentOption": {
-          "$ref": "#/definitions/v1PaymentOption",
+          "$ref": "#/definitions/apiorderv1PaymentOption",
           "title": "支付方式"
         },
         "invoiceRequirement": {
-          "$ref": "#/definitions/v1InvoiceRequirement",
+          "$ref": "#/definitions/apiorderv1InvoiceRequirement",
           "title": "开票要求"
         },
         "invoiceStatus": {
-          "$ref": "#/definitions/v1OrderInvoiceStatus",
+          "$ref": "#/definitions/apiorderv1InvoiceStatus",
           "title": "开票状态"
         },
         "shippingStatus": {
@@ -2330,7 +2735,7 @@
           "title": "订单通知（详情时返回）"
         },
         "payment": {
-          "$ref": "#/definitions/v1Payment",
+          "$ref": "#/definitions/apiorderv1Payment",
           "title": "付款记录（详情时返回，无付款则不返回）"
         },
         "shipments": {
@@ -2341,17 +2746,6 @@
           "title": "发货记录（详情时返回，无发货则不返回）"
         }
       }
-    },
-    "v1OrderInvoiceStatus": {
-      "type": "string",
-      "enum": [
-        "INVOICE_STATUS_NONE",
-        "INVOICE_STATUS_UNINVOICED",
-        "INVOICE_STATUS_INVOICED"
-      ],
-      "default": "INVOICE_STATUS_NONE",
-      "description": "- INVOICE_STATUS_NONE: 不开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
-      "title": "开票状态"
     },
     "v1OrderItem": {
       "type": "object",
@@ -2422,107 +2816,6 @@
           "title": "通知内容"
         }
       }
-    },
-    "v1Payment": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "付款ID"
-        },
-        "createTime": {
-          "type": "string",
-          "title": "时间"
-        },
-        "status": {
-          "$ref": "#/definitions/v1PaymentStatus",
-          "title": "付款状态"
-        },
-        "option": {
-          "$ref": "#/definitions/v1PaymentOption",
-          "title": "付款方式"
-        },
-        "terms": {
-          "$ref": "#/definitions/v1PaymentTerms",
-          "title": "支付条款"
-        },
-        "no": {
-          "type": "string",
-          "title": "付款编号"
-        },
-        "name": {
-          "type": "string",
-          "title": "名称"
-        },
-        "amount": {
-          "type": "string",
-          "title": "付款金额"
-        },
-        "orderCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "订单数量"
-        },
-        "note": {
-          "type": "string",
-          "title": "付款备注"
-        },
-        "recipient": {
-          "type": "string",
-          "title": "收款人"
-        },
-        "voucherUrl": {
-          "type": "string",
-          "title": "付款凭证链接"
-        },
-        "invoiceRequirement": {
-          "$ref": "#/definitions/v1InvoiceRequirement",
-          "title": "开票要求"
-        },
-        "invoiceAccount": {
-          "$ref": "#/definitions/apiorderv1InvoiceAccount",
-          "title": "开票抬头信息；无票时，不返回"
-        },
-        "invoiceStatus": {
-          "$ref": "#/definitions/v1OrderInvoiceStatus",
-          "title": "开票状态"
-        },
-        "invoiceUrl": {
-          "type": "string",
-          "title": "发票连接（如有，使用浏览器打开即可）"
-        }
-      }
-    },
-    "v1PaymentOption": {
-      "type": "string",
-      "enum": [
-        "PAYMENT_OPTION_NONE",
-        "PAYMENT_OPTION_OFFLINE_WECHAT",
-        "PAYMENT_OPTION_OFFLINE_ALIPAY",
-        "PAYMENT_OPTION_OFFLINE_ENTERPRISE"
-      ],
-      "default": "PAYMENT_OPTION_NONE",
-      "title": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付"
-    },
-    "v1PaymentStatus": {
-      "type": "string",
-      "enum": [
-        "PAYMENT_STATUS_UNPAID",
-        "PAYMENT_STATUS_CONFIRMING",
-        "PAYMENT_STATUS_PAID"
-      ],
-      "default": "PAYMENT_STATUS_UNPAID",
-      "title": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_CONFIRMING: 确认中\n - PAYMENT_STATUS_PAID: 已付款"
-    },
-    "v1PaymentTerms": {
-      "type": "string",
-      "enum": [
-        "PAYMENT_TERMS_CASH",
-        "PAYMENT_TERMS_CREDIT"
-      ],
-      "default": "PAYMENT_TERMS_CASH",
-      "title": "- PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账"
     },
     "v1SendSMSCodeRequest": {
       "type": "object",
@@ -2605,6 +2898,123 @@
           "title": "合计金额"
         }
       }
+    },
+    "v1Statement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "对账单ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "更新时间"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64",
+          "title": "用户id"
+        },
+        "buyerConfirmTime": {
+          "type": "string",
+          "title": "买方确认时间"
+        },
+        "financeConfirmTime": {
+          "type": "string",
+          "title": "财务确认时间"
+        },
+        "status": {
+          "$ref": "#/definitions/v1StatementStatus",
+          "title": "状态 1:待买家确认 2：财务待确认 3：已确认"
+        },
+        "paymentStatus": {
+          "$ref": "#/definitions/apistatementv1PaymentStatus",
+          "title": "订单支付状态: 0-待付款 1-确认中 2-已付款 3-挂账中"
+        },
+        "paymentOption": {
+          "$ref": "#/definitions/apistatementv1PaymentOption",
+          "title": "支付方式: 0-无 1-线下微信转账 2-线下支付宝转账 3-线下对公支付"
+        },
+        "paymentId": {
+          "type": "string",
+          "format": "int64",
+          "title": "支付记录id"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/apistatementv1InvoiceRequirement",
+          "title": "开票要求: 0-不开票 1-普票 2-专票"
+        },
+        "invoiceStatus": {
+          "type": "integer",
+          "format": "int32",
+          "title": "开票状态: 0-未开票 1-未开票 2-已开票"
+        },
+        "no": {
+          "type": "string",
+          "title": "对账单号"
+        },
+        "summary": {
+          "type": "string",
+          "title": "摘要"
+        },
+        "orderCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "订单数"
+        },
+        "subtotal": {
+          "type": "string",
+          "title": "汇总金额（小计）"
+        },
+        "tax": {
+          "type": "string",
+          "title": "税费"
+        },
+        "shipping": {
+          "type": "string",
+          "title": "运费"
+        },
+        "discount": {
+          "type": "string",
+          "title": "优惠金额"
+        },
+        "grandTotal": {
+          "type": "string",
+          "title": "最终总额"
+        },
+        "balanceDeduction": {
+          "type": "string",
+          "title": "余额抵扣"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "应付金额"
+        },
+        "remark": {
+          "type": "string",
+          "title": "备注"
+        },
+        "payment": {
+          "$ref": "#/definitions/apistatementv1Payment",
+          "title": "付款记录（详情时返回，无付款则不返回）"
+        }
+      }
+    },
+    "v1StatementStatus": {
+      "type": "string",
+      "enum": [
+        "STATEMENT_STATUS_PENDING_UNKNOWN",
+        "STATEMENT_STATUS_PENDING_BUYER_CONFIRM",
+        "STATEMENT_STATUS_PENDING_FINANCE_CONFIRM",
+        "STATEMENT_STATUS_CONFIRMED"
+      ],
+      "default": "STATEMENT_STATUS_PENDING_UNKNOWN",
+      "title": "- STATEMENT_STATUS_PENDING_UNKNOWN: 异常\n - STATEMENT_STATUS_PENDING_BUYER_CONFIRM: 待买家确认\n - STATEMENT_STATUS_PENDING_FINANCE_CONFIRM: 财务待确认\n - STATEMENT_STATUS_CONFIRMED: 已确认"
     },
     "v1User": {
       "type": "object",
