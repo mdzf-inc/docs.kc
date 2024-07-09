@@ -1020,6 +1020,29 @@
         ]
       }
     },
+    "/regions": {
+      "get": {
+        "summary": "获取全国省市区信息",
+        "operationId": "AddressService_GetRegion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetRegionReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AddressService"
+        ]
+      }
+    },
     "/shopping-carts": {
       "get": {
         "summary": "购物车列表",
@@ -2528,6 +2551,17 @@
         "items"
       ]
     },
+    "v1GetRegionReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Region"
+          }
+        }
+      }
+    },
     "v1ListAccountBillReply": {
       "type": "object",
       "properties": {
@@ -2814,6 +2848,23 @@
         "content": {
           "type": "string",
           "title": "通知内容"
+        }
+      }
+    },
+    "v1Region": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Region"
+          }
         }
       }
     },
