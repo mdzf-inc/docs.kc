@@ -2950,8 +2950,7 @@
           "title": "开票要求: 0-不开票 1-普票 2-专票"
         },
         "invoiceStatus": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/apistatementv1InvoiceStatus",
           "title": "开票状态: 0-未开票 1-未开票 2-已开票"
         },
         "no": {
