@@ -1352,7 +1352,7 @@
           "type": "string",
           "title": "注册地址"
         },
-        "registerPhone": {
+        "phone": {
           "type": "string",
           "title": "注册电话"
         },
@@ -2332,6 +2332,13 @@
         "payment": {
           "$ref": "#/definitions/v1Payment",
           "title": "付款记录（详情时返回，无付款则不返回）"
+        },
+        "shipments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Shipment"
+          },
+          "title": "发货记录（详情时返回，无发货则不返回）"
         }
       }
     },
@@ -2531,6 +2538,64 @@
       "required": [
         "phone"
       ]
+    },
+    "v1Shipment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "no": {
+          "type": "string",
+          "title": "发货出库单号"
+        },
+        "shippingTime": {
+          "type": "string",
+          "title": "发货时间"
+        },
+        "status": {
+          "$ref": "#/definitions/v1ShipmentStatus",
+          "title": "状态"
+        },
+        "logisticsCompany": {
+          "type": "string",
+          "title": "物流公司"
+        },
+        "logisticsNo": {
+          "type": "string",
+          "title": "物流单号"
+        },
+        "remark": {
+          "type": "string",
+          "title": "备注"
+        }
+      },
+      "title": "发货信息"
+    },
+    "v1ShipmentStatus": {
+      "type": "string",
+      "enum": [
+        "SHIPMENT_STATUS_UNKNOWN",
+        "SHIPMENT_STATUS_CANCELLED",
+        "SHIPMENT_STATUS_TO_BE_RETURNED",
+        "SHIPMENT_STATUS_OUT_OF_STOCK",
+        "SHIPMENT_STATUS_WMS_RECEIVED",
+        "SHIPMENT_STATUS_GET_ELECTRONIC_BILL",
+        "SHIPMENT_STATUS_TO_BE_ALLOCATED",
+        "SHIPMENT_STATUS_QUEUING",
+        "SHIPMENT_STATUS_TO_BE_REPLENISHED",
+        "SHIPMENT_STATUS_TO_BE_PROCESSED",
+        "SHIPMENT_STATUS_TO_BE_SHIPPED",
+        "SHIPMENT_STATUS_HOT_LOCKED",
+        "SHIPMENT_STATUS_TO_BE_PICKED",
+        "SHIPMENT_STATUS_PICKING",
+        "SHIPMENT_STATUS_PICKED",
+        "SHIPMENT_STATUS_DELAYED_SHIPMENT",
+        "SHIPMENT_STATUS_COMPLETED"
+      ],
+      "default": "SHIPMENT_STATUS_UNKNOWN",
+      "title": "- SHIPMENT_STATUS_UNKNOWN: 未知\n - SHIPMENT_STATUS_CANCELLED: 已取消\n - SHIPMENT_STATUS_TO_BE_RETURNED: 待放回\n - SHIPMENT_STATUS_OUT_OF_STOCK: 缺货\n - SHIPMENT_STATUS_WMS_RECEIVED: WMS已接单\n - SHIPMENT_STATUS_GET_ELECTRONIC_BILL: 获取电子面单\n - SHIPMENT_STATUS_TO_BE_ALLOCATED: 待分配\n - SHIPMENT_STATUS_QUEUING: 排队中\n - SHIPMENT_STATUS_TO_BE_REPLENISHED: 待补货\n - SHIPMENT_STATUS_TO_BE_PROCESSED: 待处理\n - SHIPMENT_STATUS_TO_BE_SHIPPED: 待发货\n - SHIPMENT_STATUS_HOT_LOCKED: 爆款锁定\n - SHIPMENT_STATUS_TO_BE_PICKED: 待拣货\n - SHIPMENT_STATUS_PICKING: 拣货中\n - SHIPMENT_STATUS_PICKED: 已拣货\n - SHIPMENT_STATUS_DELAYED_SHIPMENT: 延时发货\n - SHIPMENT_STATUS_COMPLETED: 已完成"
     },
     "v1ShippingStatus": {
       "type": "string",
