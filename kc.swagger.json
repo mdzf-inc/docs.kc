@@ -2074,9 +2074,13 @@
           "type": "string",
           "title": "余额"
         },
+        "redPacket": {
+          "type": "string",
+          "title": "红包"
+        },
         "amountDue": {
           "type": "string",
-          "title": "当前付款"
+          "title": "应付账款"
         },
         "creditLimit": {
           "type": "string",
@@ -2701,10 +2705,6 @@
           "type": "string",
           "title": "汇总金额（小计）"
         },
-        "tax": {
-          "type": "string",
-          "title": "税费"
-        },
         "shipping": {
           "type": "string",
           "title": "运费"
@@ -2713,15 +2713,15 @@
           "type": "string",
           "title": "优惠金额"
         },
+        "redPacketDeduction": {
+          "type": "string",
+          "title": "红包抵扣"
+        },
+        "tax": {
+          "type": "string",
+          "title": "税费"
+        },
         "grandTotal": {
-          "type": "string",
-          "title": "最终总额"
-        },
-        "balanceDeduction": {
-          "type": "string",
-          "title": "余额抵扣"
-        },
-        "amountDue": {
           "type": "string",
           "title": "应付金额"
         },
@@ -3122,6 +3122,10 @@
         "balance": {
           "type": "string",
           "title": "余额"
+        },
+        "redPacket": {
+          "type": "string",
+          "title": "红包"
         },
         "amountDue": {
           "type": "string",
