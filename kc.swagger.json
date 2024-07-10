@@ -2508,9 +2508,6 @@
     "v1CreateOrderRequest": {
       "type": "object",
       "properties": {
-        "orderType": {
-          "$ref": "#/definitions/v1OrderType"
-        },
         "receiverName": {
           "type": "string",
           "title": "收货人",
@@ -2571,7 +2568,7 @@
         "quantity": {
           "type": "integer",
           "format": "int32",
-          "title": "商品数量",
+          "title": "商品数量 [1-999999]",
           "required": [
             "quantity"
           ]
@@ -2912,15 +2909,6 @@
           "title": "通知内容"
         }
       }
-    },
-    "v1OrderType": {
-      "type": "string",
-      "enum": [
-        "ORDER_TYPE_SHOPPING_CART",
-        "ORDER_TYPE_DIRECT_PURCHASE"
-      ],
-      "default": "ORDER_TYPE_SHOPPING_CART",
-      "title": "- ORDER_TYPE_SHOPPING_CART: 购物车下单\n - ORDER_TYPE_DIRECT_PURCHASE: 直接购买"
     },
     "v1SendSMSCodeRequest": {
       "type": "object",
