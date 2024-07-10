@@ -2703,7 +2703,7 @@
         },
         "subtotal": {
           "type": "string",
-          "title": "汇总金额（小计）"
+          "title": "商品总额"
         },
         "shipping": {
           "type": "string",
@@ -2791,6 +2791,7 @@
         },
         "productId": {
           "type": "string",
+          "format": "int64",
           "title": "商品id"
         },
         "mainImageUrl": {
