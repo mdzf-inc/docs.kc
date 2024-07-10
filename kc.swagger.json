@@ -1140,7 +1140,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apishoppingcartv1Response"
+              "$ref": "#/definitions/shoppingcartv1ShoppingCart"
             }
           },
           "default": {
@@ -2058,6 +2058,33 @@
       "description": "- STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
       "title": "订单状态"
     },
+    "shoppingcartv1ShoppingCart": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "购物车id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "加入时间"
+        },
+        "product": {
+          "$ref": "#/definitions/apishoppingcartv1Product",
+          "title": "产品"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "title": "数量"
+        },
+        "amountTotal": {
+          "type": "string",
+          "title": "合计金额"
+        }
+      }
+    },
     "v1Account": {
       "type": "object",
       "properties": {
@@ -2481,6 +2508,9 @@
     "v1CreateOrderRequest": {
       "type": "object",
       "properties": {
+        "orderType": {
+          "$ref": "#/definitions/v1OrderType"
+        },
         "receiverName": {
           "type": "string",
           "title": "收货人",
@@ -2514,23 +2544,61 @@
           "type": "string",
           "title": "备注 【0- 100】"
         },
-        "shoppingCartIds": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "int64"
-          },
-          "title": "购物车ID数组 【1-200】",
-          "required": [
-            "shoppingCartIds"
-          ]
+        "shoppingCart": {
+          "$ref": "#/definitions/v1CreateOrderRequestShoppingCart"
+        },
+        "product": {
+          "$ref": "#/definitions/v1CreateOrderRequestProduct"
         }
       },
       "required": [
         "receiverName",
         "receiverPhone",
-        "receiverAddress",
-        "shoppingCartIds"
+        "receiverAddress"
+      ]
+    },
+    "v1CreateOrderRequestProduct": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "商品ID",
+          "required": [
+            "id"
+          ]
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "title": "商品数量",
+          "required": [
+            "quantity"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "quantity"
+      ]
+    },
+    "v1CreateOrderRequestShoppingCart": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "购物车ID数组 【1-500】",
+          "required": [
+            "ids"
+          ]
+        }
+      },
+      "required": [
+        "ids"
       ]
     },
     "v1CreateShoppingCartRequest": {
@@ -2555,10 +2623,7 @@
       "type": "object",
       "properties": {
         "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1Region"
-          }
+          "type": "string"
         }
       }
     },
@@ -2637,7 +2702,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1ShoppingCart"
+            "$ref": "#/definitions/shoppingcartv1ShoppingCart"
           }
         }
       }
@@ -2848,22 +2913,14 @@
         }
       }
     },
-    "v1Region": {
-      "type": "object",
-      "properties": {
-        "label": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        },
-        "children": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1Region"
-          }
-        }
-      }
+    "v1OrderType": {
+      "type": "string",
+      "enum": [
+        "ORDER_TYPE_SHOPPING_CART",
+        "ORDER_TYPE_DIRECT_PURCHASE"
+      ],
+      "default": "ORDER_TYPE_SHOPPING_CART",
+      "title": "- ORDER_TYPE_SHOPPING_CART: 购物车下单\n - ORDER_TYPE_DIRECT_PURCHASE: 直接购买"
     },
     "v1SendSMSCodeRequest": {
       "type": "object",
@@ -2919,33 +2976,6 @@
       ],
       "default": "SHIPPING_STATUS_UNDELIVERED",
       "title": "- SHIPPING_STATUS_UNDELIVERED: 未发货\n - SHIPPING_STATUS_PARTIALLY_DELIVERED: 部分发货\n - SHIPPING_STATUS_DELIVERED: 已发货"
-    },
-    "v1ShoppingCart": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "购物车id"
-        },
-        "createTime": {
-          "type": "string",
-          "title": "加入时间"
-        },
-        "product": {
-          "$ref": "#/definitions/apishoppingcartv1Product",
-          "title": "产品"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32",
-          "title": "数量"
-        },
-        "amountTotal": {
-          "type": "string",
-          "title": "合计金额"
-        }
-      }
     },
     "v1Statement": {
       "type": "object",
