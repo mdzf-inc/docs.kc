@@ -762,7 +762,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Order"
+              "$ref": "#/definitions/orderv1Order"
             }
           },
           "default": {
@@ -795,7 +795,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Order"
+              "$ref": "#/definitions/orderv1Order"
             }
           },
           "default": {
@@ -828,7 +828,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Order"
+              "$ref": "#/definitions/orderv1Order"
             }
           },
           "default": {
@@ -863,6 +863,58 @@
       }
     },
     "/payments": {
+      "get": {
+        "summary": "付款列表",
+        "operationId": "PaymentService_ListPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListPaymentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageNum",
+            "description": "页数 从0开始",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "description": "每页数据量 \u003c= 1000",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "status",
+            "description": "付款状态\n\n - PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_CONFIRMING: 确认中\n - PAYMENT_STATUS_PAID: 已付款",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PAYMENT_STATUS_UNPAID",
+              "PAYMENT_STATUS_CONFIRMING",
+              "PAYMENT_STATUS_PAID"
+            ],
+            "default": "PAYMENT_STATUS_UNPAID"
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      },
       "post": {
         "summary": "提交付款",
         "operationId": "PaymentService_CreatePayment",
@@ -888,6 +940,39 @@
             "schema": {
               "$ref": "#/definitions/v1CreatePaymentRequest"
             }
+          }
+        ],
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
+    "/payments/{id}": {
+      "get": {
+        "summary": "付款详情",
+        "operationId": "PaymentService_GetPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Payment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "付款ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -974,7 +1059,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiproductv1Product"
+              "$ref": "#/definitions/productv1Product"
             }
           },
           "default": {
@@ -1261,7 +1346,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Statement"
+              "$ref": "#/definitions/statementv1Statement"
             }
           },
           "default": {
@@ -1294,7 +1379,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Statement"
+              "$ref": "#/definitions/statementv1Statement"
             }
           },
           "default": {
@@ -1515,7 +1600,179 @@
         }
       }
     },
-    "apiproductv1Product": {
+    "apishoppingcartv1Response": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        }
+      }
+    },
+    "googlerpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "orderv1Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "订单ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "下单时间"
+        },
+        "paymentStatus": {
+          "$ref": "#/definitions/v1PaymentStatus",
+          "title": "订单支付状态"
+        },
+        "paymentTerms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "支付条款：现付、挂账"
+        },
+        "paymentOption": {
+          "$ref": "#/definitions/v1PaymentOption",
+          "title": "支付方式"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/v1InvoiceRequirement",
+          "title": "开票要求"
+        },
+        "invoiceStatus": {
+          "$ref": "#/definitions/v1InvoiceStatus",
+          "title": "开票状态"
+        },
+        "shippingStatus": {
+          "$ref": "#/definitions/v1ShippingStatus",
+          "title": "订单发货状态"
+        },
+        "status": {
+          "$ref": "#/definitions/orderv1Status",
+          "title": "订单状态"
+        },
+        "summary": {
+          "type": "string",
+          "title": "订单摘要"
+        },
+        "no": {
+          "type": "string",
+          "title": "订单号"
+        },
+        "subtotal": {
+          "type": "string",
+          "title": "商品总额"
+        },
+        "shipping": {
+          "type": "string",
+          "title": "运费"
+        },
+        "discount": {
+          "type": "string",
+          "title": "优惠金额"
+        },
+        "redPacket": {
+          "type": "string",
+          "title": "红包抵扣"
+        },
+        "tax": {
+          "type": "string",
+          "title": "税费"
+        },
+        "grandTotal": {
+          "type": "string",
+          "title": "应付金额"
+        },
+        "receiverName": {
+          "type": "string",
+          "title": "收货人"
+        },
+        "receiverPhone": {
+          "type": "string",
+          "title": "收货人手机号"
+        },
+        "receiverAddress": {
+          "type": "string",
+          "title": "收货地址"
+        },
+        "buyerRemark": {
+          "type": "string",
+          "title": "买家备注"
+        },
+        "sellerRemark": {
+          "type": "string",
+          "title": "卖家备注"
+        },
+        "itemsCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "商品种类数"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrderItem"
+          },
+          "title": "订单商品"
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrderNotification"
+          },
+          "title": "订单通知（详情时返回）"
+        },
+        "payment": {
+          "$ref": "#/definitions/v1Payment",
+          "title": "付款记录（详情时返回，无付款则不返回）"
+        },
+        "shipments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Shipment"
+          },
+          "title": "发货记录（详情时返回，无发货则不返回）"
+        }
+      }
+    },
+    "orderv1Status": {
+      "type": "string",
+      "enum": [
+        "STATUS_PENDING",
+        "STATUS_CONFIRMED",
+        "STATUS_CANCELLED",
+        "STATUS_COMPLETED"
+      ],
+      "default": "STATUS_PENDING",
+      "description": "- STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
+      "title": "订单状态"
+    },
+    "productv1Product": {
       "type": "object",
       "properties": {
         "id": {
@@ -1619,132 +1876,14 @@
         }
       }
     },
-    "apishoppingcartv1Product": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "产品id"
-        },
-        "mainImageUrl": {
-          "type": "string",
-          "title": "主图"
-        },
-        "name": {
-          "type": "string",
-          "title": "产品名称"
-        },
-        "no": {
-          "type": "string",
-          "title": "产品编号"
-        },
-        "spec": {
-          "type": "string",
-          "title": "规格"
-        },
-        "material": {
-          "type": "string",
-          "title": "材质"
-        },
-        "weight": {
-          "type": "number",
-          "format": "double",
-          "title": "重量"
-        },
-        "barcode": {
-          "type": "string",
-          "title": "69码"
-        },
-        "supplierPackingRate": {
-          "type": "integer",
-          "format": "int32",
-          "title": "供应商装箱率"
-        },
-        "internalPackingRate": {
-          "type": "integer",
-          "format": "int32",
-          "title": "内部装箱率"
-        },
-        "wholesalePrice": {
-          "type": "string",
-          "title": "批发价"
-        },
-        "dropshippingPrice": {
-          "type": "string",
-          "title": "代发价"
-        },
-        "unifiedPrice": {
-          "type": "string",
-          "title": "统一控价"
-        },
-        "labels": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "产品标签"
-        }
-      }
-    },
-    "apishoppingcartv1Response": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "error": {
-          "type": "string"
-        },
-        "details": {
-          "type": "string"
-        }
-      }
-    },
-    "googleprotobufAny": {
+    "protobufAny": {
       "type": "object",
       "properties": {
         "@type": {
-          "type": "string",
-          "description": "A URL/resource name that uniquely identifies the type of the serialized\nprotocol buffer message. This string must contain at least\none \"/\" character. The last segment of the URL's path must represent\nthe fully qualified name of the type (as in\n`path/google.protobuf.Duration`). The name should be in a canonical form\n(e.g., leading \".\" is not accepted).\n\nIn practice, teams usually precompile into the binary all types that they\nexpect it to use in the context of Any. However, for URLs which use the\nscheme `http`, `https`, or no scheme, one can optionally set up a type\nserver that maps type URLs to message definitions as follows:\n\n* If no scheme is provided, `https` is assumed.\n* An HTTP GET on the URL must yield a [google.protobuf.Type][]\n  value in binary format, or produce an error.\n* Applications are allowed to cache lookup results based on the\n  URL, or have them precompiled into a binary to avoid any\n  lookup. Therefore, binary compatibility needs to be preserved\n  on changes to types. (Use versioned type names to manage\n  breaking changes.)\n\nNote: this functionality is not currently available in the official\nprotobuf release, and it is not used for type URLs beginning with\ntype.googleapis.com. As of May 2023, there are no widely used type server\nimplementations and no plans to implement one.\n\nSchemes other than `http`, `https` (or the empty scheme) might be\nused with implementation specific semantics."
+          "type": "string"
         }
       },
-      "additionalProperties": {},
-      "description": "`Any` contains an arbitrary serialized protocol buffer message along with a\nURL that describes the type of the serialized message.\n\nProtobuf library provides support to pack/unpack Any values in the form\nof utility functions or additional generated methods of the Any type.\n\nExample 1: Pack and unpack a message in C++.\n\n    Foo foo = ...;\n    Any any;\n    any.PackFrom(foo);\n    ...\n    if (any.UnpackTo(\u0026foo)) {\n      ...\n    }\n\nExample 2: Pack and unpack a message in Java.\n\n    Foo foo = ...;\n    Any any = Any.pack(foo);\n    ...\n    if (any.is(Foo.class)) {\n      foo = any.unpack(Foo.class);\n    }\n    // or ...\n    if (any.isSameTypeAs(Foo.getDefaultInstance())) {\n      foo = any.unpack(Foo.getDefaultInstance());\n    }\n\n Example 3: Pack and unpack a message in Python.\n\n    foo = Foo(...)\n    any = Any()\n    any.Pack(foo)\n    ...\n    if any.Is(Foo.DESCRIPTOR):\n      any.Unpack(foo)\n      ...\n\n Example 4: Pack and unpack a message in Go\n\n     foo := \u0026pb.Foo{...}\n     any, err := anypb.New(foo)\n     if err != nil {\n       ...\n     }\n     ...\n     foo := \u0026pb.Foo{}\n     if err := any.UnmarshalTo(foo); err != nil {\n       ...\n     }\n\nThe pack methods provided by protobuf library will by default use\n'type.googleapis.com/full.type.name' as the type URL and the unpack\nmethods only use the fully qualified type name after the last '/'\nin the type URL, for example \"foo.bar.com/x/y.z\" will yield type\nname \"y.z\".\n\nJSON\n====\nThe JSON representation of an `Any` value uses the regular\nrepresentation of the deserialized, embedded message, with an\nadditional field `@type` which contains the type URL. Example:\n\n    package google.profile;\n    message Person {\n      string first_name = 1;\n      string last_name = 2;\n    }\n\n    {\n      \"@type\": \"type.googleapis.com/google.profile.Person\",\n      \"firstName\": \u003cstring\u003e,\n      \"lastName\": \u003cstring\u003e\n    }\n\nIf the embedded message type is well-known and has a custom JSON\nrepresentation, that representation will be embedded adding a field\n`value` which holds the custom JSON in addition to the `@type`\nfield. Example (for message [google.protobuf.Duration][]):\n\n    {\n      \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n      \"value\": \"1.212s\"\n    }"
-    },
-    "googlerpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/googleprotobufAny"
-          }
-        }
-      }
-    },
-    "orderv1Status": {
-      "type": "string",
-      "enum": [
-        "STATUS_PENDING",
-        "STATUS_CONFIRMED",
-        "STATUS_CANCELLED",
-        "STATUS_COMPLETED"
-      ],
-      "default": "STATUS_PENDING",
-      "description": "- STATUS_PENDING: 审核中\n - STATUS_CONFIRMED: 已确认\n - STATUS_CANCELLED: 已取消\n - STATUS_COMPLETED: 已完成",
-      "title": "订单状态"
+      "additionalProperties": {}
     },
     "shoppingcartv1ShoppingCart": {
       "type": "object",
@@ -1758,10 +1897,6 @@
           "type": "string",
           "title": "加入时间"
         },
-        "product": {
-          "$ref": "#/definitions/apishoppingcartv1Product",
-          "title": "产品"
-        },
         "quantity": {
           "type": "integer",
           "format": "int32",
@@ -1770,6 +1905,115 @@
         "amountTotal": {
           "type": "string",
           "title": "合计金额"
+        },
+        "product": {
+          "$ref": "#/definitions/productv1Product",
+          "title": "产品"
+        }
+      }
+    },
+    "statementv1Statement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "对账单ID"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "title": "更新时间"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64",
+          "title": "用户id"
+        },
+        "buyerConfirmTime": {
+          "type": "string",
+          "title": "买方确认时间"
+        },
+        "financeConfirmTime": {
+          "type": "string",
+          "title": "财务确认时间"
+        },
+        "status": {
+          "$ref": "#/definitions/v1StatementStatus",
+          "title": "状态 1:待买家确认 2：财务待确认 3：已确认"
+        },
+        "paymentStatus": {
+          "$ref": "#/definitions/v1PaymentStatus",
+          "title": "订单支付状态: 0-待付款 1-确认中 2-已付款 3-挂账中"
+        },
+        "paymentOption": {
+          "$ref": "#/definitions/v1PaymentOption",
+          "title": "支付方式: 0-无 1-线下微信转账 2-线下支付宝转账 3-线下对公支付"
+        },
+        "paymentId": {
+          "type": "string",
+          "format": "int64",
+          "title": "支付记录id"
+        },
+        "invoiceRequirement": {
+          "$ref": "#/definitions/v1InvoiceRequirement",
+          "title": "开票要求: 0-不开票 1-普票 2-专票"
+        },
+        "invoiceStatus": {
+          "$ref": "#/definitions/v1InvoiceStatus",
+          "title": "开票状态: 0-未开票 1-未开票 2-已开票"
+        },
+        "no": {
+          "type": "string",
+          "title": "对账单号"
+        },
+        "summary": {
+          "type": "string",
+          "title": "摘要"
+        },
+        "orderCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "订单数"
+        },
+        "subtotal": {
+          "type": "string",
+          "title": "汇总金额（小计）"
+        },
+        "tax": {
+          "type": "string",
+          "title": "税费"
+        },
+        "shipping": {
+          "type": "string",
+          "title": "运费"
+        },
+        "discount": {
+          "type": "string",
+          "title": "优惠金额"
+        },
+        "grandTotal": {
+          "type": "string",
+          "title": "最终总额"
+        },
+        "balanceDeduction": {
+          "type": "string",
+          "title": "余额抵扣"
+        },
+        "amountDue": {
+          "type": "string",
+          "title": "应付金额"
+        },
+        "remark": {
+          "type": "string",
+          "title": "备注"
+        },
+        "payment": {
+          "$ref": "#/definitions/v1Payment",
+          "title": "付款记录（详情时返回，无付款则不返回）"
         }
       }
     },
@@ -2291,16 +2535,62 @@
     "v1CreatePaymentRequest": {
       "type": "object",
       "properties": {
-        "orderId": {
+        "order": {
+          "$ref": "#/definitions/v1CreatePaymentRequestOrder"
+        },
+        "statement": {
+          "$ref": "#/definitions/v1CreatePaymentRequestStatement"
+        },
+        "option": {
+          "$ref": "#/definitions/v1PaymentOption",
+          "title": "付款方式"
+        },
+        "terms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "付款条款"
+        },
+        "voucherUrl": {
           "type": "string",
-          "format": "int64",
+          "title": "付款凭证图片（余额支付时不需要截图）",
           "required": [
-            "orderId"
+            "voucherUrl"
           ]
         }
       },
       "required": [
-        "orderId"
+        "voucherUrl"
+      ]
+    },
+    "v1CreatePaymentRequestOrder": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "订单ID(二选一)",
+          "required": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "v1CreatePaymentRequestStatement": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "对账单ID(二选一)",
+          "required": [
+            "id"
+          ]
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "v1CreateShoppingCartRequest": {
@@ -2403,7 +2693,18 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1Order"
+            "$ref": "#/definitions/orderv1Order"
+          }
+        }
+      }
+    },
+    "v1ListPaymentReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Payment"
           }
         }
       }
@@ -2414,7 +2715,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiproductv1Product"
+            "$ref": "#/definitions/productv1Product"
           }
         }
       }
@@ -2436,132 +2737,8 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/v1Statement"
+            "$ref": "#/definitions/statementv1Statement"
           }
-        }
-      }
-    },
-    "v1Order": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "订单ID"
-        },
-        "createTime": {
-          "type": "string",
-          "title": "下单时间"
-        },
-        "paymentStatus": {
-          "$ref": "#/definitions/v1PaymentStatus",
-          "title": "订单支付状态"
-        },
-        "paymentTerms": {
-          "$ref": "#/definitions/v1PaymentTerms",
-          "title": "支付条款：现付、挂账"
-        },
-        "paymentOption": {
-          "$ref": "#/definitions/v1PaymentOption",
-          "title": "支付方式"
-        },
-        "invoiceRequirement": {
-          "$ref": "#/definitions/v1InvoiceRequirement",
-          "title": "开票要求"
-        },
-        "invoiceStatus": {
-          "$ref": "#/definitions/v1InvoiceStatus",
-          "title": "开票状态"
-        },
-        "shippingStatus": {
-          "$ref": "#/definitions/v1ShippingStatus",
-          "title": "订单发货状态"
-        },
-        "status": {
-          "$ref": "#/definitions/orderv1Status",
-          "title": "订单状态"
-        },
-        "summary": {
-          "type": "string",
-          "title": "订单摘要"
-        },
-        "no": {
-          "type": "string",
-          "title": "订单号"
-        },
-        "subtotal": {
-          "type": "string",
-          "title": "商品总额"
-        },
-        "shipping": {
-          "type": "string",
-          "title": "运费"
-        },
-        "discount": {
-          "type": "string",
-          "title": "优惠金额"
-        },
-        "redPacket": {
-          "type": "string",
-          "title": "红包抵扣"
-        },
-        "tax": {
-          "type": "string",
-          "title": "税费"
-        },
-        "grandTotal": {
-          "type": "string",
-          "title": "应付金额"
-        },
-        "receiverName": {
-          "type": "string",
-          "title": "收货人"
-        },
-        "receiverPhone": {
-          "type": "string",
-          "title": "收货人手机号"
-        },
-        "receiverAddress": {
-          "type": "string",
-          "title": "收货地址"
-        },
-        "buyerRemark": {
-          "type": "string",
-          "title": "买家备注"
-        },
-        "sellerRemark": {
-          "type": "string",
-          "title": "卖家备注"
-        },
-        "itemsCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "商品种类数"
-        },
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1OrderItem"
-          },
-          "title": "订单商品"
-        },
-        "notifications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1OrderNotification"
-          },
-          "title": "订单通知（详情时返回）"
-        },
-        "payment": {
-          "$ref": "#/definitions/v1Payment",
-          "title": "付款记录（详情时返回，无付款则不返回）"
-        },
-        "shipments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1Shipment"
-          },
-          "title": "发货记录（详情时返回，无发货则不返回）"
         }
       }
     },
@@ -2713,10 +2890,11 @@
         "PAYMENT_OPTION_NONE",
         "PAYMENT_OPTION_OFFLINE_WECHAT",
         "PAYMENT_OPTION_OFFLINE_ALIPAY",
-        "PAYMENT_OPTION_OFFLINE_ENTERPRISE"
+        "PAYMENT_OPTION_OFFLINE_ENTERPRISE",
+        "PAYMENT_OPTION_BALANCE"
       ],
       "default": "PAYMENT_OPTION_NONE",
-      "title": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付"
+      "title": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付\n - PAYMENT_OPTION_BALANCE: 余额支付"
     },
     "v1PaymentStatus": {
       "type": "string",
@@ -2791,111 +2969,6 @@
       ],
       "default": "SHIPPING_STATUS_UNDELIVERED",
       "title": "- SHIPPING_STATUS_UNDELIVERED: 未发货\n - SHIPPING_STATUS_PARTIALLY_DELIVERED: 部分发货\n - SHIPPING_STATUS_DELIVERED: 已发货"
-    },
-    "v1Statement": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "对账单ID"
-        },
-        "createTime": {
-          "type": "string",
-          "title": "创建时间"
-        },
-        "updateTime": {
-          "type": "string",
-          "title": "更新时间"
-        },
-        "userId": {
-          "type": "string",
-          "format": "int64",
-          "title": "用户id"
-        },
-        "buyerConfirmTime": {
-          "type": "string",
-          "title": "买方确认时间"
-        },
-        "financeConfirmTime": {
-          "type": "string",
-          "title": "财务确认时间"
-        },
-        "status": {
-          "$ref": "#/definitions/v1StatementStatus",
-          "title": "状态 1:待买家确认 2：财务待确认 3：已确认"
-        },
-        "paymentStatus": {
-          "$ref": "#/definitions/v1PaymentStatus",
-          "title": "订单支付状态: 0-待付款 1-确认中 2-已付款 3-挂账中"
-        },
-        "paymentOption": {
-          "$ref": "#/definitions/v1PaymentOption",
-          "title": "支付方式: 0-无 1-线下微信转账 2-线下支付宝转账 3-线下对公支付"
-        },
-        "paymentId": {
-          "type": "string",
-          "format": "int64",
-          "title": "支付记录id"
-        },
-        "invoiceRequirement": {
-          "$ref": "#/definitions/v1InvoiceRequirement",
-          "title": "开票要求: 0-不开票 1-普票 2-专票"
-        },
-        "invoiceStatus": {
-          "$ref": "#/definitions/v1InvoiceStatus",
-          "title": "开票状态: 0-未开票 1-未开票 2-已开票"
-        },
-        "no": {
-          "type": "string",
-          "title": "对账单号"
-        },
-        "summary": {
-          "type": "string",
-          "title": "摘要"
-        },
-        "orderCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "订单数"
-        },
-        "subtotal": {
-          "type": "string",
-          "title": "汇总金额（小计）"
-        },
-        "tax": {
-          "type": "string",
-          "title": "税费"
-        },
-        "shipping": {
-          "type": "string",
-          "title": "运费"
-        },
-        "discount": {
-          "type": "string",
-          "title": "优惠金额"
-        },
-        "grandTotal": {
-          "type": "string",
-          "title": "最终总额"
-        },
-        "balanceDeduction": {
-          "type": "string",
-          "title": "余额抵扣"
-        },
-        "amountDue": {
-          "type": "string",
-          "title": "应付金额"
-        },
-        "remark": {
-          "type": "string",
-          "title": "备注"
-        },
-        "payment": {
-          "$ref": "#/definitions/v1Payment",
-          "title": "付款记录（详情时返回，无付款则不返回）"
-        }
-      }
     },
     "v1StatementStatus": {
       "type": "string",
