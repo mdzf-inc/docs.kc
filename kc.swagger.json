@@ -2713,7 +2713,7 @@
           "type": "string",
           "title": "优惠金额"
         },
-        "redPacketDeduction": {
+        "redPacket": {
           "type": "string",
           "title": "红包抵扣"
         },
