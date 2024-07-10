@@ -2542,10 +2542,12 @@
           "title": "备注 【0- 100】"
         },
         "shoppingCart": {
-          "$ref": "#/definitions/v1CreateOrderRequestShoppingCart"
+          "$ref": "#/definitions/v1CreateOrderRequestShoppingCart",
+          "title": "如果是购物车下单，设置购物车ID；shoppingCart和product二选一，不可同时设置"
         },
         "product": {
-          "$ref": "#/definitions/v1CreateOrderRequestProduct"
+          "$ref": "#/definitions/v1CreateOrderRequestProduct",
+          "title": "如果是单个商品下单，设置商品ID；shoppingCart和product二选一，不可同时设置"
         }
       },
       "required": [
