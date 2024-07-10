@@ -2627,7 +2627,8 @@
         "INVOICE_REQUIREMENT_SPECIAL"
       ],
       "default": "INVOICE_REQUIREMENT_NONE",
-      "title": "- INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票"
+      "description": "- INVOICE_REQUIREMENT_NONE: 不开票\n - INVOICE_REQUIREMENT_NORMAL: 普票\n - INVOICE_REQUIREMENT_SPECIAL: 专票",
+      "title": "发票要求"
     },
     "v1InvoiceStatus": {
       "type": "string",
@@ -2894,7 +2895,8 @@
         "PAYMENT_OPTION_BALANCE"
       ],
       "default": "PAYMENT_OPTION_NONE",
-      "title": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付\n - PAYMENT_OPTION_BALANCE: 余额支付"
+      "description": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付\n - PAYMENT_OPTION_BALANCE: 余额支付",
+      "title": "付款方式"
     },
     "v1PaymentStatus": {
       "type": "string",
@@ -2904,7 +2906,8 @@
         "PAYMENT_STATUS_PAID"
       ],
       "default": "PAYMENT_STATUS_UNPAID",
-      "title": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_CONFIRMING: 确认中\n - PAYMENT_STATUS_PAID: 已付款"
+      "description": "- PAYMENT_STATUS_UNPAID: 待付款\n - PAYMENT_STATUS_CONFIRMING: 确认中\n - PAYMENT_STATUS_PAID: 已付款",
+      "title": "付款状态"
     },
     "v1PaymentTerms": {
       "type": "string",
@@ -2913,7 +2916,8 @@
         "PAYMENT_TERMS_CREDIT"
       ],
       "default": "PAYMENT_TERMS_CASH",
-      "title": "- PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账"
+      "description": "- PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账",
+      "title": "付款条款"
     },
     "v1SendSMSCodeRequest": {
       "type": "object",
