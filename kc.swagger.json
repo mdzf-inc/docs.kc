@@ -825,7 +825,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiorderv1Response"
+              "$ref": "#/definitions/v1Order"
             }
           },
           "default": {
@@ -2505,10 +2505,6 @@
         "paymentTerms": {
           "$ref": "#/definitions/apiorderv1PaymentTerms",
           "title": "支付条款：现付、挂账（用户信息接口中有是否允许挂账）"
-        },
-        "paymentOption": {
-          "$ref": "#/definitions/apiorderv1PaymentOption",
-          "title": "支付方式"
         },
         "buyerRemark": {
           "type": "string",
