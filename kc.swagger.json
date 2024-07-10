@@ -2286,7 +2286,7 @@
         },
         "phone": {
           "type": "string",
-          "title": "手机号",
+          "title": "手机号^1[3-9]\\\\d{9}$",
           "required": [
             "phone"
           ]
@@ -2517,7 +2517,7 @@
         },
         "receiverPhone": {
           "type": "string",
-          "title": "收货人手机号",
+          "title": "收货人手机号^1[3-9]\\\\d{9}$",
           "required": [
             "receiverPhone"
           ]
