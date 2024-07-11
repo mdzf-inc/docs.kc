@@ -112,15 +112,16 @@
           },
           {
             "name": "accountType",
-            "description": "账单类型\n\n - BILL_ACCOUNT_TYPE_RED_PACKET: 红包账户\n - BILL_ACCOUNT_TYPE_BALANCE: 余额账户",
+            "description": "账单类型\n\n - BILL_ACCOUNT_TYPE_UNKNOWN: 未知\n - BILL_ACCOUNT_TYPE_RED_PACKET: 红包账户\n - BILL_ACCOUNT_TYPE_BALANCE: 余额账户",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
+              "BILL_ACCOUNT_TYPE_UNKNOWN",
               "BILL_ACCOUNT_TYPE_RED_PACKET",
               "BILL_ACCOUNT_TYPE_BALANCE"
             ],
-            "default": "BILL_ACCOUNT_TYPE_RED_PACKET"
+            "default": "BILL_ACCOUNT_TYPE_UNKNOWN"
           }
         ],
         "tags": [
@@ -2163,17 +2164,17 @@
           "type": "string",
           "title": "优惠金额"
         },
-        "grandTotal": {
-          "type": "string",
-          "title": "最终总额"
-        },
-        "balanceDeduction": {
-          "type": "string",
-          "title": "余额抵扣"
-        },
-        "amountDue": {
+        "payable": {
           "type": "string",
           "title": "应付金额"
+        },
+        "redPacket": {
+          "type": "string",
+          "title": "红包抵扣"
+        },
+        "paid": {
+          "type": "string",
+          "title": "实付金额"
         },
         "remark": {
           "type": "string",
@@ -2290,15 +2291,11 @@
         "id": {
           "type": "string",
           "format": "int64",
-          "title": "账单id"
+          "title": "账单id(前端需要显示，并可复制)"
         },
         "createTime": {
           "type": "string",
           "title": "账单时间"
-        },
-        "no": {
-          "type": "string",
-          "title": "账单号"
         },
         "accountType": {
           "$ref": "#/definitions/v1BillAccountType",
@@ -2307,11 +2304,6 @@
         "amount": {
           "type": "string",
           "title": "账单金额"
-        },
-        "direction": {
-          "type": "integer",
-          "format": "int32",
-          "title": "收支方向 1-收入 -1支出"
         },
         "summary": {
           "type": "string",
@@ -2326,11 +2318,12 @@
     "v1BillAccountType": {
       "type": "string",
       "enum": [
+        "BILL_ACCOUNT_TYPE_UNKNOWN",
         "BILL_ACCOUNT_TYPE_RED_PACKET",
         "BILL_ACCOUNT_TYPE_BALANCE"
       ],
-      "default": "BILL_ACCOUNT_TYPE_RED_PACKET",
-      "title": "- BILL_ACCOUNT_TYPE_RED_PACKET: 红包账户\n - BILL_ACCOUNT_TYPE_BALANCE: 余额账户"
+      "default": "BILL_ACCOUNT_TYPE_UNKNOWN",
+      "title": "- BILL_ACCOUNT_TYPE_UNKNOWN: 未知\n - BILL_ACCOUNT_TYPE_RED_PACKET: 红包账户\n - BILL_ACCOUNT_TYPE_BALANCE: 余额账户"
     },
     "v1CancelFavoriteProductRequest": {
       "type": "object",
@@ -3025,7 +3018,7 @@
         "id": {
           "type": "string",
           "format": "int64",
-          "title": "付款ID"
+          "title": "付款ID(前端需要显示，并可复制)"
         },
         "createTime": {
           "type": "string",
@@ -3038,10 +3031,6 @@
         "option": {
           "$ref": "#/definitions/v1PaymentOption",
           "title": "付款方式"
-        },
-        "terms": {
-          "$ref": "#/definitions/v1PaymentTerms",
-          "title": "支付条款"
         },
         "recipient": {
           "type": "string",
@@ -3059,10 +3048,6 @@
         "fromType": {
           "$ref": "#/definitions/v1PaymentFromType",
           "title": "来源"
-        },
-        "no": {
-          "type": "string",
-          "title": "付款编号"
         },
         "summary": {
           "type": "string",
