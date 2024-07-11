@@ -2179,6 +2179,10 @@
           "type": "string",
           "title": "最新更新时间"
         },
+        "isSupportCredit": {
+          "type": "boolean",
+          "title": "是否支持挂账"
+        },
         "balance": {
           "type": "string",
           "title": "余额"
@@ -3236,10 +3240,9 @@
           },
           "title": "合作方式： 1:集中采购 2:一件代发"
         },
-        "paymentTerms": {
-          "type": "integer",
-          "format": "int32",
-          "title": "支付条款 0：未设置 1:现结 2:账期"
+        "isSupportCredit": {
+          "type": "boolean",
+          "title": "是否支持账期"
         },
         "creditLimit": {
           "type": "string",
