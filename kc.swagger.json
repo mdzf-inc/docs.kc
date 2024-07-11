@@ -1059,7 +1059,7 @@
         ]
       },
       "post": {
-        "summary": "提交付款",
+        "summary": "提交付款（先实时读取账户金额）",
         "operationId": "PaymentService_CreatePayment",
         "responses": {
           "200": {
@@ -2693,21 +2693,15 @@
           "$ref": "#/definitions/v1PaymentOption",
           "title": "付款方式"
         },
-        "terms": {
-          "$ref": "#/definitions/v1PaymentTerms",
-          "title": "付款条款"
+        "userRedPacket": {
+          "type": "boolean",
+          "title": "使用账户红包金额抵扣(红包必须一次性抵扣)"
         },
         "voucherUrl": {
           "type": "string",
-          "title": "付款凭证图片（余额支付时不需要截图）",
-          "required": [
-            "voucherUrl"
-          ]
+          "title": "付款凭证图片（余额支付时不需要截图）"
         }
-      },
-      "required": [
-        "voucherUrl"
-      ]
+      }
     },
     "v1CreatePaymentRequestOrder": {
       "type": "object",
