@@ -1857,9 +1857,13 @@
           "type": "string",
           "title": "税费"
         },
-        "grandTotal": {
+        "payable": {
           "type": "string",
           "title": "应付金额"
+        },
+        "paid": {
+          "type": "string",
+          "title": "实付金额"
         },
         "receiverName": {
           "type": "string",
@@ -2183,7 +2187,7 @@
           "type": "string",
           "title": "红包"
         },
-        "amountDue": {
+        "payable": {
           "type": "string",
           "title": "应付账款"
         },
@@ -3020,17 +3024,9 @@
           "$ref": "#/definitions/v1PaymentTerms",
           "title": "支付条款"
         },
-        "no": {
+        "recipient": {
           "type": "string",
-          "title": "付款编号"
-        },
-        "name": {
-          "type": "string",
-          "title": "名称"
-        },
-        "amount": {
-          "type": "string",
-          "title": "付款金额"
+          "title": "收款人"
         },
         "orderCount": {
           "type": "integer",
@@ -3041,9 +3037,25 @@
           "type": "string",
           "title": "付款备注"
         },
-        "recipient": {
+        "no": {
           "type": "string",
-          "title": "收款人"
+          "title": "付款编号"
+        },
+        "summary": {
+          "type": "string",
+          "title": "摘要"
+        },
+        "payable": {
+          "type": "string",
+          "title": "应付金额"
+        },
+        "redPacket": {
+          "type": "string",
+          "title": "红包"
+        },
+        "paid": {
+          "type": "string",
+          "title": "实付金额"
         },
         "voucherUrl": {
           "type": "string",
@@ -3232,7 +3244,7 @@
           "type": "string",
           "title": "红包"
         },
-        "amountDue": {
+        "payable": {
           "type": "string",
           "title": "应付账款"
         }
