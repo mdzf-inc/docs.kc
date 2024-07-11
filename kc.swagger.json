@@ -2688,6 +2688,11 @@
           "type": "boolean",
           "title": "使用账户红包金额抵扣(红包必须一次性抵扣)"
         },
+        "invoiceAccountId": {
+          "type": "string",
+          "format": "int64",
+          "title": "发票账户ID（无票要求 不需要传）"
+        },
         "voucherUrl": {
           "type": "string",
           "title": "付款凭证图片（余额支付时不需要截图,且不要传该字段）"
