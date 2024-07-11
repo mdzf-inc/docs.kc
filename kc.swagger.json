@@ -3037,6 +3037,10 @@
           "type": "string",
           "title": "付款备注"
         },
+        "fromType": {
+          "$ref": "#/definitions/v1PaymentFromType",
+          "title": "来源"
+        },
         "no": {
           "type": "string",
           "title": "付款编号"
@@ -3078,6 +3082,17 @@
           "title": "发票连接（如有，使用浏览器打开即可）"
         }
       }
+    },
+    "v1PaymentFromType": {
+      "type": "string",
+      "enum": [
+        "PAYMENT_FROM_TYPE_UNDEFINED",
+        "PAYMENT_FROM_TYPE_ORDER",
+        "PAYMENT_FROM_TYPE_STATEMENT"
+      ],
+      "default": "PAYMENT_FROM_TYPE_UNDEFINED",
+      "description": "- PAYMENT_FROM_TYPE_UNDEFINED: 未定义\n - PAYMENT_FROM_TYPE_ORDER: 订单\n - PAYMENT_FROM_TYPE_STATEMENT: 对账单",
+      "title": "来源"
     },
     "v1PaymentOption": {
       "type": "string",
