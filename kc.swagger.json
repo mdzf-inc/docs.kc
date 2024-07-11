@@ -1569,6 +1569,37 @@
     }
   },
   "definitions": {
+    "CreatePaymentRequestBalance": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "title": "账户余额传入",
+          "required": [
+            "amount"
+          ]
+        }
+      },
+      "required": [
+        "amount"
+      ]
+    },
+    "CreatePaymentRequestOffline": {
+      "type": "object",
+      "properties": {
+        "voucherUrl": {
+          "type": "string",
+          "title": "支付凭证",
+          "required": [
+            "voucherUrl"
+          ]
+        }
+      },
+      "required": [
+        "voucherUrl"
+      ]
+    },
     "CreateShoppingCartRequestItem": {
       "type": "object",
       "properties": {
@@ -2680,22 +2711,20 @@
         "statement": {
           "$ref": "#/definitions/v1CreatePaymentRequestStatement"
         },
-        "option": {
-          "$ref": "#/definitions/v1PaymentOption",
-          "title": "付款方式"
+        "offline": {
+          "$ref": "#/definitions/CreatePaymentRequestOffline"
+        },
+        "balance": {
+          "$ref": "#/definitions/CreatePaymentRequestBalance"
         },
         "useRedPacket": {
           "type": "boolean",
-          "title": "使用账户红包金额抵扣(红包必须一次性抵扣)"
+          "title": "是否使用红包"
         },
         "invoiceAccountId": {
           "type": "string",
           "format": "int64",
           "title": "发票账户ID（无票要求 不需要传）"
-        },
-        "voucherUrl": {
-          "type": "string",
-          "title": "付款凭证图片（余额支付时不需要截图,且不要传该字段）"
         }
       }
     },
@@ -3088,13 +3117,11 @@
       "type": "string",
       "enum": [
         "PAYMENT_OPTION_NONE",
-        "PAYMENT_OPTION_OFFLINE_WECHAT",
-        "PAYMENT_OPTION_OFFLINE_ALIPAY",
-        "PAYMENT_OPTION_OFFLINE_ENTERPRISE",
-        "PAYMENT_OPTION_BALANCE"
+        "PAYMENT_OPTION_BALANCE",
+        "PAYMENT_OPTION_OFFLINE"
       ],
       "default": "PAYMENT_OPTION_NONE",
-      "description": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_OFFLINE_WECHAT: 线下微信转账\n - PAYMENT_OPTION_OFFLINE_ALIPAY: 线下支付宝转账\n - PAYMENT_OPTION_OFFLINE_ENTERPRISE: 线下对公支付\n - PAYMENT_OPTION_BALANCE: 余额支付",
+      "description": "- PAYMENT_OPTION_NONE: 无\n - PAYMENT_OPTION_BALANCE: 余额支付\n - PAYMENT_OPTION_OFFLINE: 线下支付",
       "title": "付款方式"
     },
     "v1PaymentStatus": {
