@@ -1219,6 +1219,29 @@
         ]
       }
     },
+    "/recipient-accounts": {
+      "get": {
+        "summary": "获取收款账户信息(需要让客户知道转到哪个账户，账户信息可以一键复制，图片可以保存)",
+        "operationId": "PaymentService_ListRecipientAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListRecipientAccountReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "PaymentService"
+        ]
+      }
+    },
     "/regions": {
       "get": {
         "summary": "获取全国省市区信息",
@@ -2911,6 +2934,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/productv1Product"
+          }
+        }
+      }
+    },
+    "v1ListRecipientAccountReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apipaymentv1InvoiceAccount"
           }
         }
       }
