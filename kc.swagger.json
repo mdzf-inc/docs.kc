@@ -2697,7 +2697,7 @@
           "$ref": "#/definitions/v1PaymentOption",
           "title": "付款方式"
         },
-        "userRedPacket": {
+        "useRedPacket": {
           "type": "boolean",
           "title": "使用账户红包金额抵扣(红包必须一次性抵扣)"
         },
