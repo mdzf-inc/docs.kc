@@ -2944,7 +2944,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apipaymentv1InvoiceAccount"
+            "$ref": "#/definitions/v1RecipientAccount"
           }
         }
       }
@@ -3158,6 +3158,46 @@
       "default": "PAYMENT_TERMS_CASH",
       "description": "- PAYMENT_TERMS_CASH: 现付\n - PAYMENT_TERMS_CREDIT: 挂账",
       "title": "付款条款"
+    },
+    "v1RecipientAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "收款账户ID"
+        },
+        "type": {
+          "$ref": "#/definitions/v1RecipientAccountType",
+          "title": "收款账户类型"
+        },
+        "name": {
+          "type": "string",
+          "title": "收款账户名称"
+        },
+        "bank": {
+          "type": "string",
+          "title": "开户行"
+        },
+        "bankNo": {
+          "type": "string",
+          "title": "银行账号"
+        },
+        "qrcodeUrl": {
+          "type": "string",
+          "title": "收款码"
+        }
+      }
+    },
+    "v1RecipientAccountType": {
+      "type": "string",
+      "enum": [
+        "RECIPIENT_ACCOUNT_TYPE_UNDEFINED",
+        "RECIPIENT_ACCOUNT_TYPE_QRCODE",
+        "RECIPIENT_ACCOUNT_TYPE_CORPORATE_BANK"
+      ],
+      "default": "RECIPIENT_ACCOUNT_TYPE_UNDEFINED",
+      "title": "- RECIPIENT_ACCOUNT_TYPE_UNDEFINED: 未定义(不可用)\n - RECIPIENT_ACCOUNT_TYPE_QRCODE: 收款码\n - RECIPIENT_ACCOUNT_TYPE_CORPORATE_BANK: 企业银行"
     },
     "v1SendSMSCodeRequest": {
       "type": "object",
