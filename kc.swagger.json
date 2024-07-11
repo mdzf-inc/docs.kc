@@ -3032,16 +3032,7 @@
           "$ref": "#/definitions/v1PaymentOption",
           "title": "付款方式"
         },
-        "recipient": {
-          "type": "string",
-          "title": "收款人"
-        },
-        "orderCount": {
-          "type": "integer",
-          "format": "int32",
-          "title": "订单数量"
-        },
-        "note": {
+        "remark": {
           "type": "string",
           "title": "付款备注"
         },
