@@ -1260,41 +1260,6 @@
           "ShoppingCartService"
         ]
       },
-      "delete": {
-        "summary": "删除购物车商品",
-        "operationId": "ShoppingCartService_DeleteShoppingCart",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apishoppingcartv1Response"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "ids",
-            "description": "购物车ID数组 1-1000个",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "int64"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "tags": [
-          "ShoppingCartService"
-        ]
-      },
       "post": {
         "summary": "加入购物车",
         "operationId": "ShoppingCartService_CreateShoppingCart",
@@ -1319,6 +1284,39 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/v1CreateShoppingCartRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ShoppingCartService"
+        ]
+      }
+    },
+    "/shopping-carts/actions/delete": {
+      "post": {
+        "summary": "删除购物车商品",
+        "operationId": "ShoppingCartService_DeleteShoppingCart",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apishoppingcartv1Response"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeleteShoppingCartRequest"
             }
           }
         ],
@@ -2730,6 +2728,25 @@
       },
       "required": [
         "items"
+      ]
+    },
+    "v1DeleteShoppingCartRequest": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          },
+          "title": "购物车ID数组 1-1000个",
+          "required": [
+            "ids"
+          ]
+        }
+      },
+      "required": [
+        "ids"
       ]
     },
     "v1GetRegionReply": {
