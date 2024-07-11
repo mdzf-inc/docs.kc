@@ -52,15 +52,38 @@
     "application/json"
   ],
   "paths": {
-    "/aacounts/me/bills": {
+    "/accounts/me": {
       "get": {
-        "summary": "获取账户账单",
-        "operationId": "AccountService_ListAccountBill",
+        "summary": "获取账户信息",
+        "operationId": "AccountService_GetAccount",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListAccountBillReply"
+              "$ref": "#/definitions/v1Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "AccountService"
+        ]
+      }
+    },
+    "/accounts/me/bills": {
+      "get": {
+        "summary": "获取账单",
+        "operationId": "AccountService_ListBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListBillReply"
             }
           },
           "default": {
@@ -86,31 +109,20 @@
             "required": true,
             "type": "string",
             "format": "int64"
+          },
+          {
+            "name": "accountType",
+            "description": "账单类型\n\n - BILL_ACCOUNT_TYPE_RED_PACKET: 红包账户\n - BILL_ACCOUNT_TYPE_BALANCE: 余额账户",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BILL_ACCOUNT_TYPE_RED_PACKET",
+              "BILL_ACCOUNT_TYPE_BALANCE"
+            ],
+            "default": "BILL_ACCOUNT_TYPE_RED_PACKET"
           }
         ],
-        "tags": [
-          "AccountService"
-        ]
-      }
-    },
-    "/accounts/me": {
-      "get": {
-        "summary": "获取账户信息",
-        "operationId": "AccountService_GetAccount",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1Account"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
         "tags": [
           "AccountService"
         ]
@@ -2185,41 +2197,6 @@
         }
       }
     },
-    "v1AccountBill": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "账单id"
-        },
-        "createTime": {
-          "type": "string",
-          "title": "账单时间"
-        },
-        "no": {
-          "type": "string",
-          "title": "账单号"
-        },
-        "amount": {
-          "type": "string",
-          "title": "账单金额"
-        },
-        "direction": {
-          "type": "integer",
-          "format": "int32",
-          "title": "收支方向 1-收入 -1支出"
-        },
-        "summary": {
-          "type": "string",
-          "title": "账单摘要"
-        },
-        "balance": {
-          "type": "string",
-          "title": "余额"
-        }
-      }
-    },
     "v1Address": {
       "type": "object",
       "properties": {
@@ -2280,6 +2257,54 @@
           "title": "创建时间 毫秒时间戳"
         }
       }
+    },
+    "v1Bill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "账单id"
+        },
+        "createTime": {
+          "type": "string",
+          "title": "账单时间"
+        },
+        "no": {
+          "type": "string",
+          "title": "账单号"
+        },
+        "accountType": {
+          "$ref": "#/definitions/v1BillAccountType",
+          "title": "账单类型"
+        },
+        "amount": {
+          "type": "string",
+          "title": "账单金额"
+        },
+        "direction": {
+          "type": "integer",
+          "format": "int32",
+          "title": "收支方向 1-收入 -1支出"
+        },
+        "summary": {
+          "type": "string",
+          "title": "账单摘要"
+        },
+        "balance": {
+          "type": "string",
+          "title": "余额"
+        }
+      }
+    },
+    "v1BillAccountType": {
+      "type": "string",
+      "enum": [
+        "BILL_ACCOUNT_TYPE_RED_PACKET",
+        "BILL_ACCOUNT_TYPE_BALANCE"
+      ],
+      "default": "BILL_ACCOUNT_TYPE_RED_PACKET",
+      "title": "- BILL_ACCOUNT_TYPE_RED_PACKET: 红包账户\n - BILL_ACCOUNT_TYPE_BALANCE: 余额账户"
     },
     "v1CancelFavoriteProductRequest": {
       "type": "object",
@@ -2779,18 +2804,6 @@
       "description": "- INVOICE_STATUS_NONE: 不开票\n - INVOICE_STATUS_UNINVOICED: 未开票\n - INVOICE_STATUS_INVOICED: 已开票",
       "title": "开票状态"
     },
-    "v1ListAccountBillReply": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1AccountBill"
-          },
-          "title": "账单列表"
-        }
-      }
-    },
     "v1ListAddressReply": {
       "type": "object",
       "properties": {
@@ -2800,6 +2813,18 @@
             "$ref": "#/definitions/v1Address"
           },
           "title": "地址列表"
+        }
+      }
+    },
+    "v1ListBillReply": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Bill"
+          },
+          "title": "账单列表"
         }
       }
     },
