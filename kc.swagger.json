@@ -2718,6 +2718,10 @@
           "type": "string",
           "format": "int64",
           "title": "发票账户ID（无票要求 不需要传）"
+        },
+        "remark": {
+          "type": "string",
+          "title": "付款备注 100字以内"
         }
       }
     },
