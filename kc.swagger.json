@@ -710,6 +710,7 @@
     },
     "/notifications": {
       "get": {
+        "summary": "通知列表",
         "operationId": "NotificationService_ListNotification",
         "responses": {
           "200": {
@@ -756,6 +757,7 @@
     },
     "/notifications/{id}": {
       "delete": {
+        "summary": "删除通知",
         "operationId": "NotificationService_DeleteNotification",
         "responses": {
           "200": {
@@ -786,6 +788,7 @@
         ]
       },
       "put": {
+        "summary": "设置通知已读状态",
         "operationId": "NotificationService_UpdateNotification",
         "responses": {
           "200": {
@@ -804,7 +807,7 @@
         "parameters": [
           {
             "name": "id",
-            "description": "通知ID",
+            "description": "通知ID（传0表示全部设置已读）",
             "in": "path",
             "required": true,
             "type": "string",
