@@ -794,7 +794,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1Notification"
+              "$ref": "#/definitions/apinotificationv1Response"
             }
           },
           "default": {
@@ -818,19 +818,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "isRead": {
-                  "type": "boolean",
-                  "title": "是否已读",
-                  "required": [
-                    "isRead"
-                  ]
-                }
-              },
-              "required": [
-                "isRead"
-              ]
+              "type": "object"
             }
           }
         ],
