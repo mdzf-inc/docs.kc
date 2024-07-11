@@ -1809,10 +1809,6 @@
           "$ref": "#/definitions/v1PaymentTerms",
           "title": "支付条款：现付、挂账"
         },
-        "paymentOption": {
-          "$ref": "#/definitions/v1PaymentOption",
-          "title": "支付方式"
-        },
         "invoiceRequirement": {
           "$ref": "#/definitions/v1InvoiceRequirement",
           "title": "开票要求"
