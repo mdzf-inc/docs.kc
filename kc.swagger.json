@@ -99,16 +99,16 @@
             "description": "页数 从0开始",
             "in": "query",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "pageSize",
             "description": "每页数据量 \u003c= 1000",
             "in": "query",
             "required": true,
-            "type": "string",
-            "format": "int64"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "accountType",
