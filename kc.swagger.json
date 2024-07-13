@@ -1232,12 +1232,12 @@
     "/register": {
       "post": {
         "summary": "注册",
-        "operationId": "UserService_Register",
+        "operationId": "AuthenticateService_Register",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1User"
+              "$ref": "#/definitions/v1Authentication"
             }
           },
           "default": {
@@ -1258,7 +1258,7 @@
           }
         ],
         "tags": [
-          "UserService"
+          "AuthenticateService"
         ]
       }
     },
