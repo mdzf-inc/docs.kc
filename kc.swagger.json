@@ -9,9 +9,6 @@
       "name": "OrderService"
     },
     {
-      "name": "CooperationService"
-    },
-    {
       "name": "AuthenticateService"
     },
     {
@@ -395,39 +392,6 @@
         },
         "tags": [
           "ProductService"
-        ]
-      }
-    },
-    "/cooperations": {
-      "post": {
-        "summary": "提交合作意向",
-        "operationId": "CooperationService_CreateCooperation",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1Cooperation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/googlerpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/v1CreateCooperationRequest"
-            }
-          }
-        ],
-        "tags": [
-          "CooperationService"
         ]
       }
     },
@@ -1265,6 +1229,39 @@
         ]
       }
     },
+    "/register": {
+      "post": {
+        "summary": "注册",
+        "operationId": "UserService_Register",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RegisterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/shopping-carts": {
       "get": {
         "summary": "购物车列表",
@@ -1647,6 +1644,44 @@
       "required": [
         "productId",
         "quantity"
+      ]
+    },
+    "RegisterRequestPhone": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string",
+          "title": "手机号",
+          "required": [
+            "number"
+          ]
+        },
+        "smsCode": {
+          "type": "string",
+          "title": "验证码",
+          "required": [
+            "smsCode"
+          ]
+        }
+      },
+      "required": [
+        "number",
+        "smsCode"
+      ]
+    },
+    "RegisterRequestWXPHONE": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "微信登录的临时code",
+          "required": [
+            "code"
+          ]
+        }
+      },
+      "required": [
+        "code"
       ]
     },
     "apiaddressv1Response": {
@@ -2221,9 +2256,9 @@
           "type": "string",
           "title": "最新更新时间"
         },
-        "isSupportCredit": {
-          "type": "boolean",
-          "title": "是否支持挂账"
+        "paymentTerms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "支付条款"
         },
         "balance": {
           "type": "string",
@@ -2381,32 +2416,6 @@
         }
       }
     },
-    "v1Cooperation": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "int64",
-          "title": "合作意向id"
-        },
-        "no": {
-          "type": "string",
-          "title": "合作意向编号"
-        },
-        "name": {
-          "type": "string",
-          "title": "联系人"
-        },
-        "phone": {
-          "type": "string",
-          "title": "手机号"
-        },
-        "progress": {
-          "type": "string",
-          "title": "进度说明：请您耐心等待，我们会尽快联系您"
-        }
-      }
-    },
     "v1CreateAddressRequest": {
       "type": "object",
       "properties": {
@@ -2497,69 +2506,6 @@
       ],
       "default": "UNKNOWN",
       "title": "- UNKNOWN: 未知\n - PHONE: 手机号登录\n - WX_PHONE: 微信手机号授权"
-    },
-    "v1CreateCooperationRequest": {
-      "type": "object",
-      "properties": {
-        "wxCode": {
-          "type": "string",
-          "title": "微信登录的临时code",
-          "required": [
-            "wxCode"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "title": "联系人",
-          "required": [
-            "name"
-          ]
-        },
-        "phone": {
-          "type": "string",
-          "title": "手机号",
-          "required": [
-            "phone"
-          ]
-        },
-        "region": {
-          "type": "string",
-          "title": "地区",
-          "required": [
-            "region"
-          ]
-        },
-        "businessChannel": {
-          "type": "string",
-          "title": "业务渠道(礼品采购/线下家具馆/线下商超/私域商城/银行商城/其他)",
-          "required": [
-            "businessChannel"
-          ]
-        },
-        "cooperationMode": {
-          "type": "string",
-          "title": "合作方式(集采/一件代发)",
-          "required": [
-            "cooperationMode"
-          ]
-        },
-        "settlementMethod": {
-          "type": "string",
-          "title": "结算方式 (现结/预付/账期)",
-          "required": [
-            "settlementMethod"
-          ]
-        }
-      },
-      "required": [
-        "wxCode",
-        "name",
-        "phone",
-        "region",
-        "businessChannel",
-        "cooperationMode",
-        "settlementMethod"
-      ]
     },
     "v1CreateFavoriteProductRequest": {
       "type": "object",
@@ -2652,10 +2598,6 @@
         "invoiceRequirement": {
           "$ref": "#/definitions/v1InvoiceRequirement",
           "title": "开票要求"
-        },
-        "paymentTerms": {
-          "$ref": "#/definitions/v1PaymentTerms",
-          "title": "支付条款：现付、挂账（用户信息接口中有是否允许挂账）"
         },
         "buyerRemark": {
           "type": "string",
@@ -3199,6 +3141,57 @@
       "default": "RECIPIENT_ACCOUNT_TYPE_UNDEFINED",
       "title": "- RECIPIENT_ACCOUNT_TYPE_UNDEFINED: 未定义(不可用)\n - RECIPIENT_ACCOUNT_TYPE_QRCODE: 收款码\n - RECIPIENT_ACCOUNT_TYPE_CORPORATE_BANK: 企业银行"
     },
+    "v1RegisterRequest": {
+      "type": "object",
+      "properties": {
+        "wxPhone": {
+          "$ref": "#/definitions/RegisterRequestWXPHONE",
+          "title": "微信手机号"
+        },
+        "phone": {
+          "$ref": "#/definitions/RegisterRequestPhone",
+          "title": "手机号"
+        },
+        "name": {
+          "type": "string",
+          "title": "姓名",
+          "required": [
+            "name"
+          ]
+        },
+        "region": {
+          "type": "string",
+          "title": "地区（地区选择框）拼接省市区",
+          "required": [
+            "region"
+          ]
+        },
+        "businessChannel": {
+          "type": "string",
+          "title": "业务渠道(礼品采购/线下家具馆/线下商超/私域商城/银行商城/其他)",
+          "required": [
+            "businessChannel"
+          ]
+        },
+        "cooperationMode": {
+          "type": "string",
+          "title": "合作方式(集采/一件代发)",
+          "required": [
+            "cooperationMode"
+          ]
+        },
+        "paymentTerms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "支付条款：现付、账期"
+        }
+      },
+      "required": [
+        "name",
+        "region",
+        "businessChannel",
+        "cooperationMode"
+      ]
+    },
     "v1SendSMSCodeRequest": {
       "type": "object",
       "properties": {
@@ -3281,6 +3274,10 @@
           "type": "string",
           "title": "更新时间"
         },
+        "status": {
+          "$ref": "#/definitions/v1UserStatus",
+          "title": "用户状态"
+        },
         "name": {
           "type": "string",
           "title": "姓名"
@@ -3311,7 +3308,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "title": "合作方式： 1:集中采购 2:一件代发"
+          "title": "合作方式：1:集中采购 2:一件代发"
+        },
+        "paymentTerms": {
+          "$ref": "#/definitions/v1PaymentTerms",
+          "title": "支付条款：现付、挂账"
         },
         "isSupportCredit": {
           "type": "boolean",
@@ -3319,7 +3320,7 @@
         },
         "creditLimit": {
           "type": "string",
-          "title": "授信额度"
+          "title": "付款方式\n授信额度"
         },
         "balance": {
           "type": "string",
@@ -3334,6 +3335,16 @@
           "title": "应付账款"
         }
       }
+    },
+    "v1UserStatus": {
+      "type": "string",
+      "enum": [
+        "USER_STATUS_PENDING",
+        "USER_STATUS_NORMAL"
+      ],
+      "default": "USER_STATUS_PENDING",
+      "description": "- USER_STATUS_PENDING: 审核中\n - USER_STATUS_NORMAL: 正常",
+      "title": "用户状态"
     }
   }
 }
