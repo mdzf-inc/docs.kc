@@ -961,6 +961,47 @@
         ]
       }
     },
+    "/orders/{id}/items/{itemId}": {
+      "delete": {
+        "summary": "删除订单商品",
+        "operationId": "OrderService_DeleteOrderItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/orderv1Order"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/googlerpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "订单ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "itemId",
+            "description": "商品明细ID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
     "/payments": {
       "get": {
         "summary": "付款列表",
@@ -2100,6 +2141,10 @@
         "isFavorite": {
           "type": "boolean",
           "title": "是否收藏"
+        },
+        "discountRate": {
+          "type": "string",
+          "title": "折扣率"
         }
       }
     },
@@ -3320,6 +3365,10 @@
         "enterpriseTaxNumber": {
           "type": "string",
           "title": "企业税号"
+        },
+        "region": {
+          "type": "string",
+          "title": "区域"
         },
         "channels": {
           "type": "string",
